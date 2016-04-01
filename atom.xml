@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-01T12:18:08.482Z</updated>
+  <updated>2016-04-01T12:24:56.330Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/"/>
     <id>http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/</id>
     <published>2016-04-01T10:37:11.000Z</published>
-    <updated>2016-04-01T12:18:08.482Z</updated>
+    <updated>2016-04-01T12:24:56.330Z</updated>
     
-    <content type="html">&lt;p&gt;在写自己的第一篇博客之前，还是想对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。&lt;/p&gt;
+    <content type="html">&lt;p&gt;在写自己的第一篇博客之前，还是想先对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大的&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;Twin-SVM-简介&quot;&gt;&lt;a href=&quot;#Twin-SVM-简介&quot; class=&quot;headerlink&quot; title=&quot;Twin SVM 简介&quot;&gt;&lt;/a&gt;Twin SVM 简介&lt;/h1&gt;&lt;h2 id=&quot;一、定义&quot;&gt;&lt;a href=&quot;#一、定义&quot; class=&quot;headerlink&quot; title=&quot;一、定义&quot;&gt;&lt;/a&gt;一、定义&lt;/h2&gt;&lt;p&gt;在介绍Twin SVM之前，先简要地介绍一下当前比较火的支持向量机(Support Vector Machine,简称SVM，它是建立在统计学习理论和最优化理论基础上的一种有效的解决分类问题的机器学习方法。双重支持向量机（Twin Support Vector Machine）是在SVM的基础上发展起来的，是利用最优化方法解决分类问题的新工具。其基本思想是构造两个非平行的超平面来代替标准的SVM的一个分划超平面，具有较好的泛化推广能力。&lt;/p&gt;
 &lt;h2 id=&quot;二、起源&quot;&gt;&lt;a href=&quot;#二、起源&quot; class=&quot;headerlink&quot; title=&quot;二、起源&quot;&gt;&lt;/a&gt;二、起源&lt;/h2&gt;&lt;p&gt;SVM是由Vapnik等人提出的，在一定程度上克服了“过学习”和“维数灾难”等传统问题。它根据有限的样本信息在模型的复杂性和学习能力之间寻求最佳折衷。以求获得最好的推广能力。Twin SVM最初由Jayadeva等人于2007年针对二分类问题提出的。Twin SVM较传统的SVM运算速度更快，对大规模数据具有更好的处理能力；同时，Twin SVM 利用最大间隔思想将SVM构造的平行平面推广到更广泛的非平行平面。在大数据时代，Twin SVM 的优势会越来越明显（对比于SVM）。&lt;/p&gt;
 &lt;h2 id=&quot;三、基本思想&quot;&gt;&lt;a href=&quot;#三、基本思想&quot; class=&quot;headerlink&quot; title=&quot;三、基本思想&quot;&gt;&lt;/a&gt;三、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
@@ -34,7 +35,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;在写自己的第一篇博客之前，还是想对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对
+      &lt;p&gt;在写自己的第一篇博客之前，还是想先对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大的&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。&lt;/p&gt;
     
     </summary>
     
