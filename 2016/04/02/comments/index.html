@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>如何利用Hexo在自己的博客中添加多说评论 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何利用Hexo在自己的博客中添加多说评论">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/02/comments/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：">
+<meta property="og:updated_time" content="2016-04-02T12:50:01.014Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何利用Hexo在自己的博客中添加多说评论">
+<meta name="twitter:description" content="利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-comments" class="post-comments post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      如何利用Hexo在自己的博客中添加多说评论
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/02/comments/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/02/comments/" data-id="cimj4r1q10001zsvo6x2p7cnx" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：</p>
+<a id="more"></a>
+<p>#一、注册自己的多说账号<br>在百度上搜索多说，创建自己的站点，得到一个多说的二级域名。</p>
+<p>#二、修改自己本地的配置文件<br>在自己的博客根目录下以文本编辑器打开_config.yml文件，添加duoshuo_shortname: 你在多说得到的二级域名。当然也可以在根目录下找到themes文件夹，选中你用的主题的配置文件_config.yml文件，将其中的duoshuo_shortname:的值赋为多说二级域名。</p>
+<p>接下来需要修改选用主题的部分js脚本内容，如果你使用的是默认的landscape主题，这时只需要修改：你的博客根目录\themes\landscape\layout_partial\article.ejs中的以下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname)&#123; %&gt;</span><br><span class="line">    &lt;section id=&quot;comments&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;disqus_thread&quot;&gt;</span><br><span class="line">    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;//disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;/section&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.duoshuo_shortname)&#123; %&gt;</span><br><span class="line">&lt;section id=&quot;comments&quot;&gt;     </span><br><span class="line">&lt;div id=&quot;ds-thread&quot; class=&quot;ds-thread&quot; data-thread-key=&quot;&lt;%= post.path %&gt;&quot; data-title=&quot;&lt;%= post.title %&gt;&quot; data-url=&quot;&lt;%= post.permalink %&gt;&quot;&gt;&lt;/div&gt;    </span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">var duoshuoQuery = &#123;short_name:&quot;datoublog&quot;&#125;;</span><br><span class="line">    (function() &#123;</span><br><span class="line">      var ds = document.createElement(&apos;script&apos;);</span><br><span class="line">     ds.type = &apos;text/javascript&apos;;ds.async = true;</span><br><span class="line">     ds.src = (document.location.protocol == &apos;https:&apos; ? &apos;https:&apos; : &apos;http:&apos;) + &apos;//static.duoshuo.com/embed.js&apos;;</span><br><span class="line">     ds.charset = &apos;UTF-8&apos;;</span><br><span class="line">     (document.getElementsByTagName(&apos;head&apos;)[0] </span><br><span class="line">      || document.getElementsByTagName(&apos;body&apos;)[0]).appendChild(ds);</span><br><span class="line"> &#125;)();</span><br><span class="line"> &lt;/script&gt;    </span><br><span class="line">&lt;/section&gt;</span><br><span class="line"> &lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果你使用的自定义主题，比如我使用的cyanstyle，需要直接在\themes\cyanstyle\layout_partial中article.ejs添加上面的部分代码。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/02/comments/">
+    <time datetime="2016-04-02T12:02:54.000Z" class="entry-date">
+        2016-04-02
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/02/solve-Twin-SVM/" rel="next">Twin SVM 推导过程 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-comments" data-title="如何利用Hexo在自己的博客中添加多说评论" data-url="http://WustChuiChui.github.io/2016/04/02/comments/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/02/comments/">如何利用Hexo在自己的博客中添加多说评论</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/02/solve-Twin-SVM/">Twin SVM 推导过程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/01/Twin-SVM-introduction/">Twin SVM 简介</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/31/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

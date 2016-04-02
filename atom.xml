@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-02T10:37:02.282Z</updated>
+  <updated>2016-04-02T12:50:01.014Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -16,15 +16,44 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>solve Twin SVM</title>
+    <title>如何利用Hexo在自己的博客中添加多说评论</title>
+    <link href="http://WustChuiChui.github.io/2016/04/02/comments/"/>
+    <id>http://WustChuiChui.github.io/2016/04/02/comments/</id>
+    <published>2016-04-02T12:02:54.000Z</published>
+    <updated>2016-04-02T12:50:01.014Z</updated>
+    
+    <content type="html">&lt;p&gt;利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;#一、注册自己的多说账号&lt;br&gt;在百度上搜索多说，创建自己的站点，得到一个多说的二级域名。&lt;/p&gt;
+&lt;p&gt;#二、修改自己本地的配置文件&lt;br&gt;在自己的博客根目录下以文本编辑器打开_config.yml文件，添加duoshuo_shortname: 你在多说得到的二级域名。当然也可以在根目录下找到themes文件夹，选中你用的主题的配置文件_config.yml文件，将其中的duoshuo_shortname:的值赋为多说二级域名。&lt;/p&gt;
+&lt;p&gt;接下来需要修改选用主题的部分js脚本内容，如果你使用的是默认的landscape主题，这时只需要修改：你的博客根目录\themes\landscape\layout_partial\article.ejs中的以下代码&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% if (!index &amp;amp;&amp;amp; post.comments &amp;amp;&amp;amp; config.disqus_shortname)&amp;#123; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;section id=&amp;quot;comments&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;div id=&amp;quot;disqus_thread&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;noscript&amp;gt;Please enable JavaScript to view the &amp;lt;a href=&amp;quot;//disqus.com/?ref_noscript&amp;quot;&amp;gt;comments powered by Disqus.&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/div&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/section&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;% &amp;#125; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;改为：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;% if (!index &amp;amp;&amp;amp; post.comments &amp;amp;&amp;amp; config.duoshuo_shortname)&amp;#123; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;section id=&amp;quot;comments&amp;quot;&amp;gt;     &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;div id=&amp;quot;ds-thread&amp;quot; class=&amp;quot;ds-thread&amp;quot; data-thread-key=&amp;quot;&amp;lt;%= post.path %&amp;gt;&amp;quot; data-title=&amp;quot;&amp;lt;%= post.title %&amp;gt;&amp;quot; data-url=&amp;quot;&amp;lt;%= post.permalink %&amp;gt;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var duoshuoQuery = &amp;#123;short_name:&amp;quot;datoublog&amp;quot;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    (function() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      var ds = document.createElement(&amp;apos;script&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     ds.type = &amp;apos;text/javascript&amp;apos;;ds.async = true;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     ds.src = (document.location.protocol == &amp;apos;https:&amp;apos; ? &amp;apos;https:&amp;apos; : &amp;apos;http:&amp;apos;) + &amp;apos;//static.duoshuo.com/embed.js&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     ds.charset = &amp;apos;UTF-8&amp;apos;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     (document.getElementsByTagName(&amp;apos;head&amp;apos;)[0] &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      || document.getElementsByTagName(&amp;apos;body&amp;apos;)[0]).appendChild(ds);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;#125;)();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;lt;/script&amp;gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/section&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;lt;% &amp;#125; %&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果你使用的自定义主题，比如我使用的cyanstyle，需要直接在\themes\cyanstyle\layout_partial中article.ejs添加上面的部分代码。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Twin SVM 推导过程</title>
     <link href="http://WustChuiChui.github.io/2016/04/02/solve-Twin-SVM/"/>
     <id>http://WustChuiChui.github.io/2016/04/02/solve-Twin-SVM/</id>
     <published>2016-04-02T10:37:02.000Z</published>
-    <updated>2016-04-02T10:37:02.282Z</updated>
+    <updated>2016-04-02T11:45:25.961Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;p&gt;##主人还在努力推导公式。。。。。&lt;/p&gt;
+</content>
     
     <summary type="html">
+    
+      &lt;p&gt;##主人还在努力推导公式。。。。。&lt;/p&gt;
+
     
     </summary>
     
@@ -36,7 +65,7 @@
     <link href="http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/"/>
     <id>http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/</id>
     <published>2016-04-01T10:37:11.000Z</published>
-    <updated>2016-04-01T12:27:08.629Z</updated>
+    <updated>2016-04-02T11:43:50.632Z</updated>
     
     <content type="html">&lt;p&gt;在写自己的第一篇博客之前，还是想先对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大的&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
