@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-02T12:50:01.014Z</updated>
+  <updated>2016-04-06T14:43:06.741Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
+    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
+    <published>2016-04-06T14:43:06.741Z</published>
+    <updated>2016-04-06T14:43:06.741Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>强大的随机森林分类器</title>
+    <link href="http://WustChuiChui.github.io/2016/04/06/Random-forest/"/>
+    <id>http://WustChuiChui.github.io/2016/04/06/Random-forest/</id>
+    <published>2016-04-06T14:42:16.000Z</published>
+    <updated>2016-04-06T14:52:31.952Z</updated>
+    
+    <content type="html">&lt;p&gt;机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;#基本算法&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用N来表示训练集中例子的个数，M表示变量的数目。&lt;/li&gt;
+&lt;li&gt;我们会被告知一个数m,被用来决定挡在一个结点上做决定时，会使用到多个变量，m&amp;lt;M &lt;/li&gt;
+&lt;li&gt;从N个训练样本中以可重复否方式，抽取N次，形成一组训练集（bootstrap取样）。并使用这棵树来对剩余预测其类别，并评估其误差。&lt;/li&gt;
+&lt;li&gt;对于每一个节点，随机选择m个基于此点上的变量。根据这m个变量，计算其最佳的分割方式。&lt;/li&gt;
+&lt;li&gt;每棵树都会完整成长而不会剪枝。&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>如何利用Hexo在自己的博客中添加多说评论</title>
@@ -41,26 +84,6 @@
   </entry>
   
   <entry>
-    <title>Twin SVM 推导过程</title>
-    <link href="http://WustChuiChui.github.io/2016/04/02/solve-Twin-SVM/"/>
-    <id>http://WustChuiChui.github.io/2016/04/02/solve-Twin-SVM/</id>
-    <published>2016-04-02T10:37:02.000Z</published>
-    <updated>2016-04-02T11:45:25.961Z</updated>
-    
-    <content type="html">&lt;p&gt;##主人还在努力推导公式。。。。。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;##主人还在努力推导公式。。。。。&lt;/p&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Twin SVM 简介</title>
     <link href="http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/"/>
     <id>http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/</id>
@@ -81,33 +104,6 @@
     <summary type="html">
     
       &lt;p&gt;在写自己的第一篇博客之前，还是想先对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大的&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://WustChuiChui.github.io/2016/03/31/hello-world/"/>
-    <id>http://WustChuiChui.github.io/2016/03/31/hello-world/</id>
-    <published>2016-03-31T01:23:39.228Z</published>
-    <updated>2016-04-01T06:18:15.713Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;br&gt;
     
     </summary>
     

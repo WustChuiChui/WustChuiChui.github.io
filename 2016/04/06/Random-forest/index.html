@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>强大的随机森林分类器 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强大的随机森林分类器">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/06/Random-forest/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。">
+<meta property="og:updated_time" content="2016-04-06T14:52:31.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强大的随机森林分类器">
+<meta name="twitter:description" content="机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Random-forest" class="post-Random-forest post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      强大的随机森林分类器
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/06/Random-forest/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/06/Random-forest/" data-id="cimoz5azg0002kcvoirk7dkgi" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。<br><a id="more"></a></p>
+<p>#基本算法</p>
+<ol>
+<li>用N来表示训练集中例子的个数，M表示变量的数目。</li>
+<li>我们会被告知一个数m,被用来决定挡在一个结点上做决定时，会使用到多个变量，m&lt;M </li>
+<li>从N个训练样本中以可重复否方式，抽取N次，形成一组训练集（bootstrap取样）。并使用这棵树来对剩余预测其类别，并评估其误差。</li>
+<li>对于每一个节点，随机选择m个基于此点上的变量。根据这m个变量，计算其最佳的分割方式。</li>
+<li>每棵树都会完整成长而不会剪枝。</li>
+</ol>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/06/Random-forest/">
+    <time datetime="2016-04-06T14:42:16.000Z" class="entry-date">
+        2016-04-06
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2016/04/06/solve-Twin-SVM/" rel="prev"><span class="meta-nav">←</span> (no title)</a></span>
+    
+    
+        <span class="nav-next"><a href="/2016/04/02/comments/" rel="next">如何利用Hexo在自己的博客中添加多说评论 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-Random-forest" data-title="强大的随机森林分类器" data-url="http://WustChuiChui.github.io/2016/04/06/Random-forest/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/06/solve-Twin-SVM/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/06/Random-forest/">强大的随机森林分类器</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/02/comments/">如何利用Hexo在自己的博客中添加多说评论</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/01/Twin-SVM-introduction/">Twin SVM 简介</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
