@@ -36,22 +36,19 @@
     <link href="http://WustChuiChui.github.io/2016/04/06/Random-forest/"/>
     <id>http://WustChuiChui.github.io/2016/04/06/Random-forest/</id>
     <published>2016-04-06T14:42:16.000Z</published>
-    <updated>2016-04-07T08:07:51.337Z</updated>
+    <updated>2016-04-07T08:11:53.847Z</updated>
     
     <content type="html">&lt;p&gt;机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;#基本算法&lt;/p&gt;
-&lt;ol&gt;
+&lt;h1 id=&quot;基本算法&quot;&gt;&lt;a href=&quot;#基本算法&quot; class=&quot;headerlink&quot; title=&quot;基本算法&quot;&gt;&lt;/a&gt;基本算法&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;原始训练集为N，应用bootstrap法有放回的随机抽取k个新的自助样本集，并由构建k棵决策树。每次未被抽到的样本组成了k个袋外数据；&lt;/li&gt;
 &lt;li&gt;设有M个变量，在每一棵树的每个节点处随机抽取m(m&amp;lt;M)个变量，从m中选择一个最具有分辨能力的变量，变量的阈值通过检查每一个分类点确定。&lt;/li&gt;
 &lt;li&gt;每棵树最大限度的生长，不做任何修剪（普通的决策树算法需要剪枝）。&lt;/li&gt;
 &lt;li&gt;将生成的多棵分类树组成随机森林，用随机森林分类器对新的数据进行判断与分类，其分类结果按决策树分类器的投票决定。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;#优点&lt;/p&gt;
-&lt;ol&gt;
+&lt;h1 id=&quot;优点&quot;&gt;&lt;a href=&quot;#优点&quot; class=&quot;headerlink&quot; title=&quot;优点&quot;&gt;&lt;/a&gt;优点&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;对于很多种资料，它可以产生高准确度的分类器。&lt;/li&gt;
 &lt;li&gt;它可以处理大量的输入变量。&lt;/li&gt;
 &lt;li&gt;可以在决定类别时，评估变量的重要性。&lt;/li&gt;
-&lt;li&gt;在建造森林时，它可以在内部对于一般化后的误差产生不偏差的估计。&lt;/li&gt;
 &lt;li&gt;它包含一个好方法可以估计遗失的资料，并且，如果有很大一部分的资料遗失，仍可以维持准确度。&lt;/li&gt;
 &lt;li&gt;它提供一个实验方法，可以去侦测variable interactions。&lt;/li&gt;
 &lt;li&gt;对于不平衡的分类资料集来说，它可以平衡误差。&lt;/li&gt;
@@ -62,22 +59,18 @@
 &lt;li&gt;创建随机森林的时候，对generlization error使用的是无偏估计。&lt;/li&gt;
 &lt;li&gt;容易扩展到并行方法&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;#缺点&lt;/p&gt;
-&lt;ol&gt;
+&lt;h1 id=&quot;缺点&quot;&gt;&lt;a href=&quot;#缺点&quot; class=&quot;headerlink&quot; title=&quot;缺点&quot;&gt;&lt;/a&gt;缺点&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;在某些噪音较大的分类或回归问题上会过拟合&lt;/li&gt;
 &lt;li&gt;对于有不同级别的属性的数据，级别划分较多的属性会对随机森林产生更大的影响，也就是说随机森林在这种数据上产生的属性权值是不可信的。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;#简要描述&lt;/p&gt;
-&lt;p&gt;随机森林，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵之间是没有关联的，在得到森林之后，当有一个新的输入样本进入的时候，让森林中的每一棵决策树分别进行判断，对其进行分类，最后预测为被选择的最多的那一类。&lt;br&gt;建立决策树的过程中，需要注意两点：采样与完全分裂。首先是两个随机采样的过程，random forest对输入的数据进行行列的采样；这里的采样，可能存在重复的样本。假设有N个样本，那么采样的样本也为N个，在训练的时候，每一棵树的输入样本都不是全部的样本，使得相对不容易出现over-fitting。然后进行列采样，从M个feature中选择m（m&amp;lt;M）个,之后就是对采样后的数据使用完全分裂的方式建立出决策树，这样决策树的某一个叶子节点要么是无法继续分裂的，要么里面所有的样本都指向同一个分类。&lt;strong&gt; 一般很多的决策树算法都有一个很重要的步骤-剪枝，这里不需要这样做，因为之前的两个随机采样的过程保证了随机性，就算不减枝，也不会出现over-fitting。 &lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;简要描述&quot;&gt;&lt;a href=&quot;#简要描述&quot; class=&quot;headerlink&quot; title=&quot;简要描述&quot;&gt;&lt;/a&gt;简要描述&lt;/h1&gt;&lt;p&gt;随机森林，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵之间是没有关联的，在得到森林之后，当有一个新的输入样本进入的时候，让森林中的每一棵决策树分别进行判断，对其进行分类，最后预测为被选择的最多的那一类。&lt;br&gt;建立决策树的过程中，需要注意两点：采样与完全分裂。首先是两个随机采样的过程，random forest对输入的数据进行行列的采样；这里的采样，可能存在重复的样本。假设有N个样本，那么采样的样本也为N个，在训练的时候，每一棵树的输入样本都不是全部的样本，使得相对不容易出现over-fitting。然后进行列采样，从M个feature中选择m（m&amp;lt;M）个,之后就是对采样后的数据使用完全分裂的方式建立出决策树，这样决策树的某一个叶子节点要么是无法继续分裂的，要么里面所有的样本都指向同一个分类。&lt;strong&gt; 一般很多的决策树算法都有一个很重要的步骤-剪枝，这里不需要这样做，因为之前的两个随机采样的过程保证了随机性，就算不减枝，也不会出现over-fitting。 &lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; 需要注意的是： &lt;/strong&gt; 每一棵决策树相对是较弱的，但是将多棵决策树结合起来就十分强大。可以这样比喻随机森林算法：每一棵决策树就是一个精通某一个窄领域的专家（从M个feature中选择m个让每一棵决策树进行学习），这样在随机森林中就有很多个精通不同领域的专家，对一个新的输入数据，可以从不同的角度去分析，最终由各方面的专家进行投票，得到最终结果。&lt;/p&gt;
-&lt;p&gt;#分裂特征点的选择&lt;/p&gt;
-&lt;ol&gt;
+&lt;h1 id=&quot;分裂特征点的选择&quot;&gt;&lt;a href=&quot;#分裂特征点的选择&quot; class=&quot;headerlink&quot; title=&quot;分裂特征点的选择&quot;&gt;&lt;/a&gt;分裂特征点的选择&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;信息增益&lt;/li&gt;
 &lt;li&gt;信息增益化&lt;/li&gt;
 &lt;li&gt;基尼指数&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;#over-fitting的解决思路&lt;/p&gt;
-&lt;p&gt;over-fitting(过拟合)指的是这样的一种学习现象：Ein很小，Eout却很大。是机器学习中比较常见的一种问题。&lt;/p&gt;
+&lt;h1 id=&quot;over-fitting的解决思路&quot;&gt;&lt;a href=&quot;#over-fitting的解决思路&quot; class=&quot;headerlink&quot; title=&quot;over-fitting的解决思路&quot;&gt;&lt;/a&gt;over-fitting的解决思路&lt;/h1&gt;&lt;p&gt;over-fitting(过拟合)指的是这样的一种学习现象：Ein很小，Eout却很大。是机器学习中比较常见的一种问题。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; 原因： &lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;使用过于复杂的模型；&lt;/li&gt;
@@ -90,8 +83,7 @@
 &lt;li&gt;随机噪音 -&amp;gt;数据清洗，将标签错误的数据纠正或者删除；&lt;/li&gt;
 &lt;li&gt;数据规模太小 -&amp;gt;收集更多的数据，或“伪造”更多数据。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;#相关工具箱&lt;/p&gt;
-&lt;p&gt;由于技术相对比较成熟，网上有大量开源的工具箱，2014年我在做视网膜层分割的时候，下载的工具箱来源于CSDN,代码语言为C/C++,另外，MATLAB也集成了相关工具箱，也可以使用MEX调用C/C++函数，python作为一门比较适合机器学习开发研究的语言，也集成了相关工具箱，感兴趣的同学可以自行下载。&lt;/p&gt;
+&lt;h1 id=&quot;相关工具箱&quot;&gt;&lt;a href=&quot;#相关工具箱&quot; class=&quot;headerlink&quot; title=&quot;相关工具箱&quot;&gt;&lt;/a&gt;相关工具箱&lt;/h1&gt;&lt;p&gt;由于技术相对比较成熟，网上有大量开源的工具箱，2014年我在做视网膜层分割的时候，下载的工具箱来源于CSDN,代码语言为C/C++,另外，MATLAB也集成了相关工具箱，也可以使用MEX调用C/C++函数，python作为一门比较适合机器学习开发研究的语言，也集成了相关工具箱，感兴趣的同学可以自行下载。&lt;/p&gt;
 </content>
     
     <summary type="html">
