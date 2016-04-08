@@ -15,12 +15,12 @@
   
   <title>Python学习与机器学习   各类距离与Python的具体实现 | Wust_锤锤的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Python学习与机器学习   各类距离与Python的具体实现">
+  <meta name="description" content="两个向量之间的距离（此时向量作为n维向量坐标系中的点）计算，在数学上称为向量的距离（Distance），也称为样本之间的相似性度量（Similarity Measurement）。它反映为某类事物在距离上接近或远离的程度。直觉上，距离越近，越容易归为一类；距离越远就越不同。划分的依据，称为距离。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python学习与机器学习   各类距离与Python的具体实现">
 <meta property="og:url" content="http://WustChuiChui.github.io/2016/04/08/mapython-distance/index.html">
 <meta property="og:site_name" content="Wust_锤锤的blog">
-<meta property="og:description" content="Python学习与机器学习   各类距离与Python的具体实现">
+<meta property="og:description" content="两个向量之间的距离（此时向量作为n维向量坐标系中的点）计算，在数学上称为向量的距离（Distance），也称为样本之间的相似性度量（Similarity Measurement）。它反映为某类事物在距离上接近或远离的程度。直觉上，距离越近，越容易归为一类；距离越远就越不同。划分的依据，称为距离。">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pkdwrt67j307t02sjrd.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006qSkuxgw1f2pkn8v6g6j30f202pt8v.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pl14yya7j308h02eq2u.jpg">
@@ -30,10 +30,10 @@
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2plsqwdv6j30au04xt8w.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxgw1f2pmannfgzj309b02lwef.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/006qSkuxgw1f2pme9e4b5j30fu02f74e.jpg">
-<meta property="og:updated_time" content="2016-04-08T14:45:14.460Z">
+<meta property="og:updated_time" content="2016-04-08T14:51:50.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习与机器学习   各类距离与Python的具体实现">
-<meta name="twitter:description" content="Python学习与机器学习   各类距离与Python的具体实现">
+<meta name="twitter:description" content="两个向量之间的距离（此时向量作为n维向量坐标系中的点）计算，在数学上称为向量的距离（Distance），也称为样本之间的相似性度量（Similarity Measurement）。它反映为某类事物在距离上接近或远离的程度。直觉上，距离越近，越容易归为一类；距离越远就越不同。划分的依据，称为距离。">
 <meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pkdwrt67j307t02sjrd.jpg">
   
   
@@ -92,14 +92,14 @@
             
             <a href="/2016/04/08/mapython-distance/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/08/mapython-distance/" data-id="cimrtrzfi0004iovo8tyjcl26" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/08/mapython-distance/" data-id="cimrtzo6c00048svob1tukri5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <h1 id="Python学习与机器学习-各类距离与Python的具体实现"><a href="#Python学习与机器学习-各类距离与Python的具体实现" class="headerlink" title="Python学习与机器学习   各类距离与Python的具体实现"></a>Python学习与机器学习   各类距离与Python的具体实现</h1><a id="more"></a>
-<h2 id="范数（数学基础）"><a href="#范数（数学基础）" class="headerlink" title="范数（数学基础）"></a>范数（数学基础）</h2><p>向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。<br><strong> 向量的范数定义：</strong> 向量的范数是一个函数||x||,满足非负性||x||&gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&lt;=||x||+||y||.</p>
+        <p>两个向量之间的距离（此时向量作为n维向量坐标系中的点）计算，在数学上称为向量的距离（Distance），也称为样本之间的相似性度量（Similarity Measurement）。它反映为某类事物在距离上接近或远离的程度。直觉上，距离越近，越容易归为一类；距离越远就越不同。划分的依据，称为距离。<br><a id="more"></a></p>
+<h1 id="Python学习与机器学习-各类距离与Python的具体实现"><a href="#Python学习与机器学习-各类距离与Python的具体实现" class="headerlink" title="Python学习与机器学习   各类距离与Python的具体实现"></a>Python学习与机器学习   各类距离与Python的具体实现</h1><h2 id="范数（数学基础）"><a href="#范数（数学基础）" class="headerlink" title="范数（数学基础）"></a>范数（数学基础）</h2><p>向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。<br><strong> 向量的范数定义：</strong> 向量的范数是一个函数||x||,满足非负性||x||&gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&lt;=||x||+||y||.</p>
 <p><strong> L1范数： </strong> ||x||为x向量各个元素绝对值之和。<br><strong> L2范数： </strong> ||x||为x向量各个元素平方和的开方，L2范数又称欧几里得范数。<br><strong> Lp范数： </strong> ||x||为x向量各个元素绝对值的p次方和的1/p次方。<br><strong> L无穷范数： </strong> ||x||为x向量各个元素绝对值最大的那个元素。</p>
 <h2 id="各类距离的意义与Pyhon实现"><a href="#各类距离的意义与Pyhon实现" class="headerlink" title="各类距离的意义与Pyhon实现"></a>各类距离的意义与Pyhon实现</h2><p>这里介绍的几种距离公式如下：</p>
 <p>闵可夫斯基距离 (Minkowski Distance)<br>欧式距离 （Euclidean Distance）<br>曼哈顿距离 （Manhattan Distance）<br>切比雪夫距离 (Chebyshew Distance)<br>夹角余弦 (Cosine)<br>汉明距离 (Hamming Distance)<br>杰卡德相似系数 (Jaccard Similarity Coefficient)</p>
