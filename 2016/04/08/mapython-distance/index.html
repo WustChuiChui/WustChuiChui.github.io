@@ -13,17 +13,23 @@
   
   
   
-  <title>Wust_锤锤的blog</title>
+  <title>Python学习与机器学习   各类距离与Python的具体实现 | Wust_锤锤的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="厚德博学，崇实去浮">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wust_锤锤的blog">
-<meta property="og:url" content="http://WustChuiChui.github.io/index.html">
+  <meta name="description" content="Python学习与机器学习   各类距离与Python的具体实现范数（数学基础）向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。 向量的范数定义： 向量的范数是一个函数||x||,满足非负性||x||&amp;gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&amp;lt;=||x||+||y||.
+ L1范数：  ||x||为x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习与机器学习   各类距离与Python的具体实现">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/08/mapython-distance/index.html">
 <meta property="og:site_name" content="Wust_锤锤的blog">
-<meta property="og:description" content="厚德博学，崇实去浮">
+<meta property="og:description" content="Python学习与机器学习   各类距离与Python的具体实现范数（数学基础）向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。 向量的范数定义： 向量的范数是一个函数||x||,满足非负性||x||&amp;gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&amp;lt;=||x||+||y||.
+ L1范数：  ||x||为x">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pkdwrt67j307t02sjrd.jpg">
+<meta property="og:updated_time" content="2016-04-08T12:25:53.078Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wust_锤锤的blog">
-<meta name="twitter:description" content="厚德博学，崇实去浮">
+<meta name="twitter:title" content="Python学习与机器学习   各类距离与Python的具体实现">
+<meta name="twitter:description" content="Python学习与机器学习   各类距离与Python的具体实现范数（数学基础）向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。 向量的范数定义： 向量的范数是一个函数||x||,满足非负性||x||&amp;gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&amp;lt;=||x||+||y||.
+ L1范数：  ||x||为x">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pkdwrt67j307t02sjrd.jpg">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -64,17 +70,15 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
-  
-    <article id="post-mapython-distance" class="post-mapython-distance post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-mapython-distance" class="post-mapython-distance post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
         
         
   
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/04/08/mapython-distance/">Python学习与机器学习   各类距离与Python的具体实现</a>
+    <h1 class="entry-title article-title">
+      Python学习与机器学习   各类距离与Python的具体实现
     </h1>
   
 
@@ -111,223 +115,42 @@
 </article>
 
 
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/06/Random-forest/" rel="next">强大的随机森林分类器 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
 
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-mapython-distance" data-title="Python学习与机器学习   各类距离与Python的具体实现" data-url="http://WustChuiChui.github.io/2016/04/08/mapython-distance/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
 
 
 
 1
-
-
-  
-    <article id="post-Random-forest" class="post-Random-forest post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/04/06/Random-forest/">强大的随机森林分类器</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="/2016/04/06/Random-forest/#comments" class="leave-reply">Reply</a>
-            
-            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/06/Random-forest/" data-id="cimrorwrv0000bcvodn51jki8" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/06/Random-forest/#more" class="more-link">More <span class="meta-nav">→</span></a>
-          </p>
-        
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/04/06/Random-forest/">
-    <time datetime="2016-04-06T14:42:16.000Z" class="entry-date">
-        2016-04-06
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-
-
-
-
-
-
-1
-
-
-  
-    <article id="post-solve-Twin-SVM" class="post-solve-Twin-SVM post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/04/06/solve-Twin-SVM/">Twin SVM的数学求解方法</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="/2016/04/06/solve-Twin-SVM/#comments" class="leave-reply">Reply</a>
-            
-            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/" data-id="cimrorws80003bcvohqbidhkj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/06/solve-Twin-SVM/#more" class="more-link">More <span class="meta-nav">→</span></a>
-          </p>
-        
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/04/06/solve-Twin-SVM/">
-    <time datetime="2016-04-06T14:42:16.000Z" class="entry-date">
-        2016-04-06
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-
-
-
-
-
-
-1
-
-
-  
-    <article id="post-comments" class="post-comments post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/04/02/comments/">如何利用Hexo在自己的博客中添加多说评论</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="/2016/04/02/comments/#comments" class="leave-reply">Reply</a>
-            
-            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/02/comments/" data-id="cimrorwsa0004bcvobzif4szn" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/02/comments/#more" class="more-link">More <span class="meta-nav">→</span></a>
-          </p>
-        
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/04/02/comments/">
-    <time datetime="2016-04-02T12:02:54.000Z" class="entry-date">
-        2016-04-02
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-
-
-
-
-
-
-1
-
-
-  
-    <article id="post-Twin-SVM-introduction" class="post-Twin-SVM-introduction post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/04/01/Twin-SVM-introduction/">Twin SVM 简介</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="/2016/04/01/Twin-SVM-introduction/#comments" class="leave-reply">Reply</a>
-            
-            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/" data-id="cimrorws10001bcvo3zajn197" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>在写自己的第一篇博客之前，还是想先对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大的<br>优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/01/Twin-SVM-introduction/#more" class="more-link">More <span class="meta-nav">→</span></a>
-          </p>
-        
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/04/01/Twin-SVM-introduction/">
-    <time datetime="2016-04-01T10:37:11.000Z" class="entry-date">
-        2016-04-01
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-
-
-
-
-
-
-1
-
-
-  
-  
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
