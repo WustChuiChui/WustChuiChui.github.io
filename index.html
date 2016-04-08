@@ -110,6 +110,11 @@
 <p>from numpy import *</p>
 <p>vector1=mat([1,2,3])<br>vector2=mat([4,7,6])</p>
 <p>cosV12=dot(vector1,vector2)/(linalg.norm(vector1)*linalg.norm(vector2))<br>print cosV12</p>
+<h3 id="6-汉明距离-Hamming-Distance"><a href="#6-汉明距离-Hamming-Distance" class="headerlink" title="6.汉明距离 (Hamming Distance)"></a>6.汉明距离 (Hamming Distance)</h3><p>汉明距离的定义：两个登场字符串s1和s2之间的汉明距离定义为将其中一个变为另外一个所需要的最小替换次数。<br>应用：信息编码（为了增强容错性，应使得编码间的最小汉明距离尽可能大）</p>
+<p>Python实现汉明距离</p>
+<p>from numpy import *<br>matV=mat([1,1,0,1,1,0,1],[1,0,1,0,1,0,1])<br>smstr=nonzero(matV[0]-matV[1])<br>print shape(smstr[0]) [1]</p>
+<h3 id="7-杰卡德相似系数-Jaccard-Similarity-Coefficient"><a href="#7-杰卡德相似系数-Jaccard-Similarity-Coefficient" class="headerlink" title="7.杰卡德相似系数 (Jaccard Similarity Coefficient)"></a>7.杰卡德相似系数 (Jaccard Similarity Coefficient)</h3><p>两个集合A和B的交集元素在A、B的并集中所占的比率，称为两个集合的杰卡德相似系数。<br><img src="http://ww1.sinaimg.cn/large/006qSkuxgw1f2pmannfgzj309b02lwef.jpg" alt=""><br>杰卡德相似系数是衡量两个集合相似度的一种指标。<br>杰卡德距离：与杰卡德相似系数相反的概念是杰卡德距离。<br><img src="http://ww3.sinaimg.cn/large/006qSkuxgw1f2pme9e4b5j30fu02f74e.jpg" alt=""></p>
+<p>Python实现杰卡德距离<br>from numpy import *<br>import scipy.spatial.distance as dist #导入Scipy距离公式<br>matV=mat([1,1,0,1,0,1,0,0,1],[0,1,0,1,0,1,0,1,0])<br>print “dist.jaccard:”,dist.pdist(matV,’jaccard’)</p>
 
       
     </div><!-- .entry-content -->
