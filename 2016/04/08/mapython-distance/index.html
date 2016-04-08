@@ -24,7 +24,13 @@
 <meta property="og:description" content="Python学习与机器学习   各类距离与Python的具体实现范数（数学基础）向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。 向量的范数定义： 向量的范数是一个函数||x||,满足非负性||x||&amp;gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&amp;lt;=||x||+||y||.
  L1范数：  ||x||为x">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pkdwrt67j307t02sjrd.jpg">
-<meta property="og:updated_time" content="2016-04-08T12:25:53.078Z">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006qSkuxgw1f2pkn8v6g6j30f202pt8v.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pl14yya7j308h02eq2u.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxgw1f2plab1n78j308l01jjra.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxgw1f2plctowpuj309q023mx4.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006qSkuxgw1f2plpmulqej306v02lt8m.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2plsqwdv6j30au04xt8w.jpg">
+<meta property="og:updated_time" content="2016-04-08T13:17:37.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习与机器学习   各类距离与Python的具体实现">
 <meta name="twitter:description" content="Python学习与机器学习   各类距离与Python的具体实现范数（数学基础）向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。 向量的范数定义： 向量的范数是一个函数||x||,满足非负性||x||&amp;gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&amp;lt;=||x||+||y||.
@@ -99,6 +105,21 @@
 <h2 id="各类距离的意义与Pyhon实现"><a href="#各类距离的意义与Pyhon实现" class="headerlink" title="各类距离的意义与Pyhon实现"></a>各类距离的意义与Pyhon实现</h2><p>这里介绍的几种距离公式如下：</p>
 <p>闵可夫斯基距离 (Minkowski Distance)<br>欧式距离 （Euclidean Distance）<br>曼哈顿距离 （Manhattan Distance）<br>切比雪夫距离 (Chebyshew Distance)<br>夹角余弦 (Cosine)<br>汉明距离 (Hamming Distance)<br>杰卡德相似系数 (Jaccard Similarity Coefficient)</p>
 <h3 id="1-闵可夫斯基距离-Minkowski-Distance"><a href="#1-闵可夫斯基距离-Minkowski-Distance" class="headerlink" title="1.闵可夫斯基距离 (Minkowski Distance)"></a>1.闵可夫斯基距离 (Minkowski Distance)</h3><p>严格意义上讲，闵可夫斯基距离不能算是一种距离，而是一组距离的定义。<br>设有两个n维向量A(x1,x2,x3,….xn)和B(y1,y2,y3,….yn)间的闵可夫斯基距离定义为：<br><img src="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pkdwrt67j307t02sjrd.jpg" alt=""><br>其中p是一个参数。<br>当p=1时，就是曼哈顿距离；<br>当p=2时，就是欧式距离；<br>当p-&gt;无穷时，就是切比雪夫距离。</p>
+<h3 id="2-欧式距离-（Euclidean-Distance）"><a href="#2-欧式距离-（Euclidean-Distance）" class="headerlink" title="2.欧式距离 （Euclidean Distance）"></a>2.欧式距离 （Euclidean Distance）</h3><p>欧式距离（L2范数）是最易于理解的一种距离计算方法，源于欧式空间中两点间的距离公式。两个n维向量A(x1,x2,x3,…xn)和B(y1,y2,y3,…..yn)间的欧式距离：<br><img src="http://ww2.sinaimg.cn/large/006qSkuxgw1f2pkn8v6g6j30f202pt8v.jpg" alt=""></p>
+<p>Python实现欧式距离：<br>from numpy import *</p>
+<p>vector1=mat([1,2,3])<br>vector2=mat([4,5,6])</p>
+<p>print sqrt((vector1-vector2)*(vector1-vector2).T)</p>
+<h3 id="3-曼哈顿距离-（Manhattan-Distance）"><a href="#3-曼哈顿距离-（Manhattan-Distance）" class="headerlink" title="3.曼哈顿距离 （Manhattan Distance）"></a>3.曼哈顿距离 （Manhattan Distance）</h3><p>曼哈顿距离也称城市街区距离（City Block Distance）,也就是L1范数。<br>二维平面两点A(x1,y1)和B(x2,y2)间的曼哈顿距离为：<br>d=|x2-x1|+|y2-y1|<br>两个n维向量A(x1,x2,x3,…xn)和B(y1,y2,y3,….yn)间的曼哈顿距离为：<br><img src="http://ww4.sinaimg.cn/large/006qSkuxgw1f2pl14yya7j308h02eq2u.jpg" alt=""></p>
+<p>Python实现曼哈顿距离：<br>from numpy import *<br>vector1=mat([1,2,3])<br>vector2=mat([4,5,6])<br>print sum(abs(vector1-vector2))</p>
+<h3 id="4-切比雪夫距离-Chebyshew-Distance"><a href="#4-切比雪夫距离-Chebyshew-Distance" class="headerlink" title="4.切比雪夫距离 (Chebyshew Distance)"></a>4.切比雪夫距离 (Chebyshew Distance)</h3><p>国际象棋中，国王每走一步能够走到相邻的8个方格中的任意一个，那么国王从A(x1,y1)走到B(x2,y2)最少需要多少步？最少步数总是max(|x2-x1|,|y2-y1|)步。类似的距离度量方法叫做切比雪夫距离（L无穷范数）。</p>
+<p>n维向量A(x11,x12,x13,….x1n)和B(x21,x22,x23,….x2n)间的切比雪夫距离：<br><img src="http://ww1.sinaimg.cn/large/006qSkuxgw1f2plab1n78j308l01jjra.jpg" alt=""><br>它的另一种等价形式为：<br><img src="http://ww1.sinaimg.cn/large/006qSkuxgw1f2plctowpuj309q023mx4.jpg" alt=""></p>
+<p>Python实现切比雪夫距离：<br>from numpy import *</p>
+<p>vector1=mat([1,2,3])<br>vector2=mat([4,7,6])<br>print abs(vector1-vector2).max()</p>
+<h3 id="5-夹角余弦-Cosine"><a href="#5-夹角余弦-Cosine" class="headerlink" title="5.夹角余弦 (Cosine)"></a>5.夹角余弦 (Cosine)</h3><p>几何中夹角余弦可用来衡量两个向量方向的差异，机器学习中用这一概念衡量样本向量之间的差异。<br>两个n维样本点A(x11,x12,x13,…x1n)与B(x21,x22,x23,…x2n)的夹角余弦：类似地，对于两个样本点A(x11,x12,x13,…x1n)与B(x21,x22,x23,…x2n),可以使用类似夹角余弦的概念来衡量他们间的相似程度。<br><img src="http://ww3.sinaimg.cn/large/006qSkuxgw1f2plpmulqej306v02lt8m.jpg" alt=""><br>即<br><img src="http://ww4.sinaimg.cn/large/006qSkuxgw1f2plsqwdv6j30au04xt8w.jpg" alt=""></p>
+<p>python 实现向量夹角</p>
+<p>from numpy import *</p>
+<p>vector1=mat([1,2,3])<br>vector2=mat([4,7,6])</p>
+<p>cosV12=dot(vector1,vector2)/(linalg.norm(vector1)*linalg.norm(vector2))<br>print cosV12</p>
 
       
     </div><!-- .entry-content -->
