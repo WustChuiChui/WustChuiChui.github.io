@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>计算机视觉 特征提取之HOG特征 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机视觉 特征提取之HOG特征">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/08/hog/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。">
+<meta property="og:updated_time" content="2016-04-08T14:39:56.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机视觉 特征提取之HOG特征">
+<meta name="twitter:description" content="方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-hog" class="post-hog post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      计算机视觉 特征提取之HOG特征
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/08/hog/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/08/hog/" data-id="cimrtkeox000250vo7r4lzx76" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。<br><a id="more"></a></p>
+<h1 id="计算机视觉-特征提取之HOG特征"><a href="#计算机视觉-特征提取之HOG特征" class="headerlink" title="计算机视觉 特征提取之HOG特征"></a>计算机视觉 特征提取之HOG特征</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>HOG即histogram of oriented gradient, 是用于目标检测的特征描述子，该技术将图像局部出现的方向梯度次数进行计数，该方法和边缘方向直方图、scale-invariant feature transform类似，不同的是hog的计算基于一致空间的密度矩阵来提高准确率。</p>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>1）灰度化图像；<br>2）采用Gamma校正法对输入图像进行颜色空间的归一化；调节图像的对比度，降低图像局部的阴影和光照变化所造成的影响，同时可以抑制噪音的干扰；<br>3）计算图像每个像素的梯度（大小和方向）；主要为了捕捉轮廓信息，同时进一步弱化光照的干扰；<br>4）强图像划分为小cells;<br>5)统计每个cell的梯度直方图，形成每个cell的descriptor;<br>6）强没几个cell组成一个block,一个block内所有的cell的特征descriptor串联起来得到该HOG特征；<br>7）将图像image内的所有block的HOG特征descriptor串联起来可以得到该图像image的HOG特征descriptor,即最终可供分类使用的特征向量。</p>
+<p>通俗的讲：HOG特征提取方法就是将image:<br>进行灰度化，划分为小cells，计算每个cell中每个像素的orientation,最后统计每个cell的梯度直方图，再串联起来得到图像的descriptor.</p>
+<h2 id="HOG特征的特点"><a href="#HOG特征的特点" class="headerlink" title="HOG特征的特点"></a>HOG特征的特点</h2><p>1）HOG没有选取主方向，也没有旋转梯度直方图，因而本身不具有旋转不变性；<br>2）HOG本身不具有scale不变性，其scale不变性是通过改变检测图像的size来实现的；<br>3）HOG是在dense采样的图像块中求取的，在计算得到的HOG特征向量中隐含了该块与检测窗口的空间位置关系</p>
+<h2 id="HOG特征的优点"><a href="#HOG特征的优点" class="headerlink" title="HOG特征的优点"></a>HOG特征的优点</h2><p>1)能够有效地描述图像区域的local shape的特征信息<br>2)采用“cell”方式进行梯度方向量化，使得特征描述算子具有一些（a small amount of）平移或旋转不变性<br>3)具有光照不变性</p>
+<h2 id="影响HOG性能的主要因素"><a href="#影响HOG性能的主要因素" class="headerlink" title="影响HOG性能的主要因素"></a>影响HOG性能的主要因素</h2><p>finescale梯度、<br>精细定位面元、<br>相对粗空间装箱和高质量的地方对比正常话重叠块描述符等</p>
+<h2 id="相关疑问"><a href="#相关疑问" class="headerlink" title="相关疑问"></a>相关疑问</h2><p>1）Q:为何使用方向直方图？<br>A:捕捉局部的形态信息<br>2）Q:为何使用cell?<br>A:实现小范围内的空间不变性</p>
+<p>##参考文献<br>“Histograms of Oriented Gradients for Human Detection”<br>“Finding People in Images and Videos” (PhD Thesis) </p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/08/hog/">
+    <time datetime="2016-04-08T14:06:35.000Z" class="entry-date">
+        2016-04-08
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/08/mapython-distance/" rel="next">Python学习与机器学习   各类距离与Python的具体实现 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-hog" data-title="计算机视觉 特征提取之HOG特征" data-url="http://WustChuiChui.github.io/2016/04/08/hog/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/08/hog/">计算机视觉 特征提取之HOG特征</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/08/mapython-distance/">Python学习与机器学习   各类距离与Python的具体实现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/06/Random-forest/">强大的随机森林分类器</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/06/solve-Twin-SVM/">Twin SVM的数学求解方法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/02/comments/">如何利用Hexo在自己的博客中添加多说评论</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

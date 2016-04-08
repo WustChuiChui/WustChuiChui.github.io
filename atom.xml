@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-08T14:03:21.140Z</updated>
+  <updated>2016-04-08T14:39:56.488Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -16,11 +16,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>计算机视觉 特征提取之HOG特征</title>
+    <link href="http://WustChuiChui.github.io/2016/04/08/hog/"/>
+    <id>http://WustChuiChui.github.io/2016/04/08/hog/</id>
+    <published>2016-04-08T14:06:35.000Z</published>
+    <updated>2016-04-08T14:39:56.488Z</updated>
+    
+    <content type="html">&lt;p&gt;方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;计算机视觉-特征提取之HOG特征&quot;&gt;&lt;a href=&quot;#计算机视觉-特征提取之HOG特征&quot; class=&quot;headerlink&quot; title=&quot;计算机视觉 特征提取之HOG特征&quot;&gt;&lt;/a&gt;计算机视觉 特征提取之HOG特征&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;HOG即histogram of oriented gradient, 是用于目标检测的特征描述子，该技术将图像局部出现的方向梯度次数进行计数，该方法和边缘方向直方图、scale-invariant feature transform类似，不同的是hog的计算基于一致空间的密度矩阵来提高准确率。&lt;/p&gt;
+&lt;h2 id=&quot;算法流程&quot;&gt;&lt;a href=&quot;#算法流程&quot; class=&quot;headerlink&quot; title=&quot;算法流程&quot;&gt;&lt;/a&gt;算法流程&lt;/h2&gt;&lt;p&gt;1）灰度化图像；&lt;br&gt;2）采用Gamma校正法对输入图像进行颜色空间的归一化；调节图像的对比度，降低图像局部的阴影和光照变化所造成的影响，同时可以抑制噪音的干扰；&lt;br&gt;3）计算图像每个像素的梯度（大小和方向）；主要为了捕捉轮廓信息，同时进一步弱化光照的干扰；&lt;br&gt;4）强图像划分为小cells;&lt;br&gt;5)统计每个cell的梯度直方图，形成每个cell的descriptor;&lt;br&gt;6）强没几个cell组成一个block,一个block内所有的cell的特征descriptor串联起来得到该HOG特征；&lt;br&gt;7）将图像image内的所有block的HOG特征descriptor串联起来可以得到该图像image的HOG特征descriptor,即最终可供分类使用的特征向量。&lt;/p&gt;
+&lt;p&gt;通俗的讲：HOG特征提取方法就是将image:&lt;br&gt;进行灰度化，划分为小cells，计算每个cell中每个像素的orientation,最后统计每个cell的梯度直方图，再串联起来得到图像的descriptor.&lt;/p&gt;
+&lt;h2 id=&quot;HOG特征的特点&quot;&gt;&lt;a href=&quot;#HOG特征的特点&quot; class=&quot;headerlink&quot; title=&quot;HOG特征的特点&quot;&gt;&lt;/a&gt;HOG特征的特点&lt;/h2&gt;&lt;p&gt;1）HOG没有选取主方向，也没有旋转梯度直方图，因而本身不具有旋转不变性；&lt;br&gt;2）HOG本身不具有scale不变性，其scale不变性是通过改变检测图像的size来实现的；&lt;br&gt;3）HOG是在dense采样的图像块中求取的，在计算得到的HOG特征向量中隐含了该块与检测窗口的空间位置关系&lt;/p&gt;
+&lt;h2 id=&quot;HOG特征的优点&quot;&gt;&lt;a href=&quot;#HOG特征的优点&quot; class=&quot;headerlink&quot; title=&quot;HOG特征的优点&quot;&gt;&lt;/a&gt;HOG特征的优点&lt;/h2&gt;&lt;p&gt;1)能够有效地描述图像区域的local shape的特征信息&lt;br&gt;2)采用“cell”方式进行梯度方向量化，使得特征描述算子具有一些（a small amount of）平移或旋转不变性&lt;br&gt;3)具有光照不变性&lt;/p&gt;
+&lt;h2 id=&quot;影响HOG性能的主要因素&quot;&gt;&lt;a href=&quot;#影响HOG性能的主要因素&quot; class=&quot;headerlink&quot; title=&quot;影响HOG性能的主要因素&quot;&gt;&lt;/a&gt;影响HOG性能的主要因素&lt;/h2&gt;&lt;p&gt;finescale梯度、&lt;br&gt;精细定位面元、&lt;br&gt;相对粗空间装箱和高质量的地方对比正常话重叠块描述符等&lt;/p&gt;
+&lt;h2 id=&quot;相关疑问&quot;&gt;&lt;a href=&quot;#相关疑问&quot; class=&quot;headerlink&quot; title=&quot;相关疑问&quot;&gt;&lt;/a&gt;相关疑问&lt;/h2&gt;&lt;p&gt;1）Q:为何使用方向直方图？&lt;br&gt;A:捕捉局部的形态信息&lt;br&gt;2）Q:为何使用cell?&lt;br&gt;A:实现小范围内的空间不变性&lt;/p&gt;
+&lt;p&gt;##参考文献&lt;br&gt;“Histograms of Oriented Gradients for Human Detection”&lt;br&gt;“Finding People in Images and Videos” (PhD Thesis) &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Python学习与机器学习   各类距离与Python的具体实现</title>
     <link href="http://WustChuiChui.github.io/2016/04/08/mapython-distance/"/>
     <id>http://WustChuiChui.github.io/2016/04/08/mapython-distance/</id>
     <published>2016-04-08T11:50:15.000Z</published>
-    <updated>2016-04-08T14:03:21.140Z</updated>
+    <updated>2016-04-08T14:05:35.040Z</updated>
     
     <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;Python学习与机器学习-各类距离与Python的具体实现&quot;&gt;&lt;a href=&quot;#Python学习与机器学习-各类距离与Python的具体实现&quot; class=&quot;headerlink&quot; title=&quot;Python学习与机器学习   各类距离与Python的具体实现&quot;&gt;&lt;/a&gt;Python学习与机器学习   各类距离与Python的具体实现&lt;/h1&gt;&lt;h2 id=&quot;范数（数学基础）&quot;&gt;&lt;a href=&quot;#范数（数学基础）&quot; class=&quot;headerlink&quot; title=&quot;范数（数学基础）&quot;&gt;&lt;/a&gt;范数（数学基础）&lt;/h2&gt;&lt;p&gt;向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。&lt;br&gt;&lt;strong&gt; 向量的范数定义：&lt;/strong&gt; 向量的范数是一个函数||x||,满足非负性||x||&amp;gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&amp;lt;=||x||+||y||.&lt;/p&gt;
