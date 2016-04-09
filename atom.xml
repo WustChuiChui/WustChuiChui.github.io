@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-08T14:43:48.343Z</updated>
+  <updated>2016-04-09T11:17:19.807Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows下安装Python的机器学习（Scikit-Learn）算法库方法</title>
+    <link href="http://WustChuiChui.github.io/2016/04/09/built-scikit-learn/"/>
+    <id>http://WustChuiChui.github.io/2016/04/09/built-scikit-learn/</id>
+    <published>2016-04-09T10:54:07.000Z</published>
+    <updated>2016-04-09T11:17:19.807Z</updated>
+    
+    <content type="html">&lt;p&gt;Python社区仿照MATLAB开发了类似的数学分析库，主要包括用NumPy和SciPy来处理数据，用Matplotlib实现数据可视化。大多数Python数学和算法领域的应用广泛地将其作为基本的程序库。为了适应处理大规模数据的需求，Python在此基础上开发了Scikit-Learn机器学习算法库，同时还提供了深度学习算法库Theano,并支持GPU运算，Python已经可以完整地提供基于C/C++语言的机器学习开发包，而且都是开源的。本文主要介绍一下Scikit-Learn机器学习算法库的安装方法。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Windows下安装Python的机器学习（Scikit-Learn）算法库方法&quot;&gt;&lt;a href=&quot;#Windows下安装Python的机器学习（Scikit-Learn）算法库方法&quot; class=&quot;headerlink&quot; title=&quot;Windows下安装Python的机器学习（Scikit-Learn）算法库方法&quot;&gt;&lt;/a&gt;Windows下安装Python的机器学习（Scikit-Learn）算法库方法&lt;/h1&gt;&lt;h2 id=&quot;基本环境&quot;&gt;&lt;a href=&quot;#基本环境&quot; class=&quot;headerlink&quot; title=&quot;基本环境&quot;&gt;&lt;/a&gt;基本环境&lt;/h2&gt;&lt;p&gt;操作系统：Windows 10   64位&lt;br&gt;Python版本：Pyhton 2.7&lt;br&gt;算法库：scikit-learn 0.16.1&lt;/p&gt;
+&lt;h2 id=&quot;基本步骤&quot;&gt;&lt;a href=&quot;#基本步骤&quot; class=&quot;headerlink&quot; title=&quot;基本步骤&quot;&gt;&lt;/a&gt;基本步骤&lt;/h2&gt;&lt;h3 id=&quot;1-搭建Python开发环境&quot;&gt;&lt;a href=&quot;#1-搭建Python开发环境&quot; class=&quot;headerlink&quot; title=&quot;1.搭建Python开发环境&quot;&gt;&lt;/a&gt;1.搭建Python开发环境&lt;/h3&gt;&lt;p&gt;Python开发环境可以搭建在Linux下，也可以搭建在Windows下：这里在Windows 10环境下部署64位的Python开发环境。&lt;br&gt;Pyhton可在官方网站直接下载，网站为&amp;gt;&lt;a href=&quot;https://www.python.org/downloads/source/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.python.org/downloads/source/&lt;/a&gt;.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Python社区仿照MATLAB开发了类似的数学分析库，主要包括用NumPy和SciPy来处理数据，用Matplotlib实现数据可视化。大多数Python数学和算法领域的应用广泛地将其作为基本的程序库。为了适应处理大规模数据的需求，Python在此基础上开发了Scikit-Learn机器学习算法库，同时还提供了深度学习算法库Theano,并支持GPU运算，Python已经可以完整地提供基于C/C++语言的机器学习开发包，而且都是开源的。本文主要介绍一下Scikit-Learn机器学习算法库的安装方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>计算机视觉 特征提取之HOG特征</title>
