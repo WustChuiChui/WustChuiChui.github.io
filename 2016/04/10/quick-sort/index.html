@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>那些年，我们一起写过的快排 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在几种常用的排序算法中，快速排序总体的平均效率是最优的，这里对快速排序给出C++版的代码，希望大家相互学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="那些年，我们一起写过的快排">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/10/quick-sort/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="在几种常用的排序算法中，快速排序总体的平均效率是最优的，这里对快速排序给出C++版的代码，希望大家相互学习。">
+<meta property="og:updated_time" content="2016-04-10T14:41:54.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="那些年，我们一起写过的快排">
+<meta name="twitter:description" content="在几种常用的排序算法中，快速排序总体的平均效率是最优的，这里对快速排序给出C++版的代码，希望大家相互学习。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-quick-sort" class="post-quick-sort post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      那些年，我们一起写过的快排
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/10/quick-sort/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/10/quick-sort/" data-id="cimuoih2b0007owvop190dj0f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>在几种常用的排序算法中，快速排序总体的平均效率是最优的，这里对快速排序给出C++版的代码，希望大家相互学习。</p>
+<a id="more"></a>
+<h1 id="那些年，我们一起写过的快排"><a href="#那些年，我们一起写过的快排" class="headerlink" title="那些年，我们一起写过的快排"></a>那些年，我们一起写过的快排</h1><h2 id="一、基本思路"><a href="#一、基本思路" class="headerlink" title="一、基本思路"></a>一、基本思路</h2><p>通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。<br>快速排序是一种不稳定的排序算法，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动。</p>
+<h2 id="二、算法分析"><a href="#二、算法分析" class="headerlink" title="二、算法分析"></a>二、算法分析</h2><p>实现快速排序算法的关键在于先在数组中选择一个数字，接下来把数组中的数字分为两个部分，其中，比关键字小的数字移到数组的左边，比关键字大的数字移到数组的右边。</p>
+<h2 id="三、相关代码实现"><a href="#三、相关代码实现" class="headerlink" title="三、相关代码实现"></a>三、相关代码实现</h2><p>先看数据结构中给出的基本算法代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void quickSort(int s[], int l, int r)  </span><br><span class="line">&#123;  </span><br><span class="line">    if (l&lt; r)  </span><br><span class="line">    &#123;        </span><br><span class="line">        int i = l, j = r, x = s[l];      //以第一个数为参考基准</span><br><span class="line">        while (i &lt; j)  </span><br><span class="line">        &#123;  </span><br><span class="line">            while(i &lt; j &amp;&amp; s[j]&gt;= x) // 从右向左找第一个小于x的数  </span><br><span class="line">                j--;   </span><br><span class="line">            if(i &lt; j)  </span><br><span class="line">                s[i++] = s[j];  </span><br><span class="line">            while(i &lt; j &amp;&amp; s[i]&lt; x) // 从左向右找第一个大于等于x的数  </span><br><span class="line">                i++;   </span><br><span class="line">            if(i &lt; j)  </span><br><span class="line">                s[j--] = s[i];  </span><br><span class="line">        &#125;  </span><br><span class="line">        s[i] = x;  </span><br><span class="line">        quickSort(s, l, i - 1); // 递归调用  </span><br><span class="line">        quickSort(s, i + 1, r);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里给出另一个版本的快速排序算法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">int Partition(int data[],int length,int start,int end)</span><br><span class="line">&#123;</span><br><span class="line">    //定义的一个函数，在数组DATA中选择一个数字，将数组中小于关键字的</span><br><span class="line">    //部分全放在关键字的左侧，大于关键字的部分放在右侧，返回关键字的索引</span><br><span class="line"></span><br><span class="line">    //参数异常处理</span><br><span class="line">    if(data==NULL || length&lt;0 || start&lt;0 || end&gt;=length)&#123;</span><br><span class="line">        throw new std:exception(&quot;参数输入非法!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int index=RandomInrange(start,end);   //在start 和end 直接随机取一个值</span><br><span class="line">    //data[index]作为关键字，先将其放在最后</span><br><span class="line">    Swap(&amp;data[index],&amp;data[end]);    </span><br><span class="line"></span><br><span class="line">    int small=start-1;</span><br><span class="line">    for(index=start;index&lt;end;++index)&#123;</span><br><span class="line">     if(data[index]&lt;data[end])&#123;</span><br><span class="line">        ++small;</span><br><span class="line">        if(small!=index)</span><br><span class="line">        Swap(&amp;data[index],&amp;data[small]);</span><br><span class="line">     &#125;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    ++small;</span><br><span class="line">    Swap(&amp;data[small],&amp;data[end]);</span><br><span class="line">    return small; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void QuickSort(int data[],int length,int start,int end)</span><br><span class="line">&#123;</span><br><span class="line">    if(start==end)</span><br><span class="line">     return ;</span><br><span class="line">      int index=Partition(data,length,start,end);</span><br><span class="line">      if(index&gt;start)</span><br><span class="line">      QuickSort(data,length,start,index-1);</span><br><span class="line">      if(index&lt;end)</span><br><span class="line">      QuickSort(data,length,index+1,end);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="四、两种算法的比较"><a href="#四、两种算法的比较" class="headerlink" title="四、两种算法的比较"></a>四、两种算法的比较</h2><p>1、这里给出的代码在选取参考数字时，使用的随机选取知道方法，而前者是直接使用第一数字作为参考；<br>2、后面的代码在输入参数出现异常时能正确给出响应提示，因而更加鲁棒。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/10/quick-sort/">
+    <time datetime="2016-04-10T14:14:25.000Z" class="entry-date">
+        2016-04-10
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/09/data-visualization/" rel="next">Python与机器学习基础 之数据可视化 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-quick-sort" data-title="那些年，我们一起写过的快排" data-url="http://WustChuiChui.github.io/2016/04/10/quick-sort/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/10/quick-sort/">那些年，我们一起写过的快排</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/09/data-visualization/">Python与机器学习基础 之数据可视化</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/09/built-scikit-learn/">Windows下安装Python的机器学习（Scikit-Learn）算法库方法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/08/hog/">计算机视觉 特征提取之HOG特征</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/08/mapython-distance/">Python学习与机器学习   各类距离与Python的具体实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
