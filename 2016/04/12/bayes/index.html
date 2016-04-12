@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Python与机器学习 贝叶斯算法 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="朴素贝叶斯分类时一种十分简单的分类算法，称其朴素是因为其思想基础的简单性，对文本分类而言，它认为词袋中的两两词之间的关系是相互独立的，即一个对象的特征向量中每个维度都是相互独立的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python与机器学习 贝叶斯算法">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/12/bayes/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="朴素贝叶斯分类时一种十分简单的分类算法，称其朴素是因为其思想基础的简单性，对文本分类而言，它认为词袋中的两两词之间的关系是相互独立的，即一个对象的特征向量中每个维度都是相互独立的。">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxgw1f2u3ez8ww3j30qk02mq3g.jpg">
+<meta property="og:updated_time" content="2016-04-12T12:52:55.270Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python与机器学习 贝叶斯算法">
+<meta name="twitter:description" content="朴素贝叶斯分类时一种十分简单的分类算法，称其朴素是因为其思想基础的简单性，对文本分类而言，它认为词袋中的两两词之间的关系是相互独立的，即一个对象的特征向量中每个维度都是相互独立的。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006qSkuxgw1f2u3ez8ww3j30qk02mq3g.jpg">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-bayes" class="post-bayes post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Python与机器学习 贝叶斯算法
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/12/bayes/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/12/bayes/" data-id="cimxfi2ip0004okvop1oe2epu" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>朴素贝叶斯分类时一种十分简单的分类算法，称其朴素是因为其思想基础的简单性，对文本分类而言，它认为词袋中的两两词之间的关系是相互独立的，即一个对象的特征向量中每个维度都是相互独立的。<br><a id="more"></a></p>
+<h1 id="Python与机器学习-贝叶斯算法"><a href="#Python与机器学习-贝叶斯算法" class="headerlink" title="Python与机器学习 贝叶斯算法"></a>Python与机器学习 贝叶斯算法</h1><h2 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h2><p>(1)设x={a1,a2,…,am}为一个待分类项，而每个a为x的一个特征属性;<br>(2)有类别集合C={y1,y2,…,yn};<br>(3)计算P(y1|x),P(y2|x),…,P(yn|x);<br>(4)如果P(yk|x)=max{P(y1|x),P(y2|x),…,P(yn|x)},则x属于yk。</p>
+<p>上述定义给出了对x样本进行分类的准则，分类的关键是计算各个条件概率。可以按以下步骤计算。<br>(1)找到一个已知分类的待分类项集合，也就是训练集；<br>(2)统计得到在各类别下各个特征属性的条件概率估计；<br>(3)如果各个特征属性是条件独立的(或者假设它们是相互独立的)，则根据贝叶斯定义有如下推论：<br><img src="http://ww1.sinaimg.cn/large/006qSkuxgw1f2u3ez8ww3j30qk02mq3g.jpg" alt=""></p>
+<h2 id="二、分类流程"><a href="#二、分类流程" class="headerlink" title="二、分类流程"></a>二、分类流程</h2><p>(1)训练数据生成训练样本集：TF-IDF<br>(2)对每个类别计算P(yi)<br>(3)对每个特征属性计算所有划分的条件概率<br>(4)对每个类别计算P(x|yi)P(yi)<br>(5)以(x|yi)P(yi)的最大项判断x的所属类别</p>
+<h2 id="三、算法实现"><a href="#三、算法实现" class="headerlink" title="三、算法实现"></a>三、算法实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">def loadDataSet():</span><br><span class="line">    postingList=[[&apos;my&apos;,&apos;dog&apos;,&apos;has&apos;,&apos;flea&apos;,&apos;poblems&apos;,&apos;help&apos;,&apos;please&apos;],[&apos;maybe&apos;,&apos;not&apos;,&apos;take&apos;,&apos;him&apos;,&apos;to&apos;,&apos;dog&apos;,&apos;park&apos;,&apos;stupid&apos;],[&apos;my&apos;,&apos;dalmation&apos;,&apos;is&apos;,&apos;so&apos;,&apos;cute&apos;,&apos;I&apos;,&apos;love&apos;,&apos;him&apos;,&apos;my&apos;],[&apos;stop&apos;,&apos;posting&apos;,&apos;stupid&apos;,&apos;worthless&apos;,&apos;garbage&apos;],[&apos;mr&apos;,&apos;licks&apos;,&apos;ate&apos;,&apos;my&apos;,&apos;steak&apos;,&apos;how&apos;,&apos;to&apos;,&apos;stop&apos;,&apos;to&apos;,&apos;stop&apos;,&apos;him&apos;],[&apos;quit&apos;,&apos;buying&apos;,&apos;worthles&apos;,&apos;dog&apos;,&apos;food&apos;,&apos;stupid&apos;]]</span><br><span class="line">    classVec=[0,1,0,1,0,1]</span><br><span class="line">    return postingList,classVec</span><br><span class="line">    #这里postingList,classVec分别为训练集和对应的分类</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    #编写一个bayes算法类，实现该算法</span><br><span class="line">    #默认构造方法</span><br><span class="line">class NBayes(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.vocabulary=[]             #词典</span><br><span class="line">        self.idf=0                     #词典的IDF权值向量</span><br><span class="line">        self.tf=0                      #训练集中的权值矩阵</span><br><span class="line">        self.tdm=0                     #P(x|yi)</span><br><span class="line">        self.Pcates=&#123;&#125;                 #P(yi)是一个类别字典</span><br><span class="line">        self.lables=[]                 #对应每个文本的分类，是一个外部导入的列表</span><br><span class="line">        self.doclength=0               #训练集文本数</span><br><span class="line">        self.vocablen=0                #词典词长</span><br><span class="line">        self.testset=0                 #测试集</span><br><span class="line"></span><br><span class="line">    #导入和训练集数据，生成算法必需的参数和数据结构</span><br><span class="line">    def train_set(self,trainset,classVec):</span><br><span class="line">        self.cate_prob(classVec)      #计算每个分类在数据集中的概率P(yi)</span><br><span class="line">        self.doclength=len(trainset)</span><br><span class="line">        tempset=set()</span><br><span class="line">        [tempset.add(word) for doc i trainset for word in doc] #生成词典</span><br><span class="line">        self.vocabulary=list(tempset)</span><br><span class="line">        self.vocablen=len(self.vocabulary)</span><br><span class="line">        self.calc_wordfreq(trainset)    #计算词频数据集</span><br><span class="line">        self.built_tdm()                #按分类累计向量空间的每维值P(x|yi)</span><br><span class="line"></span><br><span class="line">    #cate_prob函数,计算在数据集中每个分类的概率P(yi)</span><br><span class="line">    def cate_prob(self,classVec):</span><br><span class="line">        self.lables=classVec</span><br><span class="line">        labletemps=set(self.lables) #全部分类</span><br><span class="line">        for labletemp in labletemps:</span><br><span class="line">            self.lables.count(labletemp)</span><br><span class="line">            self.Pcates[labletemp]=float(self.lables.count(labletemp))/float(len(self.lables))</span><br><span class="line"></span><br><span class="line">    #calc_wordfreq函数，生成普通的词频向量</span><br><span class="line">    def calc_wordfreq(self,trainset):</span><br><span class="line">        self.idf=np.zeros([1,self.vocablen])   </span><br><span class="line">        self.tf=np.zeros(self.doclength,self.vocablen)</span><br><span class="line">        for indx in xrange(self.doclength):</span><br><span class="line">            for word in trainset[indx]:</span><br><span class="line">                self.tf[indx,self.vocabulary.index(word)]+=1</span><br><span class="line">            for signleword in set(trainset[indx]):</span><br><span class="line">                self.idf[0,self.vocabulary.index(signleword)]+=1</span><br><span class="line"></span><br><span class="line">    #built_tdm函数，按分类累计计算向量空间的每维值</span><br><span class="line">    def built_tdm(self):</span><br><span class="line">        self.tdm=np.zeros([len(self.Pcates),self.vocablen])</span><br><span class="line">        sumlist=np.zeros([len(self.Pcates),1])    #统计每个分类的总值</span><br><span class="line">        for indx in xrange(self.doclength):</span><br><span class="line">            #将同一类别的词向量空间值相加</span><br><span class="line">            self.tdm[self.lables[indx]]+=self.tf[indx]</span><br><span class="line">            #统计每个分类的总值，它为一个标量</span><br><span class="line">            sumlist[self.lables[indx]]=np.sum(self.tdm[self.lables[indx]])</span><br><span class="line">        self.tdm=self.tdm/sumlist</span><br><span class="line"></span><br><span class="line">    #map2vocab函数，将测试集映射到当前词典</span><br><span class="line">    def map2vovocab(self,testdata):</span><br><span class="line">        self.testdata=np.zeros([1,self.vocablen])</span><br><span class="line">        for word in testdata:</span><br><span class="line">            self.testdata[0,self.vocabulary.index(word)]+=1</span><br><span class="line"></span><br><span class="line">    #predict函数，预测分类结果，输出预测的分类类别</span><br><span class="line">    def predict(self,testdata):</span><br><span class="line">        if np.shape(testdata)[1]!=self.vocablen:     #测试集长度与词典长度不相等，则退出</span><br><span class="line">            print &quot;Error input&quot;</span><br><span class="line">            exit(0)</span><br><span class="line"></span><br><span class="line">        predvalue=0  #初始化类别概率</span><br><span class="line">        predclass=&quot;&quot; #初始化类别名称</span><br><span class="line">        for tdm_vect,keyclass in zip(self.tdm,self.Pcates):</span><br><span class="line">            temp=np.sum(testset*tdm_vect*self.Pcates[keyclass])</span><br><span class="line">            if temp&gt;predvalue:</span><br><span class="line">                predvalue=temp</span><br><span class="line">                predclass=keyclass</span><br><span class="line"></span><br><span class="line">        return predclass</span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/12/bayes/">
+    <time datetime="2016-04-12T10:05:02.000Z" class="entry-date">
+        2016-04-12
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/12/ReorderArray/" rel="next">调整数组顺序使奇数位于偶数前面 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-bayes" data-title="Python与机器学习 贝叶斯算法" data-url="http://WustChuiChui.github.io/2016/04/12/bayes/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/12/bayes/">Python与机器学习 贝叶斯算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/ReorderArray/">调整数组顺序使奇数位于偶数前面</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/Resert-print-list/">几种从尾到头输出链表的算法比较</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/10/quick-sort/">那些年，我们一起写过的快排</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/09/data-visualization/">Python与机器学习基础 之数据可视化</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
