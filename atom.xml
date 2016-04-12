@@ -266,30 +266,6 @@
   </entry>
   
   <entry>
-    <title>Twin SVM的数学求解方法</title>
-    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
-    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
-    <published>2016-04-06T14:42:16.000Z</published>
-    <updated>2016-04-08T01:11:13.904Z</updated>
-    
-    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
-&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>强大的随机森林分类器</title>
     <link href="http://WustChuiChui.github.io/2016/04/06/Random-forest/"/>
     <id>http://WustChuiChui.github.io/2016/04/06/Random-forest/</id>
@@ -347,6 +323,30 @@
     <summary type="html">
     
       &lt;p&gt;机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Twin SVM的数学求解方法</title>
+    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
+    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
+    <published>2016-04-06T14:42:16.000Z</published>
+    <updated>2016-04-08T01:11:13.904Z</updated>
+    
+    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
+&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
     
     </summary>
     
