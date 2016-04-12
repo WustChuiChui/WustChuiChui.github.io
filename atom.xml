@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-12T02:28:00.463Z</updated>
+  <updated>2016-04-12T09:33:39.663Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>调整数组顺序使奇数位于偶数前面</title>
+    <link href="http://WustChuiChui.github.io/2016/04/12/ReorderArray/"/>
+    <id>http://WustChuiChui.github.io/2016/04/12/ReorderArray/</id>
+    <published>2016-04-12T07:53:05.000Z</published>
+    <updated>2016-04-12T09:33:39.663Z</updated>
+    
+    <content type="html">&lt;p&gt;问题描述：输入一个整数数组，实现一个函数调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;调整数组顺序使奇数位于偶数前面&quot;&gt;&lt;a href=&quot;#调整数组顺序使奇数位于偶数前面&quot; class=&quot;headerlink&quot; title=&quot;调整数组顺序使奇数位于偶数前面&quot;&gt;&lt;/a&gt;调整数组顺序使奇数位于偶数前面&lt;/h1&gt;&lt;p&gt;一种基础的思路：先不考虑时间复杂度，从开开始遍历数组，当当前位置为偶数时，将位于该元素后面的数字整体向前移动一位，同时将该节点的数字放在数组的最后位置，每遇到一个偶数需要移动O(n)个数字，时间复杂度为O(n2).&lt;/p&gt;
+&lt;p&gt;现给出另一种思路，在扫描的过程中，如果发现有偶数在奇数的前面，则交换他们的位置，交换之后就符合要求了。基于上述分析，给出如下代码：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;void ReorderOddEven(int *pData,int length)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(pData==NULL ||length==0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int *pBegin=pData;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int *pEnd=pData+length-1;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    while(pBegin&amp;lt;pEnd)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        while(pBegin&amp;lt;pEnd &amp;amp;&amp;amp; (*pBegin &amp;amp; ox1)!=0)&amp;#123;  //找到第一个偶数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                 pBegin++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        while(pBegin&amp;lt;pEnd &amp;amp;&amp;amp; (*pEnd &amp;amp; ox1)==0)&amp;#123;     //找到第一个奇数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            eEnd--;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     if(pBegin&amp;lt;pEnd)&amp;#123;       //交换奇数和偶数的位置&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        int temp=*pBegin;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        *pBegin=*pEnd;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        *pEnd=temp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;现在如果要对上述算法进行扩展，比如：将题目简单的修改一下，将数组按大小分成两部分？将负数放在前面，正数放在后面？为了将代码进一步抽象，可以给出一个模式，修改函数ReorderOddEven中的判断标准，其他的逻辑框架不需要改动。有以下代码：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;void ReorderOddEven(int *pData,int length,bool (*func)(int))&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(pData==NULL ||length==0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int *pBegin=pData;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int *pEnd=pData+length-1;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    while(pBegin&amp;lt;pEnd)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        while(pBegin&amp;lt;pEnd &amp;amp;&amp;amp; !func(*pBegin))&amp;#123;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                 pBegin++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        while(pBegin&amp;lt;pEnd &amp;amp;&amp;amp; func(*pEnd))&amp;#123;     &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            eEnd--;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     if(pBegin&amp;lt;pEnd)&amp;#123;       &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        int temp=*pBegin;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        *pBegin=*pEnd;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        *pEnd=temp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;bool isEven(int n)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return (n &amp;amp; 1)==0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;另外对给出的第一个算法，这里在实现题目要求时，奇偶数的相对顺序发生了变化，如果要使得在重排后奇偶数的相对顺序不变。可以借用栈或队列等容器来实现，当然，这意味着额外的内存开销，最差的情况为O(n),其代码如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;void reOrderOddEven(vector&amp;lt;int&amp;gt; &amp;amp;array) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      if(array.size()&amp;lt;=0)            //异常处理&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          return;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      vector&amp;lt;int&amp;gt; odds,evens;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      unsigned int i;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      for(i=0;i&amp;lt;array.size();i++)&amp;#123;   //分别将奇数和偶数存入一个vector容器中&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          if((array[i]&amp;amp;0x1)!=0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             odds.push_back(array[i]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          if((array[i]&amp;amp;0x1)==0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             evens.push_back(array[i]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      for(i=0;i&amp;lt;odds.size();i++)   //将奇数和偶数分别存入array中&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          array[i]=odds[i];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      int k=i;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      for(i=0;i&amp;lt;evens.size();i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          array[k++]=evens[i];        &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;问题描述：输入一个整数数组，实现一个函数调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>几种从尾到头输出链表的算法比较</title>
@@ -213,30 +237,6 @@
   </entry>
   
   <entry>
-    <title>Twin SVM的数学求解方法</title>
-    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
-    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
-    <published>2016-04-06T14:42:16.000Z</published>
-    <updated>2016-04-08T01:11:13.904Z</updated>
-    
-    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
-&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>强大的随机森林分类器</title>
     <link href="http://WustChuiChui.github.io/2016/04/06/Random-forest/"/>
     <id>http://WustChuiChui.github.io/2016/04/06/Random-forest/</id>
@@ -294,6 +294,30 @@
     <summary type="html">
     
       &lt;p&gt;机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Twin SVM的数学求解方法</title>
+    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
+    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
+    <published>2016-04-06T14:42:16.000Z</published>
+    <updated>2016-04-08T01:11:13.904Z</updated>
+    
+    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
+&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
     
     </summary>
     
