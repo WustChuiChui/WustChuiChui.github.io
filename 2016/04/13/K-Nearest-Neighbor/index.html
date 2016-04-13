@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Python与机器学习 K近邻算法及实现 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过计算向量间的距离衡量相似度来实现分类，就是k-NN(k-Nearest Neighbor)算法，一种基于向量间相似度的分类算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python与机器学习 K近邻算法及实现">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/13/K-Nearest-Neighbor/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="通过计算向量间的距离衡量相似度来实现分类，就是k-NN(k-Nearest Neighbor)算法，一种基于向量间相似度的分类算法。">
+<meta property="og:updated_time" content="2016-04-13T03:11:39.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python与机器学习 K近邻算法及实现">
+<meta name="twitter:description" content="通过计算向量间的距离衡量相似度来实现分类，就是k-NN(k-Nearest Neighbor)算法，一种基于向量间相似度的分类算法。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-K-Nearest-Neighbor" class="post-K-Nearest-Neighbor post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Python与机器学习 K近邻算法及实现
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/13/K-Nearest-Neighbor/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/13/K-Nearest-Neighbor/" data-id="cimya6fef0001oovoqt5xk7ps" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>通过计算向量间的距离衡量相似度来实现分类，就是k-NN(k-Nearest Neighbor)算法，一种基于向量间相似度的分类算法。</p>
+<a id="more"></a>
+<h1 id="Python与机器学习-K近邻算法及实现"><a href="#Python与机器学习-K近邻算法及实现" class="headerlink" title="Python与机器学习 K近邻算法及实现"></a>Python与机器学习 K近邻算法及实现</h1><h2 id="一、算法原理"><a href="#一、算法原理" class="headerlink" title="一、算法原理"></a>一、算法原理</h2><p>k-最近邻（k-Nearest Neighbor）算法是一种较简单的机器学习算法。它采用测量不同特征值之间的距离方法进行分类。它的基本思想如下：如果一个样本在特征空间中的k个最近邻的样本中的大多数都属于某一个类别，则该样本也属于这个类别。<br><strong> 算法流程： </strong><br>第一阶段：确定k值（最近邻居的个数），一般为一个奇数。<br>第二阶段：确定距离度量公式，文本分类一般使用<strong> 余弦夹角 </strong>进行度量。<br>第三阶段：统计k个样本点中各个类别的数量，根据k各样本中数量最多的样本的类别确定输入数据的类别。</p>
+<h2 id="二、算法评估"><a href="#二、算法评估" class="headerlink" title="二、算法评估"></a>二、算法评估</h2><p><strong> 优点： </strong><br>1.简单，易于理解，无需估计参数，无需训练；<br>2.适合对稀有事件进行分类；<br>3.特别适合于多分类问题，在此领域k-NN比SVM表现要好。<br><strong> 缺点： </strong><br>1.样本不平衡时，可能会影响分类结果；<br>2.计算量相对较大，原因是对每一个样本，都要计算它到全体样本的距离；<br>3.可理解性差，无法给出类似于决策树那样的规则。</p>
+<h2 id="三、Python实现"><a href="#三、Python实现" class="headerlink" title="三、Python实现"></a>三、Python实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#第一阶段：导入所需的库，进行数据的初始化。</span><br><span class="line"></span><br><span class="line">import sys</span><br><span class="line">import os</span><br><span class="line">from numpy import *</span><br><span class="line">import numpy as np </span><br><span class="line">import operator</span><br><span class="line">from Nbayes_lib import *</span><br><span class="line"></span><br><span class="line">#配准UTF-8输出环境</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(&apos;utf-8&apos;)</span><br><span class="line"></span><br><span class="line">k=3   </span><br><span class="line"></span><br><span class="line">#第二阶段：实现夹角余弦的距离公式</span><br><span class="line">def cosdist(vector1,voctor2):</span><br><span class="line">    return dot(vector1,voctor2)/(linalg.norm(vector1)*linalg.norm(voctor2))</span><br><span class="line"></span><br><span class="line">#第三阶段：kNN实现分类器</span><br><span class="line">#测试集：testdata; 训练集：trainSet; 类别标签：listClasses; k：k个近邻数</span><br><span class="line">def classify(testdata,trainSet,listClasses,k):</span><br><span class="line">    dataSetSize=trainSet.shape[0]   #样本集的行数</span><br><span class="line">    distances=array(zeros(dataSetSize))</span><br><span class="line">    for indx in xrange(dataSetSize):   #计算测试集与训练集之间的距离：余弦夹角</span><br><span class="line">        distances[indx]=cosdist(testdata,trainSet[indx])</span><br><span class="line">    sortedDistIndicies=argsort(-distances)</span><br><span class="line">    classCount=&#123;&#125;</span><br><span class="line">    for i in range(k):     #获取角度最小的前k项作为参考项</span><br><span class="line">        #按排序顺序返回样本集对应的类别标签</span><br><span class="line">        voteIkabel=listClasses[sortedDistIndicies[i]]</span><br><span class="line">        clssCount[voteIkabel]=classCount.get(voteIkabel,0)+1</span><br><span class="line">    #对分类字典按value排序</span><br><span class="line">    sorted(data.iteritems(),key=operator.itemgetter(1),reverse=True)</span><br><span class="line">    #该句按字典值排序的固定用法</span><br><span class="line">    sortedClassCount=sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)</span><br><span class="line">    return sortedClassCount[0][0]</span><br></pre></td></tr></table></figure>
+<h2 id="四、改进策略"><a href="#四、改进策略" class="headerlink" title="四、改进策略"></a>四、改进策略</h2><p>k-NN算法的改进主要分为分类效率和分类效果两个方面：<br><strong> 分类效率： </strong>事先对样本属性进行约简，删除对分类结果影响较小的属性，快速的得出待分类样本的类别。该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。<br><strong> 分类效果： </strong>采用权值的方法（和该样本距离小的邻居权值大）来改进该算法，由于不同分类的文件本身有数量上差异，因此也可以选取不同数目的最近邻居，来参考分类。</p>
+<h2 id="五、相关工具箱"><a href="#五、相关工具箱" class="headerlink" title="五、相关工具箱"></a>五、相关工具箱</h2><p>MATLAB：MATLAN 2016版集成了机器学习和深度学习相关的工具箱，其中DeepLearnToolbox-master中包含k-N等多种算法；<br>Python: scikit-learn 库中有该函数的实现<br>C++:CSDN 上有C++版的代码实现<br>R语言：&gt;<a href="http://blog.csdn.net/liulewei/article/details/8288412" target="_blank" rel="external">http://blog.csdn.net/liulewei/article/details/8288412</a></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/13/K-Nearest-Neighbor/">
+    <time datetime="2016-04-13T02:11:04.000Z" class="entry-date">
+        2016-04-13
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/12/visit-binary-tree/" rel="next">二叉树的几种遍历算法及其实现（C/C++） <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-K-Nearest-Neighbor" data-title="Python与机器学习 K近邻算法及实现" data-url="http://WustChuiChui.github.io/2016/04/13/K-Nearest-Neighbor/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/13/K-Nearest-Neighbor/">Python与机器学习 K近邻算法及实现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/visit-binary-tree/">二叉树的几种遍历算法及其实现（C/C++）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/bayes/">Python与机器学习 贝叶斯算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/ReorderArray/">调整数组顺序使奇数位于偶数前面</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/Resert-print-list/">几种从尾到头输出链表的算法比较</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

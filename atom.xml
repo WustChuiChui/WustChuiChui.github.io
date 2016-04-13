@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-13T01:20:34.986Z</updated>
+  <updated>2016-04-13T03:11:39.975Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python与机器学习 K近邻算法及实现</title>
+    <link href="http://WustChuiChui.github.io/2016/04/13/K-Nearest-Neighbor/"/>
+    <id>http://WustChuiChui.github.io/2016/04/13/K-Nearest-Neighbor/</id>
+    <published>2016-04-13T02:11:04.000Z</published>
+    <updated>2016-04-13T03:11:39.975Z</updated>
+    
+    <content type="html">&lt;p&gt;通过计算向量间的距离衡量相似度来实现分类，就是k-NN(k-Nearest Neighbor)算法，一种基于向量间相似度的分类算法。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Python与机器学习-K近邻算法及实现&quot;&gt;&lt;a href=&quot;#Python与机器学习-K近邻算法及实现&quot; class=&quot;headerlink&quot; title=&quot;Python与机器学习 K近邻算法及实现&quot;&gt;&lt;/a&gt;Python与机器学习 K近邻算法及实现&lt;/h1&gt;&lt;h2 id=&quot;一、算法原理&quot;&gt;&lt;a href=&quot;#一、算法原理&quot; class=&quot;headerlink&quot; title=&quot;一、算法原理&quot;&gt;&lt;/a&gt;一、算法原理&lt;/h2&gt;&lt;p&gt;k-最近邻（k-Nearest Neighbor）算法是一种较简单的机器学习算法。它采用测量不同特征值之间的距离方法进行分类。它的基本思想如下：如果一个样本在特征空间中的k个最近邻的样本中的大多数都属于某一个类别，则该样本也属于这个类别。&lt;br&gt;&lt;strong&gt; 算法流程： &lt;/strong&gt;&lt;br&gt;第一阶段：确定k值（最近邻居的个数），一般为一个奇数。&lt;br&gt;第二阶段：确定距离度量公式，文本分类一般使用&lt;strong&gt; 余弦夹角 &lt;/strong&gt;进行度量。&lt;br&gt;第三阶段：统计k个样本点中各个类别的数量，根据k各样本中数量最多的样本的类别确定输入数据的类别。&lt;/p&gt;
+&lt;h2 id=&quot;二、算法评估&quot;&gt;&lt;a href=&quot;#二、算法评估&quot; class=&quot;headerlink&quot; title=&quot;二、算法评估&quot;&gt;&lt;/a&gt;二、算法评估&lt;/h2&gt;&lt;p&gt;&lt;strong&gt; 优点： &lt;/strong&gt;&lt;br&gt;1.简单，易于理解，无需估计参数，无需训练；&lt;br&gt;2.适合对稀有事件进行分类；&lt;br&gt;3.特别适合于多分类问题，在此领域k-NN比SVM表现要好。&lt;br&gt;&lt;strong&gt; 缺点： &lt;/strong&gt;&lt;br&gt;1.样本不平衡时，可能会影响分类结果；&lt;br&gt;2.计算量相对较大，原因是对每一个样本，都要计算它到全体样本的距离；&lt;br&gt;3.可理解性差，无法给出类似于决策树那样的规则。&lt;/p&gt;
+&lt;h2 id=&quot;三、Python实现&quot;&gt;&lt;a href=&quot;#三、Python实现&quot; class=&quot;headerlink&quot; title=&quot;三、Python实现&quot;&gt;&lt;/a&gt;三、Python实现&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#第一阶段：导入所需的库，进行数据的初始化。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import sys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import os&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;from numpy import *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import numpy as np &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import operator&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;from Nbayes_lib import *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#配准UTF-8输出环境&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;reload(sys)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sys.setdefaultencoding(&amp;apos;utf-8&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;k=3   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#第二阶段：实现夹角余弦的距离公式&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;def cosdist(vector1,voctor2):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return dot(vector1,voctor2)/(linalg.norm(vector1)*linalg.norm(voctor2))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#第三阶段：kNN实现分类器&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#测试集：testdata; 训练集：trainSet; 类别标签：listClasses; k：k个近邻数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;def classify(testdata,trainSet,listClasses,k):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    dataSetSize=trainSet.shape[0]   #样本集的行数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    distances=array(zeros(dataSetSize))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    for indx in xrange(dataSetSize):   #计算测试集与训练集之间的距离：余弦夹角&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        distances[indx]=cosdist(testdata,trainSet[indx])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sortedDistIndicies=argsort(-distances)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    classCount=&amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    for i in range(k):     #获取角度最小的前k项作为参考项&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        #按排序顺序返回样本集对应的类别标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        voteIkabel=listClasses[sortedDistIndicies[i]]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        clssCount[voteIkabel]=classCount.get(voteIkabel,0)+1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    #对分类字典按value排序&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sorted(data.iteritems(),key=operator.itemgetter(1),reverse=True)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    #该句按字典值排序的固定用法&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sortedClassCount=sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return sortedClassCount[0][0]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;四、改进策略&quot;&gt;&lt;a href=&quot;#四、改进策略&quot; class=&quot;headerlink&quot; title=&quot;四、改进策略&quot;&gt;&lt;/a&gt;四、改进策略&lt;/h2&gt;&lt;p&gt;k-NN算法的改进主要分为分类效率和分类效果两个方面：&lt;br&gt;&lt;strong&gt; 分类效率： &lt;/strong&gt;事先对样本属性进行约简，删除对分类结果影响较小的属性，快速的得出待分类样本的类别。该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。&lt;br&gt;&lt;strong&gt; 分类效果： &lt;/strong&gt;采用权值的方法（和该样本距离小的邻居权值大）来改进该算法，由于不同分类的文件本身有数量上差异，因此也可以选取不同数目的最近邻居，来参考分类。&lt;/p&gt;
+&lt;h2 id=&quot;五、相关工具箱&quot;&gt;&lt;a href=&quot;#五、相关工具箱&quot; class=&quot;headerlink&quot; title=&quot;五、相关工具箱&quot;&gt;&lt;/a&gt;五、相关工具箱&lt;/h2&gt;&lt;p&gt;MATLAB：MATLAN 2016版集成了机器学习和深度学习相关的工具箱，其中DeepLearnToolbox-master中包含k-N等多种算法；&lt;br&gt;Python: scikit-learn 库中有该函数的实现&lt;br&gt;C++:CSDN 上有C++版的代码实现&lt;br&gt;R语言：&amp;gt;&lt;a href=&quot;http://blog.csdn.net/liulewei/article/details/8288412&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/liulewei/article/details/8288412&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过计算向量间的距离衡量相似度来实现分类，就是k-NN(k-Nearest Neighbor)算法，一种基于向量间相似度的分类算法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>二叉树的几种遍历算法及其实现（C/C++）</title>
@@ -267,30 +292,6 @@
   </entry>
   
   <entry>
-    <title>Twin SVM的数学求解方法</title>
-    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
-    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
-    <published>2016-04-06T14:42:16.000Z</published>
-    <updated>2016-04-08T01:11:13.904Z</updated>
-    
-    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
-&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>强大的随机森林分类器</title>
     <link href="http://WustChuiChui.github.io/2016/04/06/Random-forest/"/>
     <id>http://WustChuiChui.github.io/2016/04/06/Random-forest/</id>
@@ -348,6 +349,30 @@
     <summary type="html">
     
       &lt;p&gt;机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别输出的类别的众树而定，它有着许多的有点，能很好地处理多分类问题。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Twin SVM的数学求解方法</title>
+    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
+    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
+    <published>2016-04-06T14:42:16.000Z</published>
+    <updated>2016-04-08T01:11:13.904Z</updated>
+    
+    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
+&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
     
     </summary>
     
