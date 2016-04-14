@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>决策树算法之——CART | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CART(Classfication and Regression Tree)算法是目前决策树算法最为成熟的一类算法，应用范围比较广泛。它既可用于分类，也可以用于预测。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树算法之——CART">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/14/scikit-learn-CART/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="CART(Classfication and Regression Tree)算法是目前决策树算法最为成熟的一类算法，应用范围比较广泛。它既可用于分类，也可以用于预测。">
+<meta property="og:updated_time" content="2016-04-14T14:40:45.235Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="决策树算法之——CART">
+<meta name="twitter:description" content="CART(Classfication and Regression Tree)算法是目前决策树算法最为成熟的一类算法，应用范围比较广泛。它既可用于分类，也可以用于预测。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-scikit-learn-CART" class="post-scikit-learn-CART post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      决策树算法之——CART
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/14/scikit-learn-CART/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/14/scikit-learn-CART/" data-id="cin0e8u0q000gs4vonk2289lh" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>CART(Classfication and Regression Tree)算法是目前决策树算法最为成熟的一类算法，应用范围比较广泛。它既可用于分类，也可以用于预测。</p>
+<a id="more"></a>
+<h2 id="一、回归算法原理"><a href="#一、回归算法原理" class="headerlink" title="一、回归算法原理"></a>一、回归算法原理</h2><p>在预测中，CART使用最小剩余方差(Squared Residuals Minimization)来判定回归树的最优划分，这个准则期望划分之后的子树与样本点的误差方差最小。这样决策树的将数据集切成很多子模型数据，然后利用线性回归技术来建模。如果每次切分后的数据仍然难以拟合，就继续切分。在这种切分方式下创建预测树，每个叶子节点都是一个线性回归模型。这些线性回归模型反映了样本集合中蕴含的模式，也称模型树。<br>CART不仅支持整体预测，也支持局部模式的预测，并有能力从整体中找到模式，或根据模式组合成一个整体。整体和模式之间的相互结合，对于预测分析具有十分重要的意义。</p>
+<h2 id="二、算法流程"><a href="#二、算法流程" class="headerlink" title="二、算法流程"></a>二、算法流程</h2><p><strong> 决策树主函数： </strong>决策树的主函数是一个递归函数。主要用来按CART的规则生长出决策树的各个分支节点，并根据终止条件结束算法：<br>1）输入需要分类的数据集合类别标签。<br>2）使用最小剩余方差法判定回归树的最优划分，并创建特征的划分节点——最小剩余方差子函数。<br>3)在划分节点划分数据集为两部分——二分数据集子函数。<br>4）根据二分数据的结果创建出新的左、右节点，作为树生长的两个分支。<br>5）检验是否符合递归的终止条件。<br>6）将划分的新节点包含的数据集合类别标签作为输入，递归执行上述步骤。<br><strong> 使用最小剩余方差子函数 </strong>，计算数据集各列的最优划分方差，划分列，划分值。<br><strong> 二分数据集： </strong>根据给定的分隔列和分隔值将数据集一分为二，分别返回。<br><strong> 剪枝策略： </strong>使用先剪枝和后剪枝策略对计算出的决策树进行剪枝。</p>
+<h2 id="三、最小剩余方差法"><a href="#三、最小剩余方差法" class="headerlink" title="三、最小剩余方差法"></a>三、最小剩余方差法</h2><p>CART选择最优划分点的方法，首先求取划分数据列的均值和总方差。总方差的计算方法有两种：<br>1.求取均值std,计算每个数据点与std的方差，然后将n个点求和。<br>2.求取方差var,然后var_sum=var*n，n为数据集数据数目。<br>对应地，每次最佳分支特征的选取过程如下：<br>(1)先令最佳方差为无限大bestVar=inf;<br>(2)依次遍历所有特征列及每个特征列的所有样本点，在每个样本点上二分数据集；<br>(3)计算二分数据集后的总方差currentVar（划分后左右子数据集的总方差之和），如果currentVar&lt; bestVar,则bestVar=currentVar<br>(4)返回计算的最优分支特征列、分支特征值（连续特征则为划分点的值），以及左右分支子数据集到主程序。</p>
+<h2 id="四、模型树"><a href="#四、模型树" class="headerlink" title="四、模型树"></a>四、模型树</h2><p>模型树具有很多优秀的性质，它包含了如下的特性：<br>1）一般而言，样本总体的重复性不会很高，但局部模式经常重复。类似于历史不会重复，但会重演；<br>2）模型给出了数据的范围，它可能是一个时间范围，也可以是一个空间范围；而且模型还给出变化的趋势，可以是曲线，也可以是直线，这依赖于使用的回归算法；<br>3）传统的回归方法，无论是线性回归还是非线性回归，都不如模型树包含的信息丰富，模型树具有更高的预测准确度。</p>
+<h2 id="五、剪枝策略"><a href="#五、剪枝策略" class="headerlink" title="五、剪枝策略"></a>五、剪枝策略</h2><p>因为使用了连续的数据，CART可以生长出大量的分支树，为了避免过拟合的问题，预测树采用了剪枝的方法。剪枝方法主要包括先剪枝和后剪枝。<br><strong> 先剪枝： </strong> 给出一个预定义的划分阈值，当节点的划分子集某个标准低于预定义的阈值时，子集划分将终止。<strong> 选取合适的阈值比较困难，过高将导致过拟合，过低将导致欠拟合。它的优势是不必生成整棵决策树，算法简单，效率高，适合大规模问题的粗略估计 </strong><br><strong> 后剪枝： </strong> 后剪枝指在完全生成的决策树上，根据一定的规则标准，减掉树中不具备一般代表性的子树，使用叶子节点替代。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/14/scikit-learn-CART/">
+    <time datetime="2016-04-14T13:43:18.000Z" class="entry-date">
+        2016-04-14
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/14/C4-5-Tree-classfication/" rel="next">Python与机器学习  C4.5决策树算法 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-scikit-learn-CART" data-title="决策树算法之——CART" data-url="http://WustChuiChui.github.io/2016/04/14/scikit-learn-CART/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/14/scikit-learn-CART/">决策树算法之——CART</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/C4-5-Tree-classfication/">Python与机器学习  C4.5决策树算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/achieve-ID3/">ID3决策树算法的实现（Python）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/ID3-Tree/">决策树的发展 信息熵和ID3</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/13/K-Nearest-Neighbor/">Python与机器学习 K近邻算法及实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
