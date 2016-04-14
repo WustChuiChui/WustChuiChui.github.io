@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-13T03:11:39.975Z</updated>
+  <updated>2016-04-14T07:46:00.014Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>决策树的发展 信息熵和ID3</title>
+    <link href="http://WustChuiChui.github.io/2016/04/14/ID3-Tree/"/>
+    <id>http://WustChuiChui.github.io/2016/04/14/ID3-Tree/</id>
+    <published>2016-04-14T05:59:20.000Z</published>
+    <updated>2016-04-14T07:46:00.014Z</updated>
+    
+    <content type="html">&lt;p&gt;决策树算法是最早的机器学习算法之一。ID3的一个分支是分类回归决策树算法（Classification and Regression Tree,CART）。CART决策树主要用于预测分析。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;决策树的发展-信息熵和ID3&quot;&gt;&lt;a href=&quot;#决策树的发展-信息熵和ID3&quot; class=&quot;headerlink&quot; title=&quot;决策树的发展 信息熵和ID3&quot;&gt;&lt;/a&gt;决策树的发展 信息熵和ID3&lt;/h1&gt;&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;决策树的思想来源非常朴素，在程序设计中，最基本的语句条件分支结构就是if-then结构，最早的决策树就是利用这类结构分隔数据的一种分类学习方法。&lt;/p&gt;
+&lt;h2 id=&quot;二、算法框架&quot;&gt;&lt;a href=&quot;#二、算法框架&quot; class=&quot;headerlink&quot; title=&quot;二、算法框架&quot;&gt;&lt;/a&gt;二、算法框架&lt;/h2&gt;&lt;p&gt;&lt;strong&gt; 1.决策树主函数 &lt;/strong&gt;&lt;br&gt;决策树主函数本质上是一个递归函数，它按某种规则生长出决策树的分支节点，并根据终止条件结束算法。它需要完成以下几个功能：&lt;br&gt;（1）输入需要分类的数据集和类别标签；&lt;br&gt;（2）根据某种分类规则得到最优化的划分特征，并创建特征的划分节点——计算最优化特征子函数；&lt;br&gt;（3）按照划分子函数的计算结果构建新的节点——划分数据集子函数；&lt;br&gt;（4）根据划分子函数的计算结果构建出新的节点，作为树生长出的新分支；&lt;br&gt;（5）检验是否符合递归的终止条件；&lt;br&gt;（6）将划分的新节点包含的数据集和类别标签作为输入，递归执行上述步骤。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 2.计算最优特征子函数 &lt;/strong&gt;&lt;br&gt;计算最优特征子函数是除了主函数外最重要的函数。&lt;strong&gt; 最优特征选择的标准上的差异性将导致不同决策树之间的差异性。 &lt;/strong&gt;&lt;br&gt;ID3的最优特征选择标准是：&lt;strong&gt; 信息增益 &lt;/strong&gt;&lt;br&gt;C4.5的最优特征选择标准是：&lt;strong&gt; 信息增益率 &lt;/strong&gt;&lt;br&gt;CART的最优特征选择标准是：&lt;strong&gt; 节点方差大小 &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 3.划分数据集函数 &lt;/strong&gt;&lt;br&gt;划分数据集函数的主要功能是分隔数据集，有的需要删除某个特征轴所在的数据列，返回剩余的数据集；有的干脆将数据一分为二等。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 4.分类器 &lt;/strong&gt;&lt;br&gt;所有的机器学习都要用于分类或回归预测，决策树的分类器就是通过遍历整个决策树，使得测试数据集找到决策树中的叶子节点对应的类别标签，也就是返回的类别结果。&lt;/p&gt;
+&lt;h2 id=&quot;三、信息熵&quot;&gt;&lt;a href=&quot;#三、信息熵&quot; class=&quot;headerlink&quot; title=&quot;三、信息熵&quot;&gt;&lt;/a&gt;三、信息熵&lt;/h2&gt;&lt;p&gt;熵是用来表示任何一种能量在空间中的均匀程度。能量分布得越均匀，熵越大。信息指的是对不确定性的消除。信息熵是事物不确定性的度量标准，也称为信息的单位或“测度”。信源的平均不确定性应当为单个符号不确定性的统计平均值(E),可称为信息熵，即 :&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxgw1f2w8t0ea0sj30db02974c.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;假设S是s个数据样本的集合。假定类别标签具有m个不同值，定义m个不同类Ci(i=1,2,3,…m).设si是类Ci中样本数。对给定的样本分类所需要的信息熵由下式给出：&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxgw1f2w90g8dvsj30cz02haa4.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中pi是任意样本属于Ci的概率，用si/S估计。&lt;br&gt;设A具有v个不同值{a1,a2,…av}.A将S划分为v个子集{S1,S2,…,Sv}。Sj包含S中这样一些样本：他们在A上具有值aj.如果选A作测试特征，即最优划分特征，由A划分成子集的熵或期望信息由下式给出：&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxgw1f2w9cn1nnnj30i102imxe.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在ID3决策树算法中，使用信息增益确定决策树分支的划分标准。它是决策树某个分支上整个数据集信息熵与当前节点信息熵的差值，即：&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxgw1f2w9k7hwf7j30ce01aweh.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;四、ID3决策树&quot;&gt;&lt;a href=&quot;#四、ID3决策树&quot; class=&quot;headerlink&quot; title=&quot;四、ID3决策树&quot;&gt;&lt;/a&gt;四、ID3决策树&lt;/h2&gt;&lt;p&gt;ID3决策树生成过程如下：&lt;br&gt;（1）计算给定样本分类所需的信息熵；&lt;br&gt;（2）计算每个特征的信息熵；&lt;br&gt;（3）从所有的特征列中选出信息增益量最大的那个作为根节点或内部节点——划分节点，划分整列，首次递归选择列来划分。&lt;br&gt;（4）根据划分节点的不同取值来拆分数据集为若干个子集，然后删去当前的特征列，再计算剩余特征列的信息熵。如果有信息增益，就重复第二步直至划分结束。&lt;br&gt;（5）划分结束的标志为：子集中一个类别标签，停止划分。&lt;/p&gt;
+&lt;h2 id=&quot;五、算法评估&quot;&gt;&lt;a href=&quot;#五、算法评估&quot; class=&quot;headerlink&quot; title=&quot;五、算法评估&quot;&gt;&lt;/a&gt;五、算法评估&lt;/h2&gt;&lt;p&gt;它以信息熵为度量标准，划分出决策树特征节点，每次优先选取信息量最多的属性，也就是使信息熵变为最小的属性，以构造一棵信息熵下降最快的决策树。&lt;br&gt;ID3存在的一些问题：&lt;br&gt;1）ID3算法的节点划分度量标准采用的是信息增益，信息增益偏向于选择特征值个数较多的特征。而取值个数较多的特征并不一定是最优的特征，所以需要改进选择属性的节点划分度量标准。&lt;br&gt;2）算法递归实现过程中要依次计算每个特征值，对于大型数据会生成比较复杂的决策树：层次和分支都很多，而其中某些分支的特征值概率很小，容易造成过拟合问题。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;决策树算法是最早的机器学习算法之一。ID3的一个分支是分类回归决策树算法（Classification and Regression Tree,CART）。CART决策树主要用于预测分析。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Python与机器学习 K近邻算法及实现</title>

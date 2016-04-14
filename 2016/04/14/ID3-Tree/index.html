@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>决策树的发展 信息熵和ID3 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="决策树算法是最早的机器学习算法之一。ID3的一个分支是分类回归决策树算法（Classification and Regression Tree,CART）。CART决策树主要用于预测分析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树的发展 信息熵和ID3">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/14/ID3-Tree/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="决策树算法是最早的机器学习算法之一。ID3的一个分支是分类回归决策树算法（Classification and Regression Tree,CART）。CART决策树主要用于预测分析。">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006qSkuxgw1f2w8t0ea0sj30db02974c.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxgw1f2w90g8dvsj30cz02haa4.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006qSkuxgw1f2w9cn1nnnj30i102imxe.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006qSkuxgw1f2w9k7hwf7j30ce01aweh.jpg">
+<meta property="og:updated_time" content="2016-04-14T07:46:00.014Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="决策树的发展 信息熵和ID3">
+<meta name="twitter:description" content="决策树算法是最早的机器学习算法之一。ID3的一个分支是分类回归决策树算法（Classification and Regression Tree,CART）。CART决策树主要用于预测分析。">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006qSkuxgw1f2w8t0ea0sj30db02974c.jpg">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-ID3-Tree" class="post-ID3-Tree post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      决策树的发展 信息熵和ID3
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/14/ID3-Tree/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/14/ID3-Tree/" data-id="cimzzfkg40000d0vozzqa607v" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>决策树算法是最早的机器学习算法之一。ID3的一个分支是分类回归决策树算法（Classification and Regression Tree,CART）。CART决策树主要用于预测分析。</p>
+<a id="more"></a>
+<h1 id="决策树的发展-信息熵和ID3"><a href="#决策树的发展-信息熵和ID3" class="headerlink" title="决策树的发展 信息熵和ID3"></a>决策树的发展 信息熵和ID3</h1><h2 id="一、基本思想"><a href="#一、基本思想" class="headerlink" title="一、基本思想"></a>一、基本思想</h2><p>决策树的思想来源非常朴素，在程序设计中，最基本的语句条件分支结构就是if-then结构，最早的决策树就是利用这类结构分隔数据的一种分类学习方法。</p>
+<h2 id="二、算法框架"><a href="#二、算法框架" class="headerlink" title="二、算法框架"></a>二、算法框架</h2><p><strong> 1.决策树主函数 </strong><br>决策树主函数本质上是一个递归函数，它按某种规则生长出决策树的分支节点，并根据终止条件结束算法。它需要完成以下几个功能：<br>（1）输入需要分类的数据集和类别标签；<br>（2）根据某种分类规则得到最优化的划分特征，并创建特征的划分节点——计算最优化特征子函数；<br>（3）按照划分子函数的计算结果构建新的节点——划分数据集子函数；<br>（4）根据划分子函数的计算结果构建出新的节点，作为树生长出的新分支；<br>（5）检验是否符合递归的终止条件；<br>（6）将划分的新节点包含的数据集和类别标签作为输入，递归执行上述步骤。</p>
+<p><strong> 2.计算最优特征子函数 </strong><br>计算最优特征子函数是除了主函数外最重要的函数。<strong> 最优特征选择的标准上的差异性将导致不同决策树之间的差异性。 </strong><br>ID3的最优特征选择标准是：<strong> 信息增益 </strong><br>C4.5的最优特征选择标准是：<strong> 信息增益率 </strong><br>CART的最优特征选择标准是：<strong> 节点方差大小 </strong></p>
+<p><strong> 3.划分数据集函数 </strong><br>划分数据集函数的主要功能是分隔数据集，有的需要删除某个特征轴所在的数据列，返回剩余的数据集；有的干脆将数据一分为二等。</p>
+<p><strong> 4.分类器 </strong><br>所有的机器学习都要用于分类或回归预测，决策树的分类器就是通过遍历整个决策树，使得测试数据集找到决策树中的叶子节点对应的类别标签，也就是返回的类别结果。</p>
+<h2 id="三、信息熵"><a href="#三、信息熵" class="headerlink" title="三、信息熵"></a>三、信息熵</h2><p>熵是用来表示任何一种能量在空间中的均匀程度。能量分布得越均匀，熵越大。信息指的是对不确定性的消除。信息熵是事物不确定性的度量标准，也称为信息的单位或“测度”。信源的平均不确定性应当为单个符号不确定性的统计平均值(E),可称为信息熵，即 :<br><img src="http://ww2.sinaimg.cn/large/006qSkuxgw1f2w8t0ea0sj30db02974c.jpg" alt=""><br>假设S是s个数据样本的集合。假定类别标签具有m个不同值，定义m个不同类Ci(i=1,2,3,…m).设si是类Ci中样本数。对给定的样本分类所需要的信息熵由下式给出：<br><img src="http://ww1.sinaimg.cn/large/006qSkuxgw1f2w90g8dvsj30cz02haa4.jpg" alt=""><br>其中pi是任意样本属于Ci的概率，用si/S估计。<br>设A具有v个不同值{a1,a2,…av}.A将S划分为v个子集{S1,S2,…,Sv}。Sj包含S中这样一些样本：他们在A上具有值aj.如果选A作测试特征，即最优划分特征，由A划分成子集的熵或期望信息由下式给出：<br><img src="http://ww3.sinaimg.cn/large/006qSkuxgw1f2w9cn1nnnj30i102imxe.jpg" alt=""></p>
+<p>在ID3决策树算法中，使用信息增益确定决策树分支的划分标准。它是决策树某个分支上整个数据集信息熵与当前节点信息熵的差值，即：<br><img src="http://ww2.sinaimg.cn/large/006qSkuxgw1f2w9k7hwf7j30ce01aweh.jpg" alt=""></p>
+<h2 id="四、ID3决策树"><a href="#四、ID3决策树" class="headerlink" title="四、ID3决策树"></a>四、ID3决策树</h2><p>ID3决策树生成过程如下：<br>（1）计算给定样本分类所需的信息熵；<br>（2）计算每个特征的信息熵；<br>（3）从所有的特征列中选出信息增益量最大的那个作为根节点或内部节点——划分节点，划分整列，首次递归选择列来划分。<br>（4）根据划分节点的不同取值来拆分数据集为若干个子集，然后删去当前的特征列，再计算剩余特征列的信息熵。如果有信息增益，就重复第二步直至划分结束。<br>（5）划分结束的标志为：子集中一个类别标签，停止划分。</p>
+<h2 id="五、算法评估"><a href="#五、算法评估" class="headerlink" title="五、算法评估"></a>五、算法评估</h2><p>它以信息熵为度量标准，划分出决策树特征节点，每次优先选取信息量最多的属性，也就是使信息熵变为最小的属性，以构造一棵信息熵下降最快的决策树。<br>ID3存在的一些问题：<br>1）ID3算法的节点划分度量标准采用的是信息增益，信息增益偏向于选择特征值个数较多的特征。而取值个数较多的特征并不一定是最优的特征，所以需要改进选择属性的节点划分度量标准。<br>2）算法递归实现过程中要依次计算每个特征值，对于大型数据会生成比较复杂的决策树：层次和分支都很多，而其中某些分支的特征值概率很小，容易造成过拟合问题。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/14/ID3-Tree/">
+    <time datetime="2016-04-14T05:59:20.000Z" class="entry-date">
+        2016-04-14
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/13/K-Nearest-Neighbor/" rel="next">Python与机器学习 K近邻算法及实现 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-ID3-Tree" data-title="决策树的发展 信息熵和ID3" data-url="http://WustChuiChui.github.io/2016/04/14/ID3-Tree/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/14/ID3-Tree/">决策树的发展 信息熵和ID3</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/13/K-Nearest-Neighbor/">Python与机器学习 K近邻算法及实现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/visit-binary-tree/">二叉树的几种遍历算法及其实现（C/C++）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/bayes/">Python与机器学习 贝叶斯算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/ReorderArray/">调整数组顺序使奇数位于偶数前面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
