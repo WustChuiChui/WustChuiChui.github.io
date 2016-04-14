@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>ID3决策树算法的实现（Python） | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ID3决策树算法的实现（Python）">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/14/achieve-ID3/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例.">
+<meta property="og:updated_time" content="2016-04-14T08:58:14.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ID3决策树算法的实现（Python）">
+<meta name="twitter:description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例.">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-achieve-ID3" class="post-achieve-ID3 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      ID3决策树算法的实现（Python）
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/14/achieve-ID3/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/14/achieve-ID3/" data-id="cin0203h00005cgvo77peud50" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例.</p>
+<a id="more"></a>
+<h1 id="ID3决策树算法的实现（Python）"><a href="#ID3决策树算法的实现（Python）" class="headerlink" title="ID3决策树算法的实现（Python）"></a>ID3决策树算法的实现（Python）</h1><p>这里主要给出ID3算法的实现代码，关于ID3算法的介绍，可参考本人的博客&gt;<a href="https://wustchuichui.github.io/2016/04/14/ID3-Tree/">https://wustchuichui.github.io/2016/04/14/ID3-Tree/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">from numpy import *</span><br><span class="line">import math</span><br><span class="line">import copy</span><br><span class="line">import cPickle as pickle</span><br><span class="line"></span><br><span class="line">class ID3DTree(object):</span><br><span class="line">    def __init__(self):     #构造方法</span><br><span class="line">        self.tree=&#123;&#125;        #生成的树</span><br><span class="line">        self.dataSet=[]     #数据集</span><br><span class="line">        self.lables=[]      #标签集</span><br><span class="line"></span><br><span class="line">    #数据导入函数</span><br><span class="line">    def loadDataSet(self,path,lables):</span><br><span class="line">        recordlist=[]</span><br><span class="line">        fp=open(path,&quot;rb&quot;)  #读取文件内容</span><br><span class="line">        content=fp.read()</span><br><span class="line">        fp.close()</span><br><span class="line">        rowlist=content.splitlines()     #按行转换为一维表</span><br><span class="line">        recordlist=[row.split(&quot;\t&quot;) for row in rowlist if row.strip()]</span><br><span class="line">        self.dataSet=recordlist</span><br><span class="line">        self.lables=lables</span><br><span class="line"></span><br><span class="line">    #执行决策函数</span><br><span class="line">    def train(self):</span><br><span class="line">        lables=copy.deepcopy(self.lables)</span><br><span class="line">        self.tree=self.buildTree(self.dataSet,lables)</span><br><span class="line"></span><br><span class="line">    #构建决策树，创建决策树主程序</span><br><span class="line">    def buildTree(self,dataSet,lables):</span><br><span class="line">        cateList=[data[-1] for data in dataSet]   #抽取源数据集中的决策标签列</span><br><span class="line">        #程序终止条件1：如果classList只有一种决策标签，停止划分，返回这个决策标签</span><br><span class="line">        if cateList.count(cateList[0])==len(cateList):</span><br><span class="line">            return cateList[0]</span><br><span class="line">        #程序终止条件2：如果数据集的第一个决策标签只有一个，返回这个标签</span><br><span class="line">        if len(dataSet[0])==1:</span><br><span class="line">            return self.maxCate(cateList)</span><br><span class="line">        #核心部分</span><br><span class="line">        bestFeat=self.getBestFeat(dataSet) #返回数据集的最优特征轴</span><br><span class="line">        bestFeatLabel=lables[bestFeat]</span><br><span class="line">        tree=&#123;bestFeatLabel:&#123;&#125;&#125;</span><br><span class="line">        del(lables[bestFeat])</span><br><span class="line">        #抽取最优特征轴的列向量</span><br><span class="line">        uniqueVals=set([data[bestFeat] for data in dataSet])  #去重</span><br><span class="line">        for value in uniqueVals:          #决策树递归生长</span><br><span class="line">            subLables=lables[:]           #将删除后的特征类别集建立子类别集</span><br><span class="line">            #按最优特征列和值分隔数据集</span><br><span class="line">            splitDataset=self.splitDataset(dataSet,bestFeat,value)</span><br><span class="line">            subTree=self.buildTree(splitDataset,subLables)  #构建子树</span><br><span class="line">            tree[bestFeatLabel][value]=subTree</span><br><span class="line">        return tree</span><br><span class="line"></span><br><span class="line">    #计算出现次数最多的类别标签</span><br><span class="line">    def maxCate(self,cateList):</span><br><span class="line">        items=dict([(cateList.count(i),i) for i in cateList])</span><br><span class="line">        return items[max(items.keys())]</span><br><span class="line"></span><br><span class="line">    #计算最优特征</span><br><span class="line">    def getBestFeat(self,dataSet):</span><br><span class="line">        #计算特征向量维，其中最后一列用于类别标签</span><br><span class="line">        numFeatures=len(dataSet[0])-1  #特征向量维数=行向量维数-1</span><br><span class="line">        baseEntropy=self.computeEntropy(dataSet) #基础熵</span><br><span class="line">        bestInfoGain=0.0         #初始化最优的信息增益</span><br><span class="line">        bestFeature=-1           #初始化最优的特征轴</span><br><span class="line">        #外循环：遍历数据集各列，计算最优特征轴</span><br><span class="line">        #i为数据集列索引：取值范围0~(numFeatures-1)</span><br><span class="line">        for i in xrange(numFeatures):</span><br><span class="line">            uniqueVals=set([data[i] for data in dataSet]) #去重</span><br><span class="line">            newEntropy=0.0</span><br><span class="line">            for value in uniqueVals:</span><br><span class="line">                subDataSet=self.splitDataSet(dataSet,i,value)</span><br><span class="line">                prob=len(subDataSet)/float(len(dataSet))</span><br><span class="line">                newEntropy+=prob*self.computeEntropy(subDataSet)</span><br><span class="line">            infoGain=baseEntropy-newEntropy</span><br><span class="line">            if(infoGain&gt;bestInfoGain):  #信息增益大于0</span><br><span class="line">                bestInfoGain=infoGain   #用当前信息增益值替代之前的最优增益值</span><br><span class="line">                bestFeature=i           #重置最优特征为当前列</span><br><span class="line">        return bestFeature</span><br><span class="line"></span><br><span class="line">    #计算信息熵</span><br><span class="line">    def computeEntropy(self,dataSet):   </span><br><span class="line">        datalen=float(len(dataSet))</span><br><span class="line">        cateList=[data[-1] for data in dataSet]</span><br><span class="line">        #得到类别为key、出现次数value的字典</span><br><span class="line">        items=dict([(i,cateList.count(i)) for i in cateList])</span><br><span class="line">        infoEntropy=0.0</span><br><span class="line">        for key in items:</span><br><span class="line">            prob=float(items[key])/datalen</span><br><span class="line">            infoEntropy-=prob*math.log(prob,2)</span><br><span class="line">        return infoEntropy</span><br><span class="line"></span><br><span class="line">    #划分数据集；分隔数据集；删除特征轴所在的数据列，返回剩余的数据集</span><br><span class="line">    #dataSet:数据集；axis:特征轴；value:特征轴的取值</span><br><span class="line">    def splitDataSet(self,dataSet,axis,value):</span><br><span class="line">        rtnList=[]</span><br><span class="line">        for featVec in dataSet:</span><br><span class="line">            if featVec[axis]==value:</span><br><span class="line">                rFeatVec=featVec[:axis]    #list操作：提取0~（axis-1）的元素</span><br><span class="line">                rFeatVec.extend(featVec[axis+1:])</span><br><span class="line">                rtnList.append(rFeatVec)</span><br><span class="line">        return rtnList</span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/14/achieve-ID3/">
+    <time datetime="2016-04-14T08:54:29.000Z" class="entry-date">
+        2016-04-14
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/14/ID3-Tree/" rel="next">决策树的发展 信息熵和ID3 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-achieve-ID3" data-title="ID3决策树算法的实现（Python）" data-url="http://WustChuiChui.github.io/2016/04/14/achieve-ID3/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/14/achieve-ID3/">ID3决策树算法的实现（Python）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/ID3-Tree/">决策树的发展 信息熵和ID3</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/13/K-Nearest-Neighbor/">Python与机器学习 K近邻算法及实现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/visit-binary-tree/">二叉树的几种遍历算法及其实现（C/C++）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/bayes/">Python与机器学习 贝叶斯算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
