@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-14T08:58:14.130Z</updated>
+  <updated>2016-04-14T13:23:32.246Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python与机器学习  C4.5决策树算法</title>
+    <link href="http://WustChuiChui.github.io/2016/04/14/C4-5-Tree-classfication/"/>
+    <id>http://WustChuiChui.github.io/2016/04/14/C4-5-Tree-classfication/</id>
+    <published>2016-04-14T12:23:53.000Z</published>
+    <updated>2016-04-14T13:23:32.246Z</updated>
+    
+    <content type="html">&lt;p&gt;针对ID3算法存在的一些问题，Quinlan将ID3改进为C4.5算法，该算法成功地解决了ID3算法遇到的诸多问题。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;信息增益率&quot;&gt;&lt;a href=&quot;#信息增益率&quot; class=&quot;headerlink&quot; title=&quot;信息增益率&quot;&gt;&lt;/a&gt;信息增益率&lt;/h2&gt;&lt;p&gt;C4.5并没有改变ID3的算法逻辑，基本的程序结构仍与ID3相同，但在节点的划分标准做了改进。&lt;strong&gt; C4.5使用信息增益率来替代信息增益进行特征选择，克服了信息增益选择特征时偏向于特征值个数较多的不足。 &lt;/strong&gt;信息增益率的定义为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxgw1f2winq2g3nj30df02hdg3.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中Gain(S,A)就是ID3算法中的信息增益，而划分信息SplitInfo(S,A)代表了按照特征A划分样本集S的广度和均匀性。&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxgw1f2wivjwy58j30dq02qweo.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，Si到S是特征A的C个不同值构成的样本子集。&lt;/p&gt;
+&lt;h2 id=&quot;代码实现&quot;&gt;&lt;a href=&quot;#代码实现&quot; class=&quot;headerlink&quot; title=&quot;代码实现&quot;&gt;&lt;/a&gt;代码实现&lt;/h2&gt;&lt;p&gt;C4.5在节点的划分标准上做了改进，代码部分很大程度上没有改动。&lt;br&gt;(1) 使用信息增益率划分最优节点的方法如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;def getBestFeat(self,dataSet):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	Num_Feats=len(dataSet[0][:-1])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	totality=len(dataSet)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	BaseEntropy=self.computeEntropy(dataSet)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ConditionEntropy=[]    #初始化条件熵&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	sliptInfo=[]           #计算增长率&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	allFeatVList=[]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	for f in xrange(Num_Feats):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		featList=[example[f] for example in dataSet]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		[splitI,featureValueList]=self.computeSplitInfo(featList)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		allFeatVList.append(splitI)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		resultGain=0.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		for value in featureValueList:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			subSet=self.splitDataSet(dataSet,f,value)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			appearNum=float(len(subSet))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			subEntropy=self.computeEntropy(subSet)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			resultGain+=(appearNum/totality)*subEntropy&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		ConditionEntropy.append(resultGain)   #总条件熵&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	infoGainArray=BaseEntropy*ones(Num_Feats)-array(ConditionEntropy)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	infoGainRatio=infoGainArray/array(sliptInfo)   #信息增长率的计算&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	bestFeatureIndex=argsort(-infoGainRatio)[0]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	return bestFeatureIndex,allFeatVList[bestFeatureIndex]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;(2)计算划分信息（SplitInfo）&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;def computeSplitInfo(self,featureVList):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	numEntries=len(featureVList)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	featureVauleSetList=list(set(featureVList))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	valueCounts=[featureVList.count(featVec) for featVec in featureVauleSetList]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	pList=[float(item)/numEntries for item in valueCounts]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	lList=[item*math.log(item,2) for item in pList]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	splitInfo=-sum(lList)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	return splitInfo,featureVauleSetList&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;针对ID3算法存在的一些问题，Quinlan将ID3改进为C4.5算法，该算法成功地解决了ID3算法遇到的诸多问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>ID3决策树算法的实现（Python）</title>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Python与机器学习  C4.5决策树算法 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="针对ID3算法存在的一些问题，Quinlan将ID3改进为C4.5算法，该算法成功地解决了ID3算法遇到的诸多问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python与机器学习  C4.5决策树算法">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/14/C4-5-Tree-classfication/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="针对ID3算法存在的一些问题，Quinlan将ID3改进为C4.5算法，该算法成功地解决了ID3算法遇到的诸多问题。">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2winq2g3nj30df02hdg3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxgw1f2wivjwy58j30dq02qweo.jpg">
+<meta property="og:updated_time" content="2016-04-14T13:23:32.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python与机器学习  C4.5决策树算法">
+<meta name="twitter:description" content="针对ID3算法存在的一些问题，Quinlan将ID3改进为C4.5算法，该算法成功地解决了ID3算法遇到的诸多问题。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f2winq2g3nj30df02hdg3.jpg">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-C4-5-Tree-classfication" class="post-C4-5-Tree-classfication post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Python与机器学习  C4.5决策树算法
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/14/C4-5-Tree-classfication/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/14/C4-5-Tree-classfication/" data-id="cin0bx20e0005nkvo2xsxwtno" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>针对ID3算法存在的一些问题，Quinlan将ID3改进为C4.5算法，该算法成功地解决了ID3算法遇到的诸多问题。</p>
+<a id="more"></a>
+<h2 id="信息增益率"><a href="#信息增益率" class="headerlink" title="信息增益率"></a>信息增益率</h2><p>C4.5并没有改变ID3的算法逻辑，基本的程序结构仍与ID3相同，但在节点的划分标准做了改进。<strong> C4.5使用信息增益率来替代信息增益进行特征选择，克服了信息增益选择特征时偏向于特征值个数较多的不足。 </strong>信息增益率的定义为：<br><img src="http://ww4.sinaimg.cn/large/006qSkuxgw1f2winq2g3nj30df02hdg3.jpg" alt=""><br>其中Gain(S,A)就是ID3算法中的信息增益，而划分信息SplitInfo(S,A)代表了按照特征A划分样本集S的广度和均匀性。<br><img src="http://ww1.sinaimg.cn/large/006qSkuxgw1f2wivjwy58j30dq02qweo.jpg" alt=""><br>其中，Si到S是特征A的C个不同值构成的样本子集。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>C4.5在节点的划分标准上做了改进，代码部分很大程度上没有改动。<br>(1) 使用信息增益率划分最优节点的方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def getBestFeat(self,dataSet):</span><br><span class="line">	Num_Feats=len(dataSet[0][:-1])</span><br><span class="line">	totality=len(dataSet)</span><br><span class="line">	BaseEntropy=self.computeEntropy(dataSet)</span><br><span class="line">	ConditionEntropy=[]    #初始化条件熵</span><br><span class="line">	sliptInfo=[]           #计算增长率</span><br><span class="line">	allFeatVList=[]</span><br><span class="line">	for f in xrange(Num_Feats):</span><br><span class="line">		featList=[example[f] for example in dataSet]</span><br><span class="line">		[splitI,featureValueList]=self.computeSplitInfo(featList)</span><br><span class="line">		allFeatVList.append(splitI)</span><br><span class="line">		resultGain=0.0</span><br><span class="line">		for value in featureValueList:</span><br><span class="line">			subSet=self.splitDataSet(dataSet,f,value)</span><br><span class="line">			appearNum=float(len(subSet))</span><br><span class="line">			subEntropy=self.computeEntropy(subSet)</span><br><span class="line">			resultGain+=(appearNum/totality)*subEntropy</span><br><span class="line">		ConditionEntropy.append(resultGain)   #总条件熵</span><br><span class="line">	infoGainArray=BaseEntropy*ones(Num_Feats)-array(ConditionEntropy)</span><br><span class="line">	infoGainRatio=infoGainArray/array(sliptInfo)   #信息增长率的计算</span><br><span class="line">	bestFeatureIndex=argsort(-infoGainRatio)[0]</span><br><span class="line">	return bestFeatureIndex,allFeatVList[bestFeatureIndex]</span><br></pre></td></tr></table></figure></p>
+<p>(2)计算划分信息（SplitInfo）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def computeSplitInfo(self,featureVList):</span><br><span class="line">	numEntries=len(featureVList)</span><br><span class="line">	featureVauleSetList=list(set(featureVList))</span><br><span class="line">	valueCounts=[featureVList.count(featVec) for featVec in featureVauleSetList]</span><br><span class="line">	pList=[float(item)/numEntries for item in valueCounts]</span><br><span class="line">	lList=[item*math.log(item,2) for item in pList]</span><br><span class="line">	splitInfo=-sum(lList)</span><br><span class="line">	return splitInfo,featureVauleSetList</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/14/C4-5-Tree-classfication/">
+    <time datetime="2016-04-14T12:23:53.000Z" class="entry-date">
+        2016-04-14
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/14/achieve-ID3/" rel="next">ID3决策树算法的实现（Python） <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-C4-5-Tree-classfication" data-title="Python与机器学习  C4.5决策树算法" data-url="http://WustChuiChui.github.io/2016/04/14/C4-5-Tree-classfication/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/14/C4-5-Tree-classfication/">Python与机器学习  C4.5决策树算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/achieve-ID3/">ID3决策树算法的实现（Python）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/ID3-Tree/">决策树的发展 信息熵和ID3</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/13/K-Nearest-Neighbor/">Python与机器学习 K近邻算法及实现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/12/visit-binary-tree/">二叉树的几种遍历算法及其实现（C/C++）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
