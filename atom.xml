@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-14T14:40:45.235Z</updated>
+  <updated>2016-04-15T13:12:54.433Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>推荐系统概述</title>
+    <link href="http://WustChuiChui.github.io/2016/04/15/Recomment-1/"/>
+    <id>http://WustChuiChui.github.io/2016/04/15/Recomment-1/</id>
+    <published>2016-04-15T11:29:09.000Z</published>
+    <updated>2016-04-15T13:12:54.433Z</updated>
+    
+    <content type="html">&lt;p&gt;在互联网的发展历史上，最绚烂的成果当属搜索引擎。但通用的搜索引擎技术着力于对网络资源的大容量、无差别的获取和索引，并不能满足用户对于有偏好的信息检索的需求。原因之一是关键字的信息量不足，基于关键字的搜索在很多情况下不能精准和深刻地反映用户的潜在需求；原因二是通用的搜索引擎只有而且必须对用户提供尽量丰富而无差别的信息，这样才能应对不同种类的需求，并且需要的变化。基于上述问题，推荐系统应运而生。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;在世界范围内，推荐系统已经成为机器学习在电子商务和社交网站领域中最成功的应用之一。大多数有规模的电子商务网站都将推荐系统作为吸引和发掘客户的核心技术之一。&lt;/p&gt;
+&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;&lt;strong&gt; 定义： &lt;/strong&gt;推荐系统是利用电子商务网站向客户提供商品信息和建议，帮助用户决定应该购买什么产品，模拟销售人员帮助客户完成购买过程。&lt;br&gt;推荐系统把用户模型中兴趣需求信息和推荐对象模型中的特征信息匹配，同时使用相应的推荐算法进行计算筛选，找到用户可能感兴趣的推荐对象，然后推荐给用户。&lt;br&gt;&lt;strong&gt; 和搜索引擎的异同： &lt;/strong&gt;&lt;br&gt;相同点：都是一种帮助用户快速发现有用信息的工具；&lt;br&gt;不同点：搜索引擎需要用户主动提供准确的关键词来寻找信息；推荐系统不需要用户提供明确的需求，而是通过分析用户的历史行为给用户的兴趣建模&lt;br&gt;联系：搜索引擎满足了用户有明确目的时的主动查找需求；推荐系统能够在用户没有明确目的的时候帮助他们发现感兴趣的新内容；从这种意义上讲，推荐系统和搜索引擎对于用户来说是两个互补的工具。&lt;/p&gt;
+&lt;h2 id=&quot;推荐系统的组成&quot;&gt;&lt;a href=&quot;#推荐系统的组成&quot; class=&quot;headerlink&quot; title=&quot;推荐系统的组成&quot;&gt;&lt;/a&gt;推荐系统的组成&lt;/h2&gt;&lt;h3 id=&quot;用户建模模块&quot;&gt;&lt;a href=&quot;#用户建模模块&quot; class=&quot;headerlink&quot; title=&quot;用户建模模块&quot;&gt;&lt;/a&gt;用户建模模块&lt;/h3&gt;&lt;p&gt;用户模型的建模方法主要有遗传算法、基于机器学习的方法，如TF-IDF、自动聚类、贝叶斯分类器、决策树归纳和神经网络方法。&lt;br&gt;建模的对象有单用户建模和群组建模之分，单用户建模针对单个用户进行建模，比如基于内容的推荐；群组建模是针对群体用户进行建模，比如协同推荐&lt;br&gt;&lt;strong&gt; 用户模型应该具备以下特征： &lt;/strong&gt;&lt;br&gt;能获取、表示、存储和修改用户兴趣偏好，能进行推理；&lt;br&gt;对用户进行分类和识别；&lt;br&gt;帮助系统更好地理解用户特征和类别，理解用户的需求和任务，从而更好地实现用户所需要的功能；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 建立用户模型前要考虑的问题： &lt;/strong&gt;&lt;br&gt;模型的输入数据有哪些，如何获取模型的输入数据；&lt;br&gt;如何考虑用户的兴趣及需求的变化；&lt;br&gt;建模的对象是谁；&lt;br&gt;清楚了上述内容后，如何建模；&lt;br&gt;模型的输出是什么；&lt;/p&gt;
+&lt;h3 id=&quot;推荐对象建模模块&quot;&gt;&lt;a href=&quot;#推荐对象建模模块&quot; class=&quot;headerlink&quot; title=&quot;推荐对象建模模块&quot;&gt;&lt;/a&gt;推荐对象建模模块&lt;/h3&gt;&lt;p&gt;&lt;strong&gt; 建立对象模型需要考虑的问题： &lt;/strong&gt;&lt;br&gt;提取推荐对象的什么特征，如何提取，提取的特征用于什么目的；&lt;br&gt;对象的特征描述和用户文件描述之间有关联；&lt;br&gt;提取到的每个对象特征对推荐结果有何影响；&lt;br&gt;对象的特征描述文件是否能自动更新。&lt;/p&gt;
+&lt;p&gt;不同的对象，特征也不相同，目前没有一个统一的标准来进行统一描述，主要有基于内容的方法和基于分类的方法两大类方法。&lt;br&gt;基于内容的方法是从对象本身抽取信息来表示对象，使用最广泛的方法是用加权关键字矢量。目前使用最广泛的是TF-IDF方法。&lt;br&gt;基于分类的方法是把推荐对象放入不同类别中，这样可以把同类文档推荐给该类文档感兴趣的用户。相关方法有朴素贝叶斯，k最邻方法和支持向量机。&lt;/p&gt;
+&lt;p&gt;推荐系统推荐给用户的对象首先不能与用户看过的对象重复，其次也不能与用户刚刚看过的对象不是太形似或者太不相关，即&lt;strong&gt; 模型过拟合 &lt;/strong&gt;问题。&lt;/p&gt;
+&lt;p&gt;推荐系统中出现新的对象是，推荐系统尤其是协同过滤系统中，对象出现后必须等一段时间才有用户查看并进行评价，在此之前推荐系统无法对此对象进行分析和推荐，这就是推荐系统的难点问题——&lt;strong&gt;冷启动问题。 &lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;推荐算法模块&quot;&gt;&lt;a href=&quot;#推荐算法模块&quot; class=&quot;headerlink&quot; title=&quot;推荐算法模块&quot;&gt;&lt;/a&gt;推荐算法模块&lt;/h3&gt;&lt;p&gt;推荐算法是整个推荐系统中最核心的部分，很大程度上决定了推荐系统的性能的优劣&lt;br&gt;推荐算法主要包括以下几种：&lt;br&gt;&lt;strong&gt; 基于内容的推荐 &lt;/strong&gt;&lt;br&gt;根据用户已经选择的对象，从推荐对象中选择其他特征相似的对象作为推荐结果，首先提取推荐对象的内容特征，和用户模型中的用户兴趣偏好匹配，匹配度较高的推荐对象最推荐结果推荐给用户，如下图&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxgw1f2xormc9kmj30c506kwez.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;strong&gt; 协同过滤推荐 &lt;/strong&gt;&lt;br&gt;这里暂不展开说明，在下一篇博客中做详细介绍&lt;br&gt;&lt;strong&gt; 基于知识的推荐 &lt;/strong&gt;&lt;br&gt;如果把注意力头像其他应用领域，比如消费类电子产品，会设计大量的单次购买者，这意味着推荐系统无法依赖购买记录，此时需要利用额外的因果知识生成推荐&lt;br&gt;&lt;strong&gt; 混合推荐 &lt;/strong&gt;&lt;br&gt;混合推荐的目的是通过组合不同的推荐策略，达到扬长避短的效果，从而产生更符合用户需求的推荐，目前亚马逊采用的就是混合推荐算法&lt;/p&gt;
+&lt;h3 id=&quot;开源的推荐系统简介&quot;&gt;&lt;a href=&quot;#开源的推荐系统简介&quot; class=&quot;headerlink&quot; title=&quot;开源的推荐系统简介&quot;&gt;&lt;/a&gt;开源的推荐系统简介&lt;/h3&gt;&lt;p&gt;这里不一一举例说明，有兴趣可以参考开源中国社区&amp;gt;&lt;a href=&quot;http://www.oschina.net/news/51297/top-10-open-source-recommendation-systems&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.oschina.net/news/51297/top-10-open-source-recommendation-systems&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在互联网的发展历史上，最绚烂的成果当属搜索引擎。但通用的搜索引擎技术着力于对网络资源的大容量、无差别的获取和索引，并不能满足用户对于有偏好的信息检索的需求。原因之一是关键字的信息量不足，基于关键字的搜索在很多情况下不能精准和深刻地反映用户的潜在需求；原因二是通用的搜索引擎只有而且必须对用户提供尽量丰富而无差别的信息，这样才能应对不同种类的需求，并且需要的变化。基于上述问题，推荐系统应运而生。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>决策树算法之——CART</title>
