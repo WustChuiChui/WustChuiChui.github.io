@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Python学习笔记 如何理解__init__方法和self参数 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学习Python的朋友肯定会经常接触到init方法和self参数，那么Python中的init方法和self参数分别指的是什么？又有什么意义呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记 如何理解__init__方法和self参数">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/15/python-init-self/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="学习Python的朋友肯定会经常接触到init方法和self参数，那么Python中的init方法和self参数分别指的是什么？又有什么意义呢？">
+<meta property="og:updated_time" content="2016-04-15T13:53:48.274Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习笔记 如何理解__init__方法和self参数">
+<meta name="twitter:description" content="学习Python的朋友肯定会经常接触到init方法和self参数，那么Python中的init方法和self参数分别指的是什么？又有什么意义呢？">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-python-init-self" class="post-python-init-self post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Python学习笔记 如何理解__init__方法和self参数
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/15/python-init-self/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/15/python-init-self/" data-id="cin1s0ccn000fbgvoxppxhbda" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>学习Python的朋友肯定会经常接触到<em>init</em>方法和self参数，那么Python中的<strong>init</strong>方法和self参数分别指的是什么？又有什么意义呢？</p>
+<a id="more"></a>
+<h1 id="Python学习笔记-如何理解init方法和self参数"><a href="#Python学习笔记-如何理解init方法和self参数" class="headerlink" title="Python学习笔记 如何理解init方法和self参数"></a>Python学习笔记 如何理解<strong>init</strong>方法和self参数</h1><h2 id="init方法"><a href="#init方法" class="headerlink" title="init方法"></a><strong>init</strong>方法</h2><p><strong>init</strong>是在类创建的时候自动被执行的，这个函数在定义类的时候默认已经存在。<br><strong>init</strong>()方法意义重大的原因有两个。第一个原因是在对象生命周期中初始化是最重要的一步；每个对象必须正确初始化后才能正常工作。第二个原因是<strong>init</strong>()参数值可以有多种形式。它的应用有两个：<br><strong> 在超类中实现init() </strong><br>我们通过实现<strong>init</strong>()方法来初始化对象。当一个对象被创建，Python首先创建一个空对象，然后为那个新对象调用<strong>init</strong>()方法。这个方法函数通常用来创建对象的实例变量并执行任何其他一次性处理。<br><strong> 使用init()创建显式常量 </strong><br>在某些情况下，我们会有一个在初始化或配置文件中创建的常量对象池，或者我们可以基于命令行参数显示创建常量对象，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class demon:</span><br><span class="line">    def __init(self,name,symbol):</span><br><span class="line">        self.name=name</span><br><span class="line">        self.symbol=symbol</span><br></pre></td></tr></table></figure></p>
+<p>另外，python的每个模块的包中，都存在一个<strong>init</strong>.py文件(别和<strong>init</strong>()方法弄混淆)，有了这个文件，我们才能导入这个目录下的module.<br>其实，<strong>init</strong>.py里面还可以有其他内容，我们在导入一个包时，实际上导入了它的一个<strong>init</strong>.py文件。<br>我们可以再在<strong>init</strong>py文件中再导入其他的包，或者模块。<br><strong>init</strong>.py中海油一个重要的变量，叫做<strong>all</strong>,可以使用它实现全部导入：<br>from PackageName import *</p>
+<h2 id="self参数"><a href="#self参数" class="headerlink" title="self参数"></a>self参数</h2><p>Python的类的方法和普通的函数有一个很明显的区别，在类的方法必须有个额外的第一个参数 (self )，但在调用这个方法的时候不必为这个参数赋值 （显胜于隐 的引发）。Python的类的方法的这个特别的参数指代的是对象本身，而按照Python的惯例，它用self来表示。<br>self在Python里不是关键字，而是代表当前对象的一个实例。使用self能避免非限定调用造成的全局变量。<br>相信结果过C++的同学这时会想到C++中的this指针，self和this有着本质的区别，self代表的是一个对象的实例，this为指针，为当前对象的地址。但是在Python中将self改为this也不会报错，但为了书写规范，建议函数使用self.<br>对于self参数，需要注意三点：<br>self在定义时需要定义，但是在调用时会自动传入。<br>self的名字并不是规定死的，但是最好还是按照约定是用self<br>self总是指调用时的类的实例。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/15/python-init-self/">
+    <time datetime="2016-04-15T13:23:56.000Z" class="entry-date">
+        2016-04-15
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/15/Recomment-1/" rel="next">推荐系统概述 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-python-init-self" data-title="Python学习笔记 如何理解__init__方法和self参数" data-url="http://WustChuiChui.github.io/2016/04/15/python-init-self/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/15/python-init-self/">Python学习笔记 如何理解__init__方法和self参数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/Recomment-1/">推荐系统概述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/scikit-learn-CART/">决策树算法之——CART</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/C4-5-Tree-classfication/">Python与机器学习  C4.5决策树算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/achieve-ID3/">ID3决策树算法的实现（Python）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
