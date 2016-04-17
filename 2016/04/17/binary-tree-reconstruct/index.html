@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>二叉树的重建 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序序列和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建该二叉树并返回它的头结点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树的重建">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/17/binary-tree-reconstruct/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序序列和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建该二叉树并返回它的头结点。">
+<meta property="og:updated_time" content="2016-04-17T13:47:21.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树的重建">
+<meta name="twitter:description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序序列和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建该二叉树并返回它的头结点。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-binary-tree-reconstruct" class="post-binary-tree-reconstruct post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      二叉树的重建
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/17/binary-tree-reconstruct/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/17/binary-tree-reconstruct/" data-id="cin4mnnr7000758vozpxkps97" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序序列和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建该二叉树并返回它的头结点。</p>
+<a id="more"></a>
+<p>二叉树的节点定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct BinaryTreeNode</span><br><span class="line">&#123;</span><br><span class="line">    int             m_nValue;   //data域</span><br><span class="line">    BinaryTreeNode* m_pleft;    //左孩子的指针</span><br><span class="line">    BinaryTreeNode* m_pright;   //右孩子的指针</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="问题分析："><a href="#问题分析：" class="headerlink" title="问题分析："></a>问题分析：</h3><p>在二叉树的前序遍历序列中，第一个数字总是树的根结点的值。但在中序遍历中，根结点的值在序列的中间，左子树的节点的值位于根结点的值的左边，而右子树的结点的值位于根结点的值的右边。因此，需要扫描中序遍历序列，才能找到根结点的值。<br>通过上述步骤可以得到根结点以及左右子树的先序遍历序列和中序遍历序列，通过递归可以使用同样的方法分别构建左右子树。</p>
+<h3 id="代码实现（C-C-）"><a href="#代码实现（C-C-）" class="headerlink" title="代码实现（C/C++）"></a>代码实现（C/C++）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">BinaryTreeNode* Construct(int* preoder,int* inorder,int length)</span><br><span class="line">&#123;</span><br><span class="line">    if(preorder==NULL || inorder==NULL || length&lt;=0)</span><br><span class="line">        return NULL;</span><br><span class="line">    return ConstructCore(preorder,preorder+length-1,inorder,inorder+length-1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder,int* startInorder,int* endInorder)</span><br><span class="line">&#123;</span><br><span class="line">    //前序遍历序列中第一个结点为根结点</span><br><span class="line">    int rootValue=startPreorder[0];</span><br><span class="line">    BinaryTreeNode* root=new BinaryTreeNode();</span><br><span class="line">    root-&gt;m_nValue=rootValue;</span><br><span class="line">    root-&gt;m_pLeft=root-&gt;m_pRight=NULL;</span><br><span class="line"></span><br><span class="line">    if(startPreorder==endPreoder)&#123;</span><br><span class="line">        if(startInorder==endInorder &amp;&amp; *startPreorder==*startInorder)</span><br><span class="line">            return root;</span><br><span class="line">        else</span><br><span class="line">            throw std::exception(&quot;Invalid input.&quot;); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //中序遍历中找到根结点的值</span><br><span class="line">    int* rootInorder=startInorder;</span><br><span class="line">    while(rootInorder&lt;=endInorder &amp;&amp; *rootInorder!=rootValue)</span><br><span class="line">        ++rootInorder;</span><br><span class="line"></span><br><span class="line">    if(rootInorder==endInorder &amp;&amp; *rootInorder!=rootValue)</span><br><span class="line">        throw std::exception(&quot;Invalid input.&quot;);</span><br><span class="line"></span><br><span class="line">    int leftLength=rootInorder-startInorder;</span><br><span class="line">    int* leftPreorderEnd=startPreorder+leftLength;</span><br><span class="line"></span><br><span class="line">    //构建左子树</span><br><span class="line">    if(leftLength&gt;0)&#123;</span><br><span class="line">        root-&gt;m_pLeft=ConstructCore(startPreorder+1,leftPreorderEnd,startInorder,rootInorder-1);</span><br><span class="line">    &#125;</span><br><span class="line">    //构建右子树</span><br><span class="line">    if(leftLength&lt;endPreorder-startPreorder)&#123;</span><br><span class="line">        root-&gt;m_pRight=ConstructCore(leftPreorderEnd+1,endPreorder,rootInorder,endInorder);</span><br><span class="line">    &#125;</span><br><span class="line">    return root;</span><br><span class="line">&#125;</span><br><span class="line">这里定义的ConstructCore中，先根据前序遍历序列中的第一个数字创建根结点，接下来在中序遍历中找到根结点的位置，这样就能确定左右子树结点的数量。在前序遍历和中序遍历中划分左右子树结构的值后，用ConstructCore递归地调用，构建左右子树。</span><br></pre></td></tr></table></figure>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/17/binary-tree-reconstruct/">
+    <time datetime="2016-04-17T12:50:40.000Z" class="entry-date">
+        2016-04-17
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/15/python-init-self/" rel="next">Python学习笔记 如何理解__init__方法和self参数 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-binary-tree-reconstruct" data-title="二叉树的重建" data-url="http://WustChuiChui.github.io/2016/04/17/binary-tree-reconstruct/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/17/binary-tree-reconstruct/">二叉树的重建</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/python-init-self/">Python学习笔记 如何理解__init__方法和self参数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/Recomment-1/">推荐系统概述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/scikit-learn-CART/">决策树算法之——CART</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/C4-5-Tree-classfication/">Python与机器学习  C4.5决策树算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

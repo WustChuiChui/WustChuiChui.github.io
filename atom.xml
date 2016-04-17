@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-15T13:53:48.274Z</updated>
+  <updated>2016-04-17T13:47:21.574Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二叉树的重建</title>
+    <link href="http://WustChuiChui.github.io/2016/04/17/binary-tree-reconstruct/"/>
+    <id>http://WustChuiChui.github.io/2016/04/17/binary-tree-reconstruct/</id>
+    <published>2016-04-17T12:50:40.000Z</published>
+    <updated>2016-04-17T13:47:21.574Z</updated>
+    
+    <content type="html">&lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序序列和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建该二叉树并返回它的头结点。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;二叉树的节点定义如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;struct BinaryTreeNode&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int             m_nValue;   //data域&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    BinaryTreeNode* m_pleft;    //左孩子的指针&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    BinaryTreeNode* m_pright;   //右孩子的指针&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;问题分析：&quot;&gt;&lt;a href=&quot;#问题分析：&quot; class=&quot;headerlink&quot; title=&quot;问题分析：&quot;&gt;&lt;/a&gt;问题分析：&lt;/h3&gt;&lt;p&gt;在二叉树的前序遍历序列中，第一个数字总是树的根结点的值。但在中序遍历中，根结点的值在序列的中间，左子树的节点的值位于根结点的值的左边，而右子树的结点的值位于根结点的值的右边。因此，需要扫描中序遍历序列，才能找到根结点的值。&lt;br&gt;通过上述步骤可以得到根结点以及左右子树的先序遍历序列和中序遍历序列，通过递归可以使用同样的方法分别构建左右子树。&lt;/p&gt;
+&lt;h3 id=&quot;代码实现（C-C-）&quot;&gt;&lt;a href=&quot;#代码实现（C-C-）&quot; class=&quot;headerlink&quot; title=&quot;代码实现（C/C++）&quot;&gt;&lt;/a&gt;代码实现（C/C++）&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;BinaryTreeNode* Construct(int* preoder,int* inorder,int length)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(preorder==NULL || inorder==NULL || length&amp;lt;=0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return NULL;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return ConstructCore(preorder,preorder+length-1,inorder,inorder+length-1);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder,int* startInorder,int* endInorder)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //前序遍历序列中第一个结点为根结点&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int rootValue=startPreorder[0];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    BinaryTreeNode* root=new BinaryTreeNode();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    root-&amp;gt;m_nValue=rootValue;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    root-&amp;gt;m_pLeft=root-&amp;gt;m_pRight=NULL;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(startPreorder==endPreoder)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        if(startInorder==endInorder &amp;amp;&amp;amp; *startPreorder==*startInorder)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return root;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            throw std::exception(&amp;quot;Invalid input.&amp;quot;); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //中序遍历中找到根结点的值&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int* rootInorder=startInorder;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    while(rootInorder&amp;lt;=endInorder &amp;amp;&amp;amp; *rootInorder!=rootValue)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        ++rootInorder;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(rootInorder==endInorder &amp;amp;&amp;amp; *rootInorder!=rootValue)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        throw std::exception(&amp;quot;Invalid input.&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int leftLength=rootInorder-startInorder;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int* leftPreorderEnd=startPreorder+leftLength;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //构建左子树&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(leftLength&amp;gt;0)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        root-&amp;gt;m_pLeft=ConstructCore(startPreorder+1,leftPreorderEnd,startInorder,rootInorder-1);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //构建右子树&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if(leftLength&amp;lt;endPreorder-startPreorder)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        root-&amp;gt;m_pRight=ConstructCore(leftPreorderEnd+1,endPreorder,rootInorder,endInorder);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return root;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;这里定义的ConstructCore中，先根据前序遍历序列中的第一个数字创建根结点，接下来在中序遍历中找到根结点的位置，这样就能确定左右子树结点的数量。在前序遍历和中序遍历中划分左右子树结构的值后，用ConstructCore递归地调用，构建左右子树。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序序列和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建该二叉树并返回它的头结点。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Python学习笔记 如何理解__init__方法和self参数</title>
@@ -444,6 +466,30 @@
   </entry>
   
   <entry>
+    <title>Twin SVM的数学求解方法</title>
+    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
+    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
+    <published>2016-04-06T14:42:16.000Z</published>
+    <updated>2016-04-08T01:11:13.904Z</updated>
+    
+    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
+&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>强大的随机森林分类器</title>
     <link href="http://WustChuiChui.github.io/2016/04/06/Random-forest/"/>
     <id>http://WustChuiChui.github.io/2016/04/06/Random-forest/</id>
@@ -508,30 +554,6 @@
   </entry>
   
   <entry>
-    <title>Twin SVM的数学求解方法</title>
-    <link href="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"/>
-    <id>http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/</id>
-    <published>2016-04-06T14:42:16.000Z</published>
-    <updated>2016-04-08T01:11:13.904Z</updated>
-    
-    <content type="html">&lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;一、基本思想&quot;&gt;&lt;a href=&quot;#一、基本思想&quot; class=&quot;headerlink&quot; title=&quot;一、基本思想&quot;&gt;&lt;/a&gt;一、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
-&lt;h2 id=&quot;二、数学描述&quot;&gt;&lt;a href=&quot;#二、数学描述&quot; class=&quot;headerlink&quot; title=&quot;二、数学描述&quot;&gt;&lt;/a&gt;二、数学描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;和&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中，di为惩罚参数，&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。&lt;br&gt;它们的对偶问题分别为&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;即得到Twin SVM的决策函数为&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>如何利用Hexo在自己的博客中添加多说评论</title>
     <link href="http://WustChuiChui.github.io/2016/04/02/comments/"/>
     <id>http://WustChuiChui.github.io/2016/04/02/comments/</id>
@@ -550,33 +572,6 @@
     <summary type="html">
     
       &lt;p&gt;利用github+hexo搭建自己的博客后，可以自定义搭建自己的博客，要为自己的博客添加留言功能，需要完成一下几部：&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Twin SVM 简介</title>
-    <link href="http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/"/>
-    <id>http://WustChuiChui.github.io/2016/04/01/Twin-SVM-introduction/</id>
-    <published>2016-04-01T10:37:11.000Z</published>
-    <updated>2016-04-02T11:43:50.632Z</updated>
-    
-    <content type="html">&lt;p&gt;在写自己的第一篇博客之前，还是想先对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大的&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;Twin-SVM-简介&quot;&gt;&lt;a href=&quot;#Twin-SVM-简介&quot; class=&quot;headerlink&quot; title=&quot;Twin SVM 简介&quot;&gt;&lt;/a&gt;Twin SVM 简介&lt;/h1&gt;&lt;h2 id=&quot;一、定义&quot;&gt;&lt;a href=&quot;#一、定义&quot; class=&quot;headerlink&quot; title=&quot;一、定义&quot;&gt;&lt;/a&gt;一、定义&lt;/h2&gt;&lt;p&gt;在介绍Twin SVM之前，先简要地介绍一下当前比较火的支持向量机(Support Vector Machine,简称SVM，它是建立在统计学习理论和最优化理论基础上的一种有效的解决分类问题的机器学习方法。双重支持向量机（Twin Support Vector Machine）是在SVM的基础上发展起来的，是利用最优化方法解决分类问题的新工具。其基本思想是构造两个非平行的超平面来代替标准的SVM的一个分划超平面，具有较好的泛化推广能力。&lt;/p&gt;
-&lt;h2 id=&quot;二、起源&quot;&gt;&lt;a href=&quot;#二、起源&quot; class=&quot;headerlink&quot; title=&quot;二、起源&quot;&gt;&lt;/a&gt;二、起源&lt;/h2&gt;&lt;p&gt;SVM是由Vapnik等人提出的，在一定程度上克服了“过学习”和“维数灾难”等传统问题。它根据有限的样本信息在模型的复杂性和学习能力之间寻求最佳折衷。以求获得最好的推广能力。Twin SVM最初由Jayadeva等人于2007年针对二分类问题提出的。Twin SVM较传统的SVM运算速度更快，对大规模数据具有更好的处理能力；同时，Twin SVM 利用最大间隔思想将SVM构造的平行平面推广到更广泛的非平行平面。在大数据时代，Twin SVM 的优势会越来越明显（对比于SVM）。&lt;/p&gt;
-&lt;h2 id=&quot;三、基本思想&quot;&gt;&lt;a href=&quot;#三、基本思想&quot; class=&quot;headerlink&quot; title=&quot;三、基本思想&quot;&gt;&lt;/a&gt;三、基本思想&lt;/h2&gt;&lt;p&gt;首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。&lt;/p&gt;
-&lt;h2 id=&quot;四、优势&quot;&gt;&lt;a href=&quot;#四、优势&quot; class=&quot;headerlink&quot; title=&quot;四、优势&quot;&gt;&lt;/a&gt;四、优势&lt;/h2&gt;&lt;p&gt;不同于传统的SVM基于最大间隔原则求得一个超平面从而得到决策函数，Twin SVM 需要构造两个较小的凸二次优化问题，极大地减少了训练时间；&lt;br&gt;Twin SVM较传统的SVM运算速度更快，对大规模数据具有更好的处理能力；&lt;br&gt;同时具有良好的泛化能力。&lt;/p&gt;
-&lt;h2 id=&quot;五、核心要素&quot;&gt;&lt;a href=&quot;#五、核心要素&quot; class=&quot;headerlink&quot; title=&quot;五、核心要素&quot;&gt;&lt;/a&gt;五、核心要素&lt;/h2&gt;&lt;p&gt;同SVM类似，Twin SVM的三个核心的要素是：最大间隔原则，对偶理论，核函数。其中，最关键在于核函数：低维空间向量通常难以划分，解决的办法是将它们映射到高维空间，但这个办法带来的困难是计算复杂度的增加，而核函数正好巧妙地解决了这个问题；&lt;strong&gt; 即：只要选用了适当的核函数，就可以得到高维空间的分类函数。 &lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;六、数学描述&quot;&gt;&lt;a href=&quot;#六、数学描述&quot; class=&quot;headerlink&quot; title=&quot;六、数学描述&quot;&gt;&lt;/a&gt;六、数学描述&lt;/h2&gt;&lt;p&gt;设训练集为T={(x1,+1),….,(xp,+1),(X(p+1),-1),…(x(p+q),-1)},其中,x(i)∈𝑅^𝑛,i=1,…p+q。分类问题就是根据给定的训练集分别求得一对不平行的拟合超平面w*x+b=0(正负超平面分别对应一组w,b的值)。最终根据得到一组非平行的超平面对新的样本进行分类。&lt;/p&gt;
-&lt;p&gt;第一篇就介绍这么多啦，相对比较基础，后续会继续介绍相关Twin求解方法和实际应用，希望对大家有所帮助。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在写自己的第一篇博客之前，还是想先对我的导师刘小明教授表示感谢，感谢您让我有机会接触机器学习相关算法。研究Twin SVM 相关算法已经一年有余，相对于常用的SVM，Twin SVM 有着巨大的&lt;br&gt;优势，相关理论已经十分成熟，网上也有较多开源的工具箱。接下来，就让我简单地对Twin SVM做一下介绍。&lt;/p&gt;
     
     </summary>
     
