@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Python基础    Python中的基本数据类型 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="除了常规的字符串和数值类型之外，Python还提供了另外4种重要的基本数据类型：元组、列表、集合和字典。这4中类型有许多共同点，因为它们都允许在一个名称下面组织多条数据。因为具有这种组织性，每个类型都允许在它们中查找元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础    Python中的基本数据类型">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/17/python-data-type/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="除了常规的字符串和数值类型之外，Python还提供了另外4种重要的基本数据类型：元组、列表、集合和字典。这4中类型有许多共同点，因为它们都允许在一个名称下面组织多条数据。因为具有这种组织性，每个类型都允许在它们中查找元素。">
+<meta property="og:updated_time" content="2016-04-18T02:41:03.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础    Python中的基本数据类型">
+<meta name="twitter:description" content="除了常规的字符串和数值类型之外，Python还提供了另外4种重要的基本数据类型：元组、列表、集合和字典。这4中类型有许多共同点，因为它们都允许在一个名称下面组织多条数据。因为具有这种组织性，每个类型都允许在它们中查找元素。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-python-data-type" class="post-python-data-type post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Python基础    Python中的基本数据类型
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/17/python-data-type/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/17/python-data-type/" data-id="cin5ead91000gv0vogsmlhutg" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>除了常规的字符串和数值类型之外，Python还提供了另外4种重要的基本数据类型：元组、列表、集合和字典。这4中类型有许多共同点，因为它们都允许在一个名称下面组织多条数据。因为具有这种组织性，每个类型都允许在它们中查找元素。</p>
+<a id="more"></a>
+<h2 id="元组——不可更改的数据序列"><a href="#元组——不可更改的数据序列" class="headerlink" title="元组——不可更改的数据序列"></a>元组——不可更改的数据序列</h2><p>元组是Python中定义的一种基本数据类型。在创建的时候就可以识别出元组，因为它们被圆括号包围：<br>元组包含对数据的引用，例如对字符串和数值的引用，元组中的数据不可更改。然而，虽然它们引用数据，但是仍然是可以像其他类型的数据一样为它们命名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filler=(&quot;string&quot;,&quot;filled&quot;,&quot;by a&quot;,&quot;tuple&quot;)</span><br><span class="line">print(&quot;A %s %s %s %s&quot; % (&quot;string&quot;,&quot;filled&quot;,&quot;by a&quot;,&quot;tuple&quot;)) </span><br><span class="line">A string filled by a tuple</span><br></pre></td></tr></table></figure></p>
+<p>如果直接用print()函数调用元组，打印其结果，则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filler=(&quot;string&quot;,&quot;filled&quot;,&quot;by a&quot;,&quot;tuple&quot;)</span><br><span class="line">print(filler)</span><br><span class="line">(&apos;string&apos;,&apos;filled&apos;,&apos;by a&apos;,&apos;tuple&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>filler元组的处理方式好像是它的元素都呈现处理并且被字符串用来填充格式说明符，因为元组的处理方式就好像输入一个序列来满足给定的格式规范。也可以访问元组中的单个值。每个元素引用的值可以通过该语言的解除引用特征性直接访问。通过在元组的名称后放置方括号并且从0起计算要引用的元素的位置，可以解除元组中对值的引用。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a=(&quot;first&quot;,&quot;second&quot;,&quot;third&quot;)</span><br><span class="line">print(&quot;The first element of the tuple is %s&quot; % a[0])</span><br><span class="line">The first element of the tuple is first</span><br><span class="line">print(&quot;%d&quot; % len(a))</span><br><span class="line">3</span><br><span class="line">print(a[len(a)-1])</span><br><span class="line">third</span><br></pre></td></tr></table></figure></p>
+<p>并且，可以通过一个元组访问另外一个元组，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=(&quot;first&quot;,&quot;second&quot;,&quot;third&quot;)</span><br><span class="line">b=(a,&quot;b&apos;s second element&quot;)</span><br><span class="line">print(&quot;%s&quot; b[1])</span><br><span class="line">b&apos;s second element</span><br><span class="line">print(&quot;%s&quot; % b[0][0])</span><br><span class="line">first</span><br></pre></td></tr></table></figure></p>
+<p><strong> 值得注意的是，元组可以各种类型的数据，但在创建之后，就不能再改变。 </strong> 元组之所以不可变，是因为Python中使用元组存储一组有序的事物，这些事物在使用时是不可以更改的。如果尝试修改元组中的元素将导致Python报错。</p>
+<h2 id="列表——可以更改的数据序列"><a href="#列表——可以更改的数据序列" class="headerlink" title="列表——可以更改的数据序列"></a>列表——可以更改的数据序列</h2><p>列表和元组很像，是包含从0开始引用的元素的序列。列表用方括号创建：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">breakfast=[&quot;coffee&quot;,&quot;tea&quot;,&quot;toast&quot;,&quot;egg&quot;]</span><br></pre></td></tr></table></figure></p>
+<p>列表中的单个元素的访问方法与元组类似。像元组一样，列表中的元素从0开始引用，并且访问顺序也是从0开始知道末端。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">count=0</span><br><span class="line">print(&quot;Today&apos;s breakfast is %s &quot; % breakfast[count])</span><br><span class="line">Today&apos;s breakfast is coffee</span><br></pre></td></tr></table></figure></p>
+<p>当顺序访问列表中的多个元素时，有必要使用一个名称来存储目前在列表中所处的位置。使用列表与使用元组主要的区别在于，<strong> 元组在创建后不可以修改，列表在任何时刻都可以被修改： </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">breakfast[count]=&quot;sausages&quot;</span><br><span class="line">print(&quot;Today&apos;s breakfast is %s &quot; % breakfast[count]&quot;)</span><br><span class="line">Today&apos;s breakfast is sausages</span><br></pre></td></tr></table></figure></p>
+<p>除了直接修改列表中已经存在的元素，还可以向列表中添加需要的元素。可以用列表类型的内置方法append向列表末端添加元素。利用append方法每次只能添加一个元素。如果希望一次性地向列表末端添加多个元素，如一个列表或元组中的内容，可以使用extend方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">breakfast.extend([&quot;juice&quot;,&quot;decaf&quot;,&quot;oatmeal&quot;])</span><br><span class="line">print(breakfast)</span><br><span class="line">[&apos;sausages&apos;,&apos;tea&apos;,&apos;toast&apos;,&apos;egg&apos;,&apos;waffle&apos;,&apos;juice&apos;,&apos;decaf&apos;,&apos;oatmeal&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>列表的长度也是通过len函数确定。就像元组一样，长度从1开始，而列表的第一个元素的位置从0开始。</p>
+<h2 id="字典——以名称索引的分组数据"><a href="#字典——以名称索引的分组数据" class="headerlink" title="字典——以名称索引的分组数据"></a>字典——以名称索引的分组数据</h2><p>字典类似于列表和元组。它是包含一组数据的另外一种容器。然而，元组和列表以数字顺序索引，字典却用选择的名称索引。这些名称可以是字母、数值、字符串或者符号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">menus_specials=&#123;&#125;</span><br><span class="line">menus_specials[&quot;breakfast&quot;]=&quot;Canadian ham&quot;</span><br><span class="line">menus_specials[&quot;lunch&quot;]=&quot;Tuna surprise&quot;</span><br><span class="line">menus_specials[&quot;dinner&quot;]=&quot;Cheeseburger Deluxe&quot;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码可以创建一个字典，字典一旦被定义并且通过名称引用，将开始使用如下方式对其实例化：将希望作为索引的名称放在方括号内，将通过该索引引用的值放在等号的右端。其中，索引和值都有特殊的名称。<strong> 字典中索引的名称叫做键，对应的值叫做值。 </strong>为了创建一个完全指定（或者可以认为它是完全形成的）字典，必须在花括号之间指定每个键以及和它对应的值，并以冒号分隔它们，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menus_specials=&#123;&quot;breakfast&quot;:&quot;sausage and eggs&quot;,&quot;lunch&quot;:&quot;split pea soup and garlic bread&quot;,&quot;dinner&quot;:&quot;2 hot dogs and onion rings&quot;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要打印出某个字典中所有的键与值，只需将该字典的名称作为print()函数的参数，同样地，可以将键放在方括号中。如果键是字符串，需要将键在引号中。如果键是数值，则使用数值引用即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print(munus_specials)</span><br><span class="line">&#123;&apos;breakfast&apos;:&apos;sausage and eggs&apos;,&apos;lunch&apos;:&apos;split pea soup and garlic bread&apos;,&apos;dinner&apos;:&apos;2 hot dogs and onion rings&apos;&#125;</span><br><span class="line">print(&quot;%s &quot; % menu_specials[&quot;breakfast&quot;])</span><br><span class="line">sausage and eggs</span><br><span class="line">print(&quot;%s &quot; % menu_specials[&quot;dinner&quot;])</span><br><span class="line">2 hot dogs and onion rings</span><br></pre></td></tr></table></figure></p>
+<p>如果键是一个字符串，但是在方括号中意外地没有将键放在引号中，Python就试图将它看做一个名称，需要解除对它的引用来找到键。一般情况下，会引起一个NameError异常，除非凑巧找到了一个与该字符串相同的名称，这时会得到一个IndexError错误。<br>可以使用keys方法查看字典中的所有键，以便用户查找所需的键，同样地，可以使用values方法查看所有的值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">hungry=menus_specials.keys()</span><br><span class="line">print(list(hungry))</span><br><span class="line">breakfast</span><br><span class="line">lunch</span><br><span class="line">dinner</span><br><span class="line">starving=menus_specials.value()</span><br><span class="line">print(list(starving))</span><br><span class="line">sausage and eggs</span><br><span class="line">split pea soup and garlic bread</span><br><span class="line">2 hot dogs and onion rings</span><br></pre></td></tr></table></figure></p>
+<p>Python中允许不同的键对应相同的值，但是，当重复定义相同的键时，虽然不会报错，但也存在下述错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menus2=&#123;&quot;breakfast&quot;:&quot;spam&quot;,&quot;breakfast&quot;:&quot;ham&quot;&#125;</span><br><span class="line">menus2.get(&quot;breakfast&quot;)</span><br><span class="line">&apos;ham&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>在Python中，集合与字典类似，只是它包含键，而没有与键相关联的值。本质上，集合是不包括重复数据的数据集，从数据集删除重复数据时，集合非常实用。Python中有两种类型的集合：可变集合与不可变集合。两种的不同之处在于，对于可变集合，可以增加、删除或者改变它的元素，而不可变集合中的元素在它们被初始设定之后就不能再被更改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alphabet=[&apos;a&apos;,&apos;b&apos;,&apos;b&apos;,&apos;c&apos;,&apos;a&apos;,&apos;d&apos;,&apos;e&apos;]</span><br><span class="line">print(alphabet)</span><br><span class="line">[&apos;a&apos;,&apos;b&apos;,&apos;b&apos;,&apos;c&apos;,&apos;a&apos;,&apos;d&apos;,&apos;e&apos;]</span><br><span class="line">alph2=set(alphabet)</span><br><span class="line">&#123;&apos;a&apos;,&apos;c&apos;,&apos;b&apos;,&apos;e&apos;,&apos;d&apos;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述例子中数据集alphabet作为输入，并将其转换为一个集合。因为集合不允许重复的值，多余的字符a和b被删除。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><strong> 元组 </strong>是从0开始以固定数值顺序索引的一个数据序列。元组中的引用在元组被创建后不能被修改，也不能再添加或者删除元素。然而，如果元组包含可变元素的数据类型，该数据类型的元素是可以改变的。<br><strong> 列表 </strong>是另一种序列，处理它的元素可以被修改之外，它与元组类似。列表的长度可以改变，以容纳使用append方法新增加的元素，另外也可以通过pop方法缩减列表的长度。<br><strong> 字典 </strong>是另外一种有索引的数据分组。列表和元组以数值为索引，而字典通过所选的值索引。如果想研究这些索引（键），可以使用keys方法。为了研究被引用的数据（值），可以使用values方法。<br><strong> 集合 </strong>是项集，不允许包含重复的值。理论上，它们与字典类似，不过它们只包含键，而没有与键相关联的值。集合的一个用途是从数据集中取出冗余的值。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/17/python-data-type/">
+    <time datetime="2016-04-17T13:55:21.000Z" class="entry-date">
+        2016-04-17
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/17/binary-tree-reconstruct/" rel="next">二叉树的重建 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-python-data-type" data-title="Python基础    Python中的基本数据类型" data-url="http://WustChuiChui.github.io/2016/04/17/python-data-type/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/17/python-data-type/">Python基础    Python中的基本数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/binary-tree-reconstruct/">二叉树的重建</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/python-init-self/">Python学习笔记 如何理解__init__方法和self参数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/Recomment-1/">推荐系统概述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/14/scikit-learn-CART/">决策树算法之——CART</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
