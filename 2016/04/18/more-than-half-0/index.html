@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>算法编程练习 数组中出现次数超过一半的数字 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目描述：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法编程练习 数组中出现次数超过一半的数字">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/18/more-than-half-0/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="题目描述：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。">
+<meta property="og:updated_time" content="2016-04-18T08:14:01.132Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法编程练习 数组中出现次数超过一半的数字">
+<meta name="twitter:description" content="题目描述：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-more-than-half-0" class="post-more-than-half-0 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      算法编程练习 数组中出现次数超过一半的数字
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/18/more-than-half-0/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/18/more-than-half-0/" data-id="cin5q6exd000ggcvo89tm97je" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>题目描述：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<a id="more"></a>
+<h3 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h3><p>如果是排好序的数组，那么只需一遍遍历即可找出是否存在一个数字出现次数超过数组长度的一半。因此如果先对数组进行快速排序，再一次遍历可以得到结果，此时时间复杂度为O(nlogn)。<br>此时的时间复杂度相对较高，考虑换一种思路解决该问题。数组中有一个数字出现的次数超过了数组长度的一半，如果将这个数组排序，那么排序之后位于数组中间的数字一定就是那个出现次数超过数组长度一半的数字，也就是统计学中的中位数。<br>我们可以考虑先随机选择一个数字，然后调整数组中数字的顺序，使得比选中的数字小的全部在它的左边，比选中的数字大的全部在右边。如果这个选中的数字的下标刚好是n/2，那么这个数就是数组的中位数。如果这个选中的数字的下标大于n/2，那么中位数应该在它的左侧，应该在它的左侧查找。如果这个选中的数字的下标小于n/2，那么中位数应该在它的右侧，应该在它的右侧查找。可以用下述代码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">int MoreThanHalfNum(vector&lt;int&gt; numbers)&#123;</span><br><span class="line">    if(numbers.empty())    //向量容器为空</span><br><span class="line">        return 0;</span><br><span class="line">    int length=numbers.size();  //输入数据非法</span><br><span class="line">    if(CheckInvalidArray(numbers,length))</span><br><span class="line">        return 0;</span><br><span class="line"></span><br><span class="line">    int middle=length&gt;&gt;1;    //位移运算代替除2</span><br><span class="line">    int start=0;</span><br><span class="line">    int end=length-1;</span><br><span class="line">    int Partition(numbers,length,start,end);  </span><br><span class="line"></span><br><span class="line">    while(index!=middle)&#123;</span><br><span class="line">        if(index&gt;middle)&#123;</span><br><span class="line">            end=index-1;</span><br><span class="line">            index=Partition(numbers,length,start,end);</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            start=index+1;</span><br><span class="line">            index=Partition(numbers,length,start,end);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int result=numbers[middle];</span><br><span class="line">    if(!CheckMoreThanHalf(numbers,length,result))</span><br><span class="line">        result 0;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool g_bInputInvalid=false;</span><br><span class="line">    </span><br><span class="line">bool CheckInvalidArray(vector&lt;int&gt; numbers,int length)&#123;</span><br><span class="line">    g_bInputInvalid=false;</span><br><span class="line">    if(numbers.empty() || length&lt;=0)</span><br><span class="line">        g_bInputInvalid=true;</span><br><span class="line">        </span><br><span class="line">    return g_bInputInvalid;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">bool CheckMoreThanHalf(vector&lt;int&gt; numbers,int length,int number)&#123;</span><br><span class="line">    int times=0;</span><br><span class="line">    for(int i=0;i&lt; length;++i)&#123;</span><br><span class="line">        if(numbers[i]==number)</span><br><span class="line">            times++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    bool isMoreThanHalf=true;</span><br><span class="line">    if(times*2&lt;=length)&#123;</span><br><span class="line">        g_bInputInvalid=true;</span><br><span class="line">        isMoreThanHalf=false;</span><br><span class="line">    &#125;</span><br><span class="line">    return isMoreThanHalf;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">int Partition(vector&lt;int&gt; data,int length,int start,int end)&#123;</span><br><span class="line">    if(data.empty())</span><br><span class="line">        return NULL;</span><br><span class="line">    if(data.size()!=length || length&lt;=0 || start&lt;0 || end&gt;=length)</span><br><span class="line">        throw new std::exception(&quot;Invalid Parameters&quot;);</span><br><span class="line"></span><br><span class="line">    int index=RandomInRange(start,end);</span><br><span class="line">    Swap(&amp;data[index],&amp;data[end]);</span><br><span class="line"></span><br><span class="line">    int small=start-1;</span><br><span class="line">    for(index=start;index&lt;end;++index)&#123;</span><br><span class="line">        if(data[index]&lt;data[end])&#123;</span><br><span class="line">            ++small;</span><br><span class="line">            if(small!=index)</span><br><span class="line">                Swap(&amp;data[index],&amp;data[small]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ++small;</span><br><span class="line">    Swap(&amp;data[small],&amp;data[end]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>除了上述思路之外，数组中一个数组出现的次数超过数组的长度的一半，那么它出现的次数比其他数字出现次数的累加和还要多。我们如果在遍历时储存两个值，一个是数组中的值，一个为出现的次数。当我们遍历到下一个数字的时候，如果下一个数字和我们之前保存的数字相同，我们将次数加1，如果出现的数字不同，则将次数减1，次数为零的时候需要保存下一个数字，次数设为1.如果最终我们储存的数字出现的次数超过数组长度的一半，那么肯定是最后一次把次数设为1的数字。参考代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">int MoreThanHalfNum_Solution(vector&lt;int&gt; numbers) &#123;</span><br><span class="line">         int length=numbers.size();</span><br><span class="line">         if(CheckInvalidArray(numbers,length))</span><br><span class="line">            return 0;</span><br><span class="line">        </span><br><span class="line">        int result=numbers[0];</span><br><span class="line">        int times=1;</span><br><span class="line">        for(int i=1;i&lt;length;++i)&#123;</span><br><span class="line">            if(times==0)&#123;</span><br><span class="line">                result=numbers[i];</span><br><span class="line">                times=1;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(numbers[i]==result)</span><br><span class="line">                times++;</span><br><span class="line">            else</span><br><span class="line">                times--;                </span><br><span class="line">        &#125;</span><br><span class="line">        if(!CheckMoreThanHalf(numbers,length,result))</span><br><span class="line">            result=0;</span><br><span class="line">            </span><br><span class="line">        return result;        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/18/more-than-half-0/">
+    <time datetime="2016-04-18T08:13:02.000Z" class="entry-date">
+        2016-04-18
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/17/python-data-type/" rel="next">Python基础    Python中的基本数据类型 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-more-than-half-0" data-title="算法编程练习 数组中出现次数超过一半的数字" data-url="http://WustChuiChui.github.io/2016/04/18/more-than-half-0/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/18/more-than-half-0/">算法编程练习 数组中出现次数超过一半的数字</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/python-data-type/">Python基础    Python中的基本数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/binary-tree-reconstruct/">二叉树的重建</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/python-init-self/">Python学习笔记 如何理解__init__方法和self参数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/Recomment-1/">推荐系统概述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
