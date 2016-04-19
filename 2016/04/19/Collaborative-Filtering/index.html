@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>协同过滤推荐算法简介 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="协同过滤通过用户和产品及用户的偏好信息产生推荐的策略，最基本的策略有两种：一种是找到具有类似品味的人所喜欢的物品；另一种是从一个人喜欢的物品中找出类似的物品。这对应着两个最知名的类别推荐技术：基于用户的推荐技术和基于物品的推荐技术，它们被称为协同过滤。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="协同过滤推荐算法简介">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/19/Collaborative-Filtering/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="协同过滤通过用户和产品及用户的偏好信息产生推荐的策略，最基本的策略有两种：一种是找到具有类似品味的人所喜欢的物品；另一种是从一个人喜欢的物品中找出类似的物品。这对应着两个最知名的类别推荐技术：基于用户的推荐技术和基于物品的推荐技术，它们被称为协同过滤。">
+<meta property="og:updated_time" content="2016-04-19T14:33:13.192Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="协同过滤推荐算法简介">
+<meta name="twitter:description" content="协同过滤通过用户和产品及用户的偏好信息产生推荐的策略，最基本的策略有两种：一种是找到具有类似品味的人所喜欢的物品；另一种是从一个人喜欢的物品中找出类似的物品。这对应着两个最知名的类别推荐技术：基于用户的推荐技术和基于物品的推荐技术，它们被称为协同过滤。">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Collaborative-Filtering" class="post-Collaborative-Filtering post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      协同过滤推荐算法简介
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/19/Collaborative-Filtering/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/19/Collaborative-Filtering/" data-id="cin7j63gn0000skvogit616el" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>协同过滤通过用户和产品及用户的偏好信息产生推荐的策略，最基本的策略有两种：一种是找到具有类似品味的人所喜欢的物品；另一种是从一个人喜欢的物品中找出类似的物品。这对应着两个最知名的类别推荐技术：基于用户的推荐技术和基于物品的推荐技术，它们被称为协同过滤。</p>
+<a id="more"></a>
+<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>协同过滤推荐（Collaborative Filtering Recommendation）是在信息过滤和信息系统中正迅速成为一项很受欢迎的技术。与传统的基于内容过滤直接分析内容进行推荐不同，协同过滤分析用户兴趣，在用户群中找到指定用户的相似（兴趣）用户，综合这些相似用户对某一信息的评价，形成系统对该指定用户对此信息的喜好程度预测。</p>
+<p><strong> 优点： </strong><br>1）能够过滤难以进行机器自动基于内容分析的信息；<br>2）能够基于一些复杂的，难以表达的概念（信息质量，品味）进行过滤；<br>3）推荐的新颖性。</p>
+<p><strong> 缺点： </strong><br>1）用户对商品的评价非常稀疏，这样基于用户的评价所得到的用户间的相似性可能不准确（稀疏性问题）；<br>2）随着用户和商品的增多，系统的性能会越来越低；<br>3）如果从来没有用户对某一商品加以评价，则这个商品就不可能被推荐（冷启动问题）。</p>
+<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>1）数据预处理与UI矩阵<br>2）推荐模型：item-based CF和user-based CF<br>item-based CF:基于item的协同过滤，通过用户对不同item的评分来评测item之间的相似性，基于item之间的相似性做出推荐；<br>user-based CF:基于user的协同过滤，通过不同用户对item的评分来评测之间的相似性，基于用户之间的相似性做出推荐。<br>3）Kmeans计算相似性<br>4）SVD计算相似性<br><strong> 数据预处理 </strong><br>多数情况下，大型电子商务网站都提供多种跟踪用户行为的方法，关于如何组合这些不同的用户行为，基本上可以参考以下两种方式：<br>1）将不同的行为分组：一般可以分为“查看”和“购买”等，然后基于不同的行为计算不同的用户/物品相似度。<br>2）根据不同行为反应用户的偏好的程度将它们进行加权，得到用户对于物品的总体偏好。一般来说，显示的用户反馈要比隐式的权值大，但比较稀疏，毕竟进行显示反馈的用户是少数。<br>3）收集了用户行为数据，我们还要对数据进行一定的预处理，降噪和归一化是最常用的方法，其目的是为了下一步的聚类。<br>降噪：用户行为数据是用户在使用应用过程中产生的，它可能存在大量的噪声和用户的误操作，我们可以通过一些降噪算法过滤掉数据中的噪声，一般是离群点，这样可以使分析更精确；<br>归一化：在计算用户对物品的偏好程度时，不同行为的数据取值量纲不同，甚至可能相差很大。归一化的目标就是统一量纲，使数据都集中在一个相同的取值范围中，从而使用户的总体偏好更加精确；</p>
+<p><strong> 推荐模型 </strong><br>user-based CF:基于用户的CF的基本思想相当简单：基于用户对物品的偏好划分用户类型(聚类)，找到最近邻用户（KNN近邻算法），然后将同类用户和相邻用户所喜欢的推荐给当前用户。计算上，就是将一个用户对所有物品的偏好作为一个向量来计算用户之间的相似度，找到K邻居后，根据邻居的相似度权重及他们对物品的偏好，预测当前用户没有偏好的未涉及物品，计算得到一个排序的物品列表作为推荐。<br>item-based CF:基于物品的CF的基本思想和基于用户的CF类似，只是在计算时采用物品之间的相似度，而不是从用户的角度，即基于用户对物品的偏好划分物品类型找到最近邻物品，然后将同类物品或相邻物品推荐给当前用户。从计算的角度看，就是将所有的用户对某个物品的偏好作为一个向量来计算物品之间的相似度，得到物品的相似物品后，根据用户历史的偏好预测当前用户还没有表示偏好的物品，计算得到一个排序的物品列表作为推荐。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/19/Collaborative-Filtering/">
+    <time datetime="2016-04-19T12:13:04.000Z" class="entry-date">
+        2016-04-19
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/18/kLeastnumbers/" rel="next">算法基础练习   最小的k个数+扩展大数据 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-Collaborative-Filtering" data-title="协同过滤推荐算法简介" data-url="http://WustChuiChui.github.io/2016/04/19/Collaborative-Filtering/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/19/Collaborative-Filtering/">协同过滤推荐算法简介</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/18/kLeastnumbers/">算法基础练习   最小的k个数+扩展大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/18/more-than-half-0/">算法编程练习 数组中出现次数超过一半的数字</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/python-data-type/">Python基础    Python中的基本数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/binary-tree-reconstruct/">二叉树的重建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

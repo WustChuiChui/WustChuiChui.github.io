@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://WustChuiChui.github.io/"/>
-  <updated>2016-04-19T08:00:41.427Z</updated>
+  <updated>2016-04-19T14:33:13.192Z</updated>
   <id>http://WustChuiChui.github.io/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>协同过滤推荐算法简介</title>
+    <link href="http://WustChuiChui.github.io/2016/04/19/Collaborative-Filtering/"/>
+    <id>http://WustChuiChui.github.io/2016/04/19/Collaborative-Filtering/</id>
+    <published>2016-04-19T12:13:04.000Z</published>
+    <updated>2016-04-19T14:33:13.192Z</updated>
+    
+    <content type="html">&lt;p&gt;协同过滤通过用户和产品及用户的偏好信息产生推荐的策略，最基本的策略有两种：一种是找到具有类似品味的人所喜欢的物品；另一种是从一个人喜欢的物品中找出类似的物品。这对应着两个最知名的类别推荐技术：基于用户的推荐技术和基于物品的推荐技术，它们被称为协同过滤。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;算法简介&quot;&gt;&lt;a href=&quot;#算法简介&quot; class=&quot;headerlink&quot; title=&quot;算法简介&quot;&gt;&lt;/a&gt;算法简介&lt;/h2&gt;&lt;p&gt;协同过滤推荐（Collaborative Filtering Recommendation）是在信息过滤和信息系统中正迅速成为一项很受欢迎的技术。与传统的基于内容过滤直接分析内容进行推荐不同，协同过滤分析用户兴趣，在用户群中找到指定用户的相似（兴趣）用户，综合这些相似用户对某一信息的评价，形成系统对该指定用户对此信息的喜好程度预测。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 优点： &lt;/strong&gt;&lt;br&gt;1）能够过滤难以进行机器自动基于内容分析的信息；&lt;br&gt;2）能够基于一些复杂的，难以表达的概念（信息质量，品味）进行过滤；&lt;br&gt;3）推荐的新颖性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 缺点： &lt;/strong&gt;&lt;br&gt;1）用户对商品的评价非常稀疏，这样基于用户的评价所得到的用户间的相似性可能不准确（稀疏性问题）；&lt;br&gt;2）随着用户和商品的增多，系统的性能会越来越低；&lt;br&gt;3）如果从来没有用户对某一商品加以评价，则这个商品就不可能被推荐（冷启动问题）。&lt;/p&gt;
+&lt;h2 id=&quot;基本模型&quot;&gt;&lt;a href=&quot;#基本模型&quot; class=&quot;headerlink&quot; title=&quot;基本模型&quot;&gt;&lt;/a&gt;基本模型&lt;/h2&gt;&lt;p&gt;1）数据预处理与UI矩阵&lt;br&gt;2）推荐模型：item-based CF和user-based CF&lt;br&gt;item-based CF:基于item的协同过滤，通过用户对不同item的评分来评测item之间的相似性，基于item之间的相似性做出推荐；&lt;br&gt;user-based CF:基于user的协同过滤，通过不同用户对item的评分来评测之间的相似性，基于用户之间的相似性做出推荐。&lt;br&gt;3）Kmeans计算相似性&lt;br&gt;4）SVD计算相似性&lt;br&gt;&lt;strong&gt; 数据预处理 &lt;/strong&gt;&lt;br&gt;多数情况下，大型电子商务网站都提供多种跟踪用户行为的方法，关于如何组合这些不同的用户行为，基本上可以参考以下两种方式：&lt;br&gt;1）将不同的行为分组：一般可以分为“查看”和“购买”等，然后基于不同的行为计算不同的用户/物品相似度。&lt;br&gt;2）根据不同行为反应用户的偏好的程度将它们进行加权，得到用户对于物品的总体偏好。一般来说，显示的用户反馈要比隐式的权值大，但比较稀疏，毕竟进行显示反馈的用户是少数。&lt;br&gt;3）收集了用户行为数据，我们还要对数据进行一定的预处理，降噪和归一化是最常用的方法，其目的是为了下一步的聚类。&lt;br&gt;降噪：用户行为数据是用户在使用应用过程中产生的，它可能存在大量的噪声和用户的误操作，我们可以通过一些降噪算法过滤掉数据中的噪声，一般是离群点，这样可以使分析更精确；&lt;br&gt;归一化：在计算用户对物品的偏好程度时，不同行为的数据取值量纲不同，甚至可能相差很大。归一化的目标就是统一量纲，使数据都集中在一个相同的取值范围中，从而使用户的总体偏好更加精确；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 推荐模型 &lt;/strong&gt;&lt;br&gt;user-based CF:基于用户的CF的基本思想相当简单：基于用户对物品的偏好划分用户类型(聚类)，找到最近邻用户（KNN近邻算法），然后将同类用户和相邻用户所喜欢的推荐给当前用户。计算上，就是将一个用户对所有物品的偏好作为一个向量来计算用户之间的相似度，找到K邻居后，根据邻居的相似度权重及他们对物品的偏好，预测当前用户没有偏好的未涉及物品，计算得到一个排序的物品列表作为推荐。&lt;br&gt;item-based CF:基于物品的CF的基本思想和基于用户的CF类似，只是在计算时采用物品之间的相似度，而不是从用户的角度，即基于用户对物品的偏好划分物品类型找到最近邻物品，然后将同类物品或相邻物品推荐给当前用户。从计算的角度看，就是将所有的用户对某个物品的偏好作为一个向量来计算物品之间的相似度，得到物品的相似物品后，根据用户历史的偏好预测当前用户还没有表示偏好的物品，计算得到一个排序的物品列表作为推荐。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;协同过滤通过用户和产品及用户的偏好信息产生推荐的策略，最基本的策略有两种：一种是找到具有类似品味的人所喜欢的物品；另一种是从一个人喜欢的物品中找出类似的物品。这对应着两个最知名的类别推荐技术：基于用户的推荐技术和基于物品的推荐技术，它们被称为协同过滤。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>算法基础练习   最小的k个数+扩展大数据</title>
@@ -501,50 +526,6 @@
     <summary type="html">
     
       &lt;p&gt;方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Python学习与机器学习   各类距离与Python的具体实现</title>
-    <link href="http://WustChuiChui.github.io/2016/04/08/mapython-distance/"/>
-    <id>http://WustChuiChui.github.io/2016/04/08/mapython-distance/</id>
-    <published>2016-04-08T11:50:15.000Z</published>
-    <updated>2016-04-08T14:51:50.946Z</updated>
-    
-    <content type="html">&lt;p&gt;两个向量之间的距离（此时向量作为n维向量坐标系中的点）计算，在数学上称为向量的距离（Distance），也称为样本之间的相似性度量（Similarity Measurement）。它反映为某类事物在距离上接近或远离的程度。直觉上，距离越近，越容易归为一类；距离越远就越不同。划分的依据，称为距离。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Python学习与机器学习-各类距离与Python的具体实现&quot;&gt;&lt;a href=&quot;#Python学习与机器学习-各类距离与Python的具体实现&quot; class=&quot;headerlink&quot; title=&quot;Python学习与机器学习   各类距离与Python的具体实现&quot;&gt;&lt;/a&gt;Python学习与机器学习   各类距离与Python的具体实现&lt;/h1&gt;&lt;h2 id=&quot;范数（数学基础）&quot;&gt;&lt;a href=&quot;#范数（数学基础）&quot; class=&quot;headerlink&quot; title=&quot;范数（数学基础）&quot;&gt;&lt;/a&gt;范数（数学基础）&lt;/h2&gt;&lt;p&gt;向量的范数可以简单、形象地理解为向量的长度，或者向量到坐标系原点的距离，或者相应空间内的两点之间的距离。&lt;br&gt;&lt;strong&gt; 向量的范数定义：&lt;/strong&gt; 向量的范数是一个函数||x||,满足非负性||x||&amp;gt;0,齐次性||cx||=|c|*||x||,三角不等式||x+y||&amp;lt;=||x||+||y||.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt; L1范数： &lt;/strong&gt; ||x||为x向量各个元素绝对值之和。&lt;br&gt;&lt;strong&gt; L2范数： &lt;/strong&gt; ||x||为x向量各个元素平方和的开方，L2范数又称欧几里得范数。&lt;br&gt;&lt;strong&gt; Lp范数： &lt;/strong&gt; ||x||为x向量各个元素绝对值的p次方和的1/p次方。&lt;br&gt;&lt;strong&gt; L无穷范数： &lt;/strong&gt; ||x||为x向量各个元素绝对值最大的那个元素。&lt;/p&gt;
-&lt;h2 id=&quot;各类距离的意义与Pyhon实现&quot;&gt;&lt;a href=&quot;#各类距离的意义与Pyhon实现&quot; class=&quot;headerlink&quot; title=&quot;各类距离的意义与Pyhon实现&quot;&gt;&lt;/a&gt;各类距离的意义与Pyhon实现&lt;/h2&gt;&lt;p&gt;这里介绍的几种距离公式如下：&lt;/p&gt;
-&lt;p&gt;闵可夫斯基距离 (Minkowski Distance)&lt;br&gt;欧式距离 （Euclidean Distance）&lt;br&gt;曼哈顿距离 （Manhattan Distance）&lt;br&gt;切比雪夫距离 (Chebyshew Distance)&lt;br&gt;夹角余弦 (Cosine)&lt;br&gt;汉明距离 (Hamming Distance)&lt;br&gt;杰卡德相似系数 (Jaccard Similarity Coefficient)&lt;/p&gt;
-&lt;h3 id=&quot;1-闵可夫斯基距离-Minkowski-Distance&quot;&gt;&lt;a href=&quot;#1-闵可夫斯基距离-Minkowski-Distance&quot; class=&quot;headerlink&quot; title=&quot;1.闵可夫斯基距离 (Minkowski Distance)&quot;&gt;&lt;/a&gt;1.闵可夫斯基距离 (Minkowski Distance)&lt;/h3&gt;&lt;p&gt;严格意义上讲，闵可夫斯基距离不能算是一种距离，而是一组距离的定义。&lt;br&gt;设有两个n维向量A(x1,x2,x3,….xn)和B(y1,y2,y3,….yn)间的闵可夫斯基距离定义为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxgw1f2pkdwrt67j307t02sjrd.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;其中p是一个参数。&lt;br&gt;当p=1时，就是曼哈顿距离；&lt;br&gt;当p=2时，就是欧式距离；&lt;br&gt;当p-&amp;gt;无穷时，就是切比雪夫距离。&lt;/p&gt;
-&lt;h3 id=&quot;2-欧式距离-（Euclidean-Distance）&quot;&gt;&lt;a href=&quot;#2-欧式距离-（Euclidean-Distance）&quot; class=&quot;headerlink&quot; title=&quot;2.欧式距离 （Euclidean Distance）&quot;&gt;&lt;/a&gt;2.欧式距离 （Euclidean Distance）&lt;/h3&gt;&lt;p&gt;欧式距离（L2范数）是最易于理解的一种距离计算方法，源于欧式空间中两点间的距离公式。两个n维向量A(x1,x2,x3,…xn)和B(y1,y2,y3,…..yn)间的欧式距离：&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006qSkuxgw1f2pkn8v6g6j30f202pt8v.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Python实现欧式距离：&lt;br&gt;from numpy import *&lt;/p&gt;
-&lt;p&gt;vector1=mat([1,2,3])&lt;br&gt;vector2=mat([4,5,6])&lt;/p&gt;
-&lt;p&gt;print sqrt((vector1-vector2)*(vector1-vector2).T)&lt;/p&gt;
-&lt;h3 id=&quot;3-曼哈顿距离-（Manhattan-Distance）&quot;&gt;&lt;a href=&quot;#3-曼哈顿距离-（Manhattan-Distance）&quot; class=&quot;headerlink&quot; title=&quot;3.曼哈顿距离 （Manhattan Distance）&quot;&gt;&lt;/a&gt;3.曼哈顿距离 （Manhattan Distance）&lt;/h3&gt;&lt;p&gt;曼哈顿距离也称城市街区距离（City Block Distance）,也就是L1范数。&lt;br&gt;二维平面两点A(x1,y1)和B(x2,y2)间的曼哈顿距离为：&lt;br&gt;d=|x2-x1|+|y2-y1|&lt;br&gt;两个n维向量A(x1,x2,x3,…xn)和B(y1,y2,y3,….yn)间的曼哈顿距离为：&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxgw1f2pl14yya7j308h02eq2u.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Python实现曼哈顿距离：&lt;br&gt;from numpy import *&lt;br&gt;vector1=mat([1,2,3])&lt;br&gt;vector2=mat([4,5,6])&lt;br&gt;print sum(abs(vector1-vector2))&lt;/p&gt;
-&lt;h3 id=&quot;4-切比雪夫距离-Chebyshew-Distance&quot;&gt;&lt;a href=&quot;#4-切比雪夫距离-Chebyshew-Distance&quot; class=&quot;headerlink&quot; title=&quot;4.切比雪夫距离 (Chebyshew Distance)&quot;&gt;&lt;/a&gt;4.切比雪夫距离 (Chebyshew Distance)&lt;/h3&gt;&lt;p&gt;国际象棋中，国王每走一步能够走到相邻的8个方格中的任意一个，那么国王从A(x1,y1)走到B(x2,y2)最少需要多少步？最少步数总是max(|x2-x1|,|y2-y1|)步。类似的距离度量方法叫做切比雪夫距离（L无穷范数）。&lt;/p&gt;
-&lt;p&gt;n维向量A(x11,x12,x13,….x1n)和B(x21,x22,x23,….x2n)间的切比雪夫距离：&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxgw1f2plab1n78j308l01jjra.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;它的另一种等价形式为：&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxgw1f2plctowpuj309q023mx4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Python实现切比雪夫距离：&lt;br&gt;from numpy import *&lt;/p&gt;
-&lt;p&gt;vector1=mat([1,2,3])&lt;br&gt;vector2=mat([4,7,6])&lt;br&gt;print abs(vector1-vector2).max()&lt;/p&gt;
-&lt;h3 id=&quot;5-夹角余弦-Cosine&quot;&gt;&lt;a href=&quot;#5-夹角余弦-Cosine&quot; class=&quot;headerlink&quot; title=&quot;5.夹角余弦 (Cosine)&quot;&gt;&lt;/a&gt;5.夹角余弦 (Cosine)&lt;/h3&gt;&lt;p&gt;几何中夹角余弦可用来衡量两个向量方向的差异，机器学习中用这一概念衡量样本向量之间的差异。&lt;br&gt;两个n维样本点A(x11,x12,x13,…x1n)与B(x21,x22,x23,…x2n)的夹角余弦：类似地，对于两个样本点A(x11,x12,x13,…x1n)与B(x21,x22,x23,…x2n),可以使用类似夹角余弦的概念来衡量他们间的相似程度。&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxgw1f2plpmulqej306v02lt8m.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;即&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006qSkuxgw1f2plsqwdv6j30au04xt8w.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;python 实现向量夹角&lt;/p&gt;
-&lt;p&gt;from numpy import *&lt;/p&gt;
-&lt;p&gt;vector1=mat([1,2,3])&lt;br&gt;vector2=mat([4,7,6])&lt;/p&gt;
-&lt;p&gt;cosV12=dot(vector1,vector2)/(linalg.norm(vector1)*linalg.norm(vector2))&lt;br&gt;print cosV12&lt;/p&gt;
-&lt;h3 id=&quot;6-汉明距离-Hamming-Distance&quot;&gt;&lt;a href=&quot;#6-汉明距离-Hamming-Distance&quot; class=&quot;headerlink&quot; title=&quot;6.汉明距离 (Hamming Distance)&quot;&gt;&lt;/a&gt;6.汉明距离 (Hamming Distance)&lt;/h3&gt;&lt;p&gt;汉明距离的定义：两个登场字符串s1和s2之间的汉明距离定义为将其中一个变为另外一个所需要的最小替换次数。&lt;br&gt;应用：信息编码（为了增强容错性，应使得编码间的最小汉明距离尽可能大）&lt;/p&gt;
-&lt;p&gt;Python实现汉明距离&lt;/p&gt;
-&lt;p&gt;from numpy import *&lt;br&gt;matV=mat([1,1,0,1,1,0,1],[1,0,1,0,1,0,1])&lt;br&gt;smstr=nonzero(matV[0]-matV[1])&lt;br&gt;print shape(smstr[0]) [1]&lt;/p&gt;
-&lt;h3 id=&quot;7-杰卡德相似系数-Jaccard-Similarity-Coefficient&quot;&gt;&lt;a href=&quot;#7-杰卡德相似系数-Jaccard-Similarity-Coefficient&quot; class=&quot;headerlink&quot; title=&quot;7.杰卡德相似系数 (Jaccard Similarity Coefficient)&quot;&gt;&lt;/a&gt;7.杰卡德相似系数 (Jaccard Similarity Coefficient)&lt;/h3&gt;&lt;p&gt;两个集合A和B的交集元素在A、B的并集中所占的比率，称为两个集合的杰卡德相似系数。&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006qSkuxgw1f2pmannfgzj309b02lwef.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;杰卡德相似系数是衡量两个集合相似度的一种指标。&lt;br&gt;杰卡德距离：与杰卡德相似系数相反的概念是杰卡德距离。&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006qSkuxgw1f2pme9e4b5j30fu02f74e.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Python实现杰卡德距离&lt;br&gt;from numpy import *&lt;br&gt;import scipy.spatial.distance as dist #导入Scipy距离公式&lt;br&gt;matV=mat([1,1,0,1,0,1,0,0,1],[0,1,0,1,0,1,0,1,0])&lt;br&gt;print “dist.jaccard:”,dist.pdist(matV,’jaccard’)&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;两个向量之间的距离（此时向量作为n维向量坐标系中的点）计算，在数学上称为向量的距离（Distance），也称为样本之间的相似性度量（Similarity Measurement）。它反映为某类事物在距离上接近或远离的程度。直觉上，距离越近，越容易归为一类；距离越远就越不同。划分的依据，称为距离。&lt;br&gt;
     
     </summary>
     
