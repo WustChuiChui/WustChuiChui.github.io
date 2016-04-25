@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="厚德博学，崇实去浮" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Python学习笔记 类的继承 | Wust_锤锤的blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="让代码更有条理，这只是使用对象的好处之一。另一个更有用的好处是继承。可以通过指向一个已有的对象来定义对象，然后对他添加更多的属性和方法，从而定义一个新的对象。通过继承，可以不必重新编写代码来做同样的事情，只需要针对一些略微不同的项重新编写代码即可。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记 类的继承">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/25/Python-inherit/index.html">
+<meta property="og:site_name" content="Wust_锤锤的blog">
+<meta property="og:description" content="让代码更有条理，这只是使用对象的好处之一。另一个更有用的好处是继承。可以通过指向一个已有的对象来定义对象，然后对他添加更多的属性和方法，从而定义一个新的对象。通过继承，可以不必重新编写代码来做同样的事情，只需要针对一些略微不同的项重新编写代码即可。">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f3978wyaqrj30de07z3zz.jpg">
+<meta property="og:updated_time" content="2016-04-25T12:02:35.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习笔记 类的继承">
+<meta name="twitter:description" content="让代码更有条理，这只是使用对象的好处之一。另一个更有用的好处是继承。可以通过指向一个已有的对象来定义对象，然后对他添加更多的属性和方法，从而定义一个新的对象。通过继承，可以不必重新编写代码来做同样的事情，只需要针对一些略微不同的项重新编写代码即可。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006qSkuxgw1f3978wyaqrj30de07z3zz.jpg">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Wust_锤锤的blog" rel="home">Wust_锤锤的blog</a>
+      </h1>
+      
+        <h2 class="site-description">
+          <a href="/" id="subtitle">萌将王大锤</a>
+        </h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Python-inherit" class="post-Python-inherit post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      Python学习笔记 类的继承
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2016/04/25/Python-inherit/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/25/Python-inherit/" data-id="cinfyfi80000018vou1m1cu1h" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>让代码更有条理，这只是使用对象的好处之一。另一个更有用的好处是继承。可以通过指向一个已有的对象来定义对象，然后对他添加更多的属性和方法，从而定义一个新的对象。通过继承，可以不必重新编写代码来做同样的事情，只需要针对一些略微不同的项重新编写代码即可。</p>
+<a id="more"></a>
+<h2 id="一、类的定义方法"><a href="#一、类的定义方法" class="headerlink" title="一、类的定义方法"></a>一、类的定义方法</h2><p>这里通过一个实例来说明Python中类的定义方法。首先我们定义一个库存项类，它具有标题，说明和价格等基本属性，包含对应的方法。有一个书籍类从库存项类继承，并新定义了作者和格式两个属性，添加了几个新的方法，并重新定义一些函数等。</p>
+<p>首先，先看看InventoryItem的基本的项。其他对象都是派生自这个对象。InventoryItem有title,description,price,ID属性，如果打印它，返回该项的名称。如果想查看两个项是否相等，它比较库存ID，除此之外，还有三个函数，分别用来修改价格，说明和名称。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">class InventoryItem(object):</span><br><span class="line">    &quot;&quot;&quot;定义一个库存项基类，包含title,description,price三个属性，含有</span><br><span class="line">       change_description,change_price,change_title三个方法    </span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def __init__(self,title,description,price,store_id):</span><br><span class="line">        self.title=title             #标题</span><br><span class="line">        self.description=description  #说明</span><br><span class="line">        self.price=price              #价格</span><br><span class="line">        self.store_id=store_id         #库存编号</span><br><span class="line"></span><br><span class="line">    #用来返回输出值的函数</span><br><span class="line">    def __str__(self):</span><br><span class="line">        return self.title</span><br><span class="line"></span><br><span class="line">    #用来判断对象是否相等的函数</span><br><span class="line">    def __eq__(self,other):</span><br><span class="line">        if self.store_id==other.store_id:</span><br><span class="line">            return True</span><br><span class="line">        else:</span><br><span class="line">            return False</span><br><span class="line"></span><br><span class="line">    #change_description方法，用来修正对象的说明</span><br><span class="line">    def change_description(self,description=&quot;&quot;):</span><br><span class="line">        if not description:   #没有输入描述参数</span><br><span class="line">            description=raw_input(&quot;Please give me a description:&quot;)</span><br><span class="line">        self.description=description</span><br><span class="line"></span><br><span class="line">    #change_price方法，用来修正对象的价格</span><br><span class="line">    def change_price(self,price=-1):</span><br><span class="line">        while price&lt;0:</span><br><span class="line">            price=raw_input(&quot;Please input the new price:&quot;)</span><br><span class="line">            try:</span><br><span class="line">                price=float(price)</span><br><span class="line">                break</span><br><span class="line">            except:</span><br><span class="line">                print &quot;I&apos;m sorry, but &#123;&#125; isn&apos;t valid.&quot;.format(price)</span><br><span class="line">        self.price=price</span><br><span class="line"></span><br><span class="line">    #change_title方法，用来修正对象的标题</span><br><span class="line">    def change_title(self,title=&quot;&quot;):</span><br><span class="line">        if not title:</span><br><span class="line">            title=raw_input(&quot;Please give me the a new title:&quot;)</span><br><span class="line">        self.title=title</span><br></pre></td></tr></table></figure></p>
+<p>现在有一个基类，我们接下来创建一个继承于它的新类Book。把类的名称放在通常放置对象的圆括号中，从而告诉Python，想要继承自该类。所以函数声明需要用“class Book(InventoryItem):”,而不是“class Book(object):”。<br>这里的Book类新定义了两个属性:format和author,打印该对象时，返回标题和作者（基类中返回标题），判断两个Book类的对象是否相等时，同时比较标题和作者，若二者均相等时，则返回True,除此之外，还有两个方法，用来改变format和author属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Book(InventoryItem):   #将基类名称作为放置对象，表示继承</span><br><span class="line">    &quot;&quot;&quot;定义一个Book类，该类继承于InventoryItem类，并添加了author和format两个属性，</span><br><span class="line">       添加了change_author,change_format方法，并重新定义了一个print方法用来输出</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def __init__(self,title,description,price,format,author,store_id):</span><br><span class="line">        super(Book,self).__init__(title=title,description=description,price=price,store_id=store_id)</span><br><span class="line">        self.format=format</span><br><span class="line">        self.format=author</span><br><span class="line"></span><br><span class="line">    def __str__(self): #打印时返回标题和作者</span><br><span class="line">        book_line=&quot;&#123;title&#125; by &#123;author&#125;&quot;.format(title=self.title,author=self.author)</span><br><span class="line">        return book_line</span><br><span class="line"></span><br><span class="line">    def __eq__(self,other): #判断两个Book类的对象是否相等</span><br><span class="line">        if self.title==other.title and self.author==other.author:</span><br><span class="line">            return True</span><br><span class="line">        else:</span><br><span class="line">            return False</span><br><span class="line"></span><br><span class="line">    def change_format(self,format):</span><br><span class="line">        if not format:</span><br><span class="line">            format=raw_input(&quot;Please input the new format:&quot;)</span><br><span class="line">        self.format=format</span><br><span class="line"></span><br><span class="line">    def change_author(self,author):</span><br><span class="line">        if not author:</span><br><span class="line">            author=raw_input(&quot;Please input the author:&quot;)</span><br><span class="line">        self.author=author</span><br></pre></td></tr></table></figure></p>
+<p>这里子类中的<strong>init</strong>()方法中，有一个super()方法，它是Python中一个特殊的函数，它告诉Python调用父类中的一个函数。通过这个方法，我们不需要重复写同样的代码。同时，子类中的<strong>eq</strong>()和<strong>str</strong>()方法覆盖了基类中对应的方法。</p>
+<p>下面我们对上述类做个简单的测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hamlet=Book(title=&quot;Hamlet&quot;,description=&quot;A Dane has a bad time.&quot;,price=5.99,format=&quot;paperback&quot;,store_id=&quot;29382918&quot;,author=&quot;William Shakespears&quot;)</span><br><span class="line">hamlet_hardback=Book(title=&quot;Hamlet&quot;,description=&quot;A Dane has a bad time.&quot;,price=5.99,format=&quot;paperback&quot;,store_id=&quot;29382918&quot;,author=&quot;William Shakespears&quot;)</span><br><span class="line">macbeth=Book(title=&quot;Macbeth&quot;,description=&quot;Don&apos;t listen to strange ladies on the side of the road.&quot;,price=4.99,format=&quot;paperback&quot;,store_id=&quot;23928932&quot;,author=&quot;William Shakespears&quot;)</span><br><span class="line"></span><br><span class="line">hamlet==hamlet_hardback</span><br><span class="line">hamlet==macbeth</span><br><span class="line">print(hamlet)</span><br><span class="line">hamlet.change_description(&quot;The trouble with remarriage.&quot;)</span><br><span class="line">macbeth.change_format(format=&quot;audiobook&quot;)</span><br><span class="line">macbeth.format</span><br><span class="line">hamlet.description</span><br></pre></td></tr></table></figure></p>
+<p>其输出结果为：<br><img src="http://ww4.sinaimg.cn/large/006qSkuxgw1f3978wyaqrj30de07z3zz.jpg" alt=""></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/04/25/Python-inherit/">
+    <time datetime="2016-04-25T11:20:44.000Z" class="entry-date">
+        2016-04-25
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/04/19/Collaborative-Filtering/" rel="next">协同过滤推荐算法简介 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="post-Python-inherit" data-title="Python学习笔记 类的继承" data-url="http://WustChuiChui.github.io/2016/04/25/Python-inherit/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'WangJia'};
+    (function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+1
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/25/Python-inherit/">Python学习笔记 类的继承</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/19/Collaborative-Filtering/">协同过滤推荐算法简介</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/18/kLeastnumbers/">算法基础练习   最小的k个数+扩展大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/18/more-than-half-0/">算法编程练习 数组中出现次数超过一半的数字</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/python-data-type/">Python基础    Python中的基本数据类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Wust_锤锤
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
