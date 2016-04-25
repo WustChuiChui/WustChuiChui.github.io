@@ -13,27 +13,18 @@
   
   
   
-  <title>Twin SVM的数学求解方法 | 徐家凌的blog</title>
+  <title>Python package | 徐家凌的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。">
+  <meta name="description" content="厚德博学，崇实去浮">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Twin SVM的数学求解方法">
-<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/index.html">
+<meta property="og:title" content="Python package">
+<meta property="og:url" content="http://WustChuiChui.github.io/2016/04/25/Python-package/index.html">
 <meta property="og:site_name" content="徐家凌的blog">
-<meta property="og:description" content="第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg">
-<meta property="og:updated_time" content="2016-04-08T01:11:13.904Z">
+<meta property="og:description" content="厚德博学，崇实去浮">
+<meta property="og:updated_time" content="2016-04-25T12:42:39.677Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Twin SVM的数学求解方法">
-<meta name="twitter:description" content="第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。">
-<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg">
+<meta name="twitter:title" content="Python package">
+<meta name="twitter:description" content="厚德博学，崇实去浮">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -74,7 +65,7 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-solve-Twin-SVM" class="post-solve-Twin-SVM post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Python-package" class="post-Python-package post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -82,35 +73,29 @@
         
   
     <h1 class="entry-title article-title">
-      Twin SVM的数学求解方法
+      Python package
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2016/04/06/solve-Twin-SVM/#comments" class="leave-reply">Reply</a>
+            <a href="/2016/04/25/Python-package/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/" data-id="cing0ffv8000pb0vognm2vap1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://WustChuiChui.github.io/2016/04/25/Python-package/" data-id="cing0fft70005b0vo0bxf4a9y" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <p>第一篇博客已经对Twin SVM做了简单的介绍，这里主要从数学的角度去分析Twin SVM的求解思路。</p>
-<a id="more"></a>
-<h2 id="一、基本思想"><a href="#一、基本思想" class="headerlink" title="一、基本思想"></a>一、基本思想</h2><p>首先构造两个超平面，一个正超平面和一个负超平面，使得正负超平面尽可能地分别接近所有正类点的输入和负类点的输入，然后以这两个超平面为基础，构造决策函数；输入x距离正超平面较负超平面近时，即推断为正类；否则推断为负类。</p>
-<h2 id="二、数学描述"><a href="#二、数学描述" class="headerlink" title="二、数学描述"></a>二、数学描述</h2><p><img src="http://ww3.sinaimg.cn/large/006qSkuxjw1f2oiyiajyqj30jy085dh6.jpg" alt=""></p>
-<p>Twin SVM 要求正超平面尽可能地靠近正类点，并尽可能地远离负类点；而负超平面尽可能地靠近负类点，并尽可能地远离正类点。由此，两个超平面的原始问题为：<br><img src="http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj1vyvogj30m807lmxu.jpg" alt=""><br>和<br><img src="http://ww2.sinaimg.cn/large/006qSkuxjw1f2oj3yicixj30ll06hjrz.jpg" alt=""><br>其中，di为惩罚参数，<img src="http://ww3.sinaimg.cn/large/006qSkuxjw1f2oj6kite7j30eq01ct8r.jpg" alt=""><br>目标函数第一项的作用是使正平面尽可能接近正输入；第二项和两个约束条件是使正超平面离开负输入一个距离，尽可能把负输入排斥在限定负超平面的另一侧。<br>它们的对偶问题分别为<br><img src="http://ww4.sinaimg.cn/large/006qSkuxjw1f2oj8jivd9j30fa08qdgj.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojab77xnj30io06x74z.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/006qSkuxjw1f2ojb6qjrjj30fd04rdg4.jpg" alt=""></p>
-<p>即得到Twin SVM的决策函数为<br><img src="http://ww3.sinaimg.cn/large/006qSkuxjw1f2ojc8e0rqj30ei028mx7.jpg" alt=""></p>
-
+        
       
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
-    <a href="/2016/04/06/solve-Twin-SVM/">
-    <time datetime="2016-04-06T14:42:16.000Z" class="entry-date">
-        2016-04-06
+    <a href="/2016/04/25/Python-package/">
+    <time datetime="2016-04-25T12:42:39.000Z" class="entry-date">
+        2016-04-25
     </time>
 </a>
     
@@ -123,10 +108,8 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <span class="nav-previous"><a href="/2016/04/08/mapython-distance/" rel="prev"><span class="meta-nav">←</span> Python学习与机器学习   各类距离与Python的具体实现</a></span>
     
-    
-        <span class="nav-next"><a href="/2016/04/06/Random-forest/" rel="next">强大的随机森林分类器 <span class="meta-nav">→</span></a></span>
+        <span class="nav-next"><a href="/2016/04/25/Python-inherit/" rel="next">Python学习笔记 类的继承 <span class="meta-nav">→</span></a></span>
     
 </nav><!-- .nav-single -->
 
@@ -137,7 +120,7 @@
 
 <section id="comments">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="post-solve-Twin-SVM" data-title="Twin SVM的数学求解方法" data-url="http://WustChuiChui.github.io/2016/04/06/solve-Twin-SVM/"></div>
+  <div class="ds-thread" data-thread-key="post-Python-package" data-title="Python package" data-url="http://WustChuiChui.github.io/2016/04/25/Python-package/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
